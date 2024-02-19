@@ -1,0 +1,6 @@
+{
+  "articlesAPI": "http://localhost:3000/api/data/articles?timeout=3000",
+  "authorsAPI": "http://localhost:3000/api/data/authors?timeout=5000",
+  "commentsAPI": "http://localhost:3000/api/data/comments?timeout=2000",
+  "batchAPI": "http://localhost:3000/api/data/batch?resources=articles,authors,comments&timeout=5000"
+}

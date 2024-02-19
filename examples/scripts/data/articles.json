@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "author": "John Doe",
+      "title": "Article 1",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut ultricies nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 2,
+      "author": "Jane Smith",
+      "title": "Article 2",
+      "content": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 3,
+      "author": "Mark Johnson",
+      "title": "Article 3",
+      "content": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 4,
+      "author": "Emily Davis",
+      "title": "Article 4",
+      "content": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 5,
+      "author": "Michael Wilson",
+      "title": "Article 5",
+      "content": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 6,
+      "author": "Sarah Thompson",
+      "title": "Article 6",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut ultricies nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 7,
+      "author": "David Brown",
+      "title": "Article 7",
+      "content": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 8,
+      "author": "Olivia Wilson",
+      "title": "Article 8",
+      "content": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 9,
+      "author": "Daniel Johnson",
+      "title": "Article 9",
+      "content": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    },
+    {
+      "id": 10,
+      "author": "Sophia Davis",
+      "title": "Article 10",
+      "content": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed id nunc auctor, ultrices nisl ut, aliquet nunc. Nulla facilisi. Sed id nunc auctor, ultrices nisl ut, aliquet nunc."
+    }
+  ]
+}

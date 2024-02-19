@@ -1,0 +1,34 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "author": "John Doe",
+      "text": "I find this book enlightening.",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "author": "Mark Green",
+      "text": "Such a great book!",
+      "rating": 4
+    },
+    {
+      "id": 3,
+      "author": "Noah Smith",
+      "text": "Fine but not great.",
+      "rating": 3
+    },
+    {
+      "id": 4,
+      "author": "Jane Tarzan",
+      "text": "I don't like it.",
+      "rating": 2
+    },
+    {
+      "id": 5,
+      "author": "Sigurd Sigurdsson",
+      "text": "Make my heart warm.",
+      "rating": 4
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "authors": [
+    { "id": 0, "name": "Mark Hunt", "comments": 6, "articles": 9 },
+    { "id": 1, "name": "Jordan Michel", "comments": 5, "articles": 2 },
+    { "id": 2, "name": "Bill Burr", "comments": 3, "articles": 1 },
+    { "id": 3, "name": "Dominic McBrasco", "comments": 2, "articles": 5 },
+    { "id": 4, "name": "Sebastian Cheese", "comments": 1, "articles": 1 },
+    { "id": 5, "name": "John Doe", "comments": 2, "articles": 9 },
+    { "id": 6, "name": "Mirko Mavic", "comments": 1, "articles": 7 },
+    { "id": 7, "name": "Miloš Teodosić", "comments": 3, "articles": 3 }
+  ]
+}
