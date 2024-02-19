@@ -1,12 +1,3 @@
-# Opanuj Frontend: AI Edition - Materiały dla studenta
-
-![](./_resources/img/header.png)
-
-W tym repozytorium znajdziesz:
-
-- kod prezentowany w lekcjach kursu
-- narzędzia do realizowania ćwiczeń w każdej lekcji
-
 ## Wymagania
 
 - Node w wersji 20.9.0 lub nowszej (możesz wykorzystać narzędzie nvm)
