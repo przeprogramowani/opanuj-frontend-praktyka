@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
-import { f1, f2, f3, f4 } from './functions';
+import { addNums, divideNums, subtractNums, multiplyNums } from './functions';
 
 const App = () => {
-  const [numA, setNumA] = useState<number>(0);
-  const [numB, setNumB] = useState<number>(0);
-  const [numC, setNumC] = useState<number | string>(0);
+  const [num1, setNum1] = useState<number>(0);
+  const [num2, setNum2] = useState<number>(0);
+  const [result, setResult] = useState<number | string>(0);
 
-  const doWork = (func: (a: number, b: number) => number) => {
-    setNumC(func(numA, numB));
+  const mathOperations = [
+    { operation: addNums, symbol: '+' },
+    { operation: divideNums, symbol: '/' },
+    { operation: subtractNums, symbol: '-' },
+    { operation: multiplyNums, symbol: '*' },
+  ];
+
+  const calculate = (func: (a: number, b: number) => number) => {
+    setResult(func(num1, num2));
   };
 
   return (
@@ -16,43 +23,30 @@ const App = () => {
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numA}
-          onChange={(e) => setNumA(parseFloat(e.target.value))}
+          value={num1}
+          onChange={(e) => setNum1(parseFloat(e.target.value))}
         />
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numB}
-          onChange={(e) => setNumB(parseFloat(e.target.value))}
+          value={num2}
+          onChange={(e) => setNum2(parseFloat(e.target.value))}
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f1)}
-        >
-          +
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f2)}
-        >
-          -
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f3)}
-        >
-          *
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f4)}
-        >
-          /
-        </button>
+        {mathOperations.map((mathOperation) => {
+          const { operation, symbol } = mathOperation;
+          return (
+            <button
+              className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
+              onClick={() => calculate(operation)}
+            >
+              {symbol}
+            </button>
+          );
+        })}
       </div>
-      <div>Result: {numC}</div>
+      <div>Result: {result}</div>
     </div>
   );
 };
