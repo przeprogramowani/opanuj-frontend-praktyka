@@ -5,24 +5,22 @@ function validator() {
   const result = document.getElementById('result');
 
   button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
+    const ERROR_MESSAGE = 'Invalid number. Please enter a number between 0 and 100';
+    const SUCCESS_MESSAGE = 'Valid number. Thank you!';
+
+    const inputValue = +input.value;
+
+    if(!inputValue) {
+      result.innerHTML = ERROR_MESSAGE;
+      return;
     }
+
+    if (inputValue > 0 && inputValue < 100 && inputValue % 2 === 0) {
+      result.innerHTML = SUCCESS_MESSAGE;
+      return;
+    }
+
+    result.innerHTML = ERROR_MESSAGE;
   });
 
   button2.addEventListener('click', () => {
