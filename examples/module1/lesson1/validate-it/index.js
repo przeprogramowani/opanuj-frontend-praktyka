@@ -1,34 +1,50 @@
+document.addEventListener('DOMContentLoaded', function () {
+  validator();
+});
+
 function validator() {
   const input = document.getElementById('input');
-  const button = document.getElementById('button');
-  const button2 = document.getElementById('button2');
-  const result = document.getElementById('result');
+  const validButton = document.getElementById('validButton');
+  const clearButton = document.getElementById('clearButton');
+  const validMessage = document.getElementById('validMessage');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
+  const MESSAGE_VALID_EMPTY = 'Your field is empty, please enter a number!';
+  const MESSAGE_VALID_NO_NUMBER = 'Please enter a valid number!';
+
+  validButton.addEventListener('click', validateInput);
+
+  input.addEventListener('keypress', function(event) {
+    // Check if the Enter key is pressed
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      validateInput(); // Call the validation function
     }
   });
 
-  button2.addEventListener('click', () => {
+  clearButton.addEventListener('click', () => {
+    // clear valid message
+    validMessage.innerHTML = '';
     input.value = '';
-    result.innerHTML = '';
   });
+
+  function validateInput() {
+    // check if input is not empty
+    if (input.value) {
+      //check if input is a number and return message
+      validMessage.innerHTML = !isNaN(input.value) ? validNumberValueBetween(Number(input.value)) : MESSAGE_VALID_NO_NUMBER;
+      return;
+    }
+
+    validMessage.innerHTML = MESSAGE_VALID_EMPTY;
+  }
 }
 
-validator();
+// helper function
+function validNumberValueBetween(validNumber) {
+  const FROM_VALUE = 0;
+  const TO_VALUE = 100;
+  const VALID_MESSAGE = 'valid';
+  const INVALID_MESSAGE = 'invalid';
+
+  // Adjusted to include FROM_VALUE and TO_VALUE in the valid range
+  return validNumber > FROM_VALUE && validNumber < TO_VALUE ? VALID_MESSAGE : INVALID_MESSAGE;
+}
