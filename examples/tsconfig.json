@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "module1/lesson1/validate-it/index.js"]
   // "references": [{ "path": "./tsconfig.node.json" }]
 }
