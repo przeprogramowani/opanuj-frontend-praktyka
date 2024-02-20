@@ -23,23 +23,23 @@ function validator(validationMethods) {
   const input = document.getElementById('input');
   const validationButton = document.getElementById('button');
   const resetButton = document.getElementById('button2');
-  const isValidResult = document.getElementById('result');
+  const validationResult = document.getElementById('result');
 
   validationButton.addEventListener('click', () => {
     const numberToValidate = Number(input.value);
 
-    const isMeetingConditions = validationMethods.every((method) =>
+    const isNumMeetingConditions = validationMethods.every((method) =>
       method(numberToValidate)
     );
 
-    !!numberToValidate && isMeetingConditions
-      ? (isValidResult.innerHTML = 'Valid')
-      : (isValidResult.innerHTML = 'Invalid');
+    !!numberToValidate && isNumMeetingConditions
+      ? (validationResult.innerHTML = 'Valid')
+      : (validationResult.innerHTML = 'Invalid');
   });
 
   resetButton.addEventListener('click', () => {
     input.value = '';
-    isValidResult.innerHTML = '';
+    validationResult.innerHTML = '';
   });
 }
 
