@@ -5,8 +5,8 @@ import { TextField } from './TextField';
 import { ValidateButton } from './ValidateButton';
 import { ValidationMessage } from './ValidationMessage';
 import { evenNumber } from '../validationMethods/evenNumber';
-import { greaterThan0 } from '../validationMethods/greaterThan0';
-import { smallerThan100 } from '../validationMethods/smallerThan100';
+import { greaterThan } from '../validationMethods/greaterThan';
+import { smallerThan } from '../validationMethods/smallerThan';
 
 export function Main() {
   const [value, setValue] = useState<string | number | undefined>();
@@ -14,7 +14,7 @@ export function Main() {
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
 
   const handleValidate = () => {
-    const valid = validate(value, [evenNumber, greaterThan0, smallerThan100]);
+    const valid = validate(value, [evenNumber, greaterThan, smallerThan]);
     setIsValid(valid);
     setIsEmpty(false);
   };
