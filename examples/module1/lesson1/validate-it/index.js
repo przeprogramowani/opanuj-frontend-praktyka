@@ -5,8 +5,6 @@ function validator() {
   const result = document.getElementById('result');
 
   button.addEventListener('click', () => {
-    console.clear();
-
     const value = input.value;
 
     function isValid(value) {
