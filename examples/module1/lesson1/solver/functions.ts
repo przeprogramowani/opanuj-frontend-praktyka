@@ -1,13 +1,18 @@
-export function f1(a, b) {
-  return a + b;
+export function add(addend1: number, addend2: number) {
+  return addend1 + addend2;
 }
-export function f2(a, b) {
-  return a - b;
+export function subtract(minued: number, subtrahend: number) {
+  return minued - subtrahend;
 }
-export function f3(a, b) {
-  return a * b;
+export function multiply(multiplier: number, multiplicand: number) {
+  return multiplier * multiplicand;
 }
-
-export function f4(a, b) {
-  return a / b;
+export function divide(
+  dividend: number,
+  divisor: number
+): [boolean, string | number] {
+  if (divisor === 0) {
+    return [false, 'Divisor cannot be 0'];
+  }
+  return [true, dividend / divisor];
 }
