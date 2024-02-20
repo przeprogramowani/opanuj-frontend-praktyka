@@ -1,3 +1,8 @@
+enum ValidationMessage {
+  SUCCESS_VALIDATION = 'Valid',
+  FAIL_VALIDATION = 'Invalid',
+}
+
 function validator() {
   const validationInput = document.getElementById('input') as HTMLInputElement;
   const validationButton = document.getElementById('button');
@@ -13,16 +18,16 @@ function validator() {
             Number(validationInput.value) < 100 &&
             Number(validationInput.value) % 2 === 0
           ) {
-            validationResult.innerHTML = 'Valid';
+            validationResult.innerHTML = ValidationMessage.SUCCESS_VALIDATION;
           } else {
-            validationResult.innerHTML = 'Invalid';
+            validationResult.innerHTML = ValidationMessage.FAIL_VALIDATION;
           }
-          validationResult.innerHTML = 'Valid';
+          validationResult.innerHTML = ValidationMessage.SUCCESS_VALIDATION;
         } else {
-          validationResult.innerHTML = 'Invalid';
+          validationResult.innerHTML = ValidationMessage.FAIL_VALIDATION;
         }
       } else {
-        validationResult.innerHTML = 'Invalid';
+        validationResult.innerHTML = ValidationMessage.FAIL_VALIDATION;
       }
     });
 
