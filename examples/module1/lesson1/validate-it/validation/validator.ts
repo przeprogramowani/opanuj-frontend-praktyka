@@ -1,9 +1,11 @@
+import { ValidationMethod } from './validation-methods';
+
 enum ValidationMessage {
   SUCCESS_VALIDATION = 'Valid',
   FAIL_VALIDATION = 'Invalid',
 }
 
-export function validator() {
+export function validator(validationMethods: ValidationMethod[]) {
   const validationInput = document.getElementById(
     'input'
   ) as HTMLInputElement | null;
@@ -31,11 +33,7 @@ export function validator() {
       validationResult.innerHTML = ValidationMessage.FAIL_VALIDATION;
     }
 
-    if (
-      valueToValidate > 0 &&
-      valueToValidate < 100 &&
-      valueToValidate % 2 === 0
-    ) {
+    if (validationMethods.every((method) => method(valueToValidate))) {
       validationResult.innerHTML = ValidationMessage.SUCCESS_VALIDATION;
     } else {
       validationResult.innerHTML = ValidationMessage.FAIL_VALIDATION;
