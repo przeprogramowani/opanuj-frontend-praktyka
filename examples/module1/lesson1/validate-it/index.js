@@ -5,21 +5,16 @@ function validator() {
   const result = document.getElementById('result');
 
   button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
+    console.clear();
+
+    const value = input.value;
+
+    function isValid(value) {
+      return Number(value) > 0 && Number(value) < 100 && Number(value) % 2 == 0;
+    }
+
+    if (isValid(value)) {
+      result.innerHTML = 'Valid';
     } else {
       result.innerHTML = 'Invalid';
     }
