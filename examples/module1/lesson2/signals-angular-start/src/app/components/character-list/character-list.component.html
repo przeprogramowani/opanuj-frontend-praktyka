@@ -1,0 +1,7 @@
+<ol
+  class="grid grid-cols-1 gap-4 list-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+>
+  <li *ngFor="let character of characters" class="flex flex-col items-center">
+    <app-character-card [character]="character"></app-character-card>
+  </li>
+</ol>
