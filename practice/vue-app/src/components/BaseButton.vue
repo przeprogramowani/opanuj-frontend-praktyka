@@ -21,7 +21,6 @@ import { defineProps } from 'vue';
             'bg-blue-200 hover:bg-blue-800': type === 'validate',
             'bg-red-200 hover:bg-red-800': type === 'reset',
         }"
-        id="button"
     >
         <slot></slot>
     </button>
