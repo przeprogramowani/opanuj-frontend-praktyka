@@ -7,16 +7,11 @@ export function useCalculations() {
   const [error, setError] = useState<string>('');
 
   const calculate = (
-    func: (a: number, b: number) => number | [boolean, string | number]
+    func: (a: number, b: number) => [string | number, string | string]
   ) => {
-    const result = func(value1, value2);
-    if (Array.isArray(result) && !result[0]) {
-      setError(result[1] as string);
-      setResult('');
-      return;
-    }
-    setResult(Array.isArray(result) ? result[1] : result);
-    setError('');
+    const [result, error] = func(value1, value2);
+    setError(error as string);
+    setResult(result as string);
   };
 
   return {
