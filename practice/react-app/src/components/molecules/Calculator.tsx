@@ -1,5 +1,6 @@
 import { f1, f2, f3, f4 } from '../../functions';
 import { useCalculate } from '../../hooks/UseCalculate';
+import { CheckIsValid } from '../../utils/validator';
 import { Button } from '../atoms/Button';
 import { Input } from '../atoms/Input';
 
@@ -11,11 +12,11 @@ export const Calculator = () => {
       <div className="grid grid-cols-2 gap-x-4">
         <Input
           value={numA}
-          parseFunck={(e) => setNumA(parseFloat(e.target.value))}
+          setValue={(e) => setNumA(CheckIsValid(e.target.value))}
         />
         <Input
           value={numB}
-          parseFunck={(e) => setNumB(parseFloat(e.target.value))}
+          setValue={(e) => setNumB(CheckIsValid(e.target.value))}
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">

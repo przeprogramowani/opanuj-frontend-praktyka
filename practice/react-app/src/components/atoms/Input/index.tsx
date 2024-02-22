@@ -1,15 +1,15 @@
 type InputProps = {
   value: number;
-  parseFunck: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  setValue: React.ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
-export const Input = ({ value, parseFunck }: InputProps) => {
+export const Input = ({ value, setValue }: InputProps) => {
   return (
     <input
       type="number"
       className="rounded-md shadow-md p-4"
       value={value}
-      onChange={parseFunck}
+      onChange={setValue}
       min={0}
       max={100}
     />
