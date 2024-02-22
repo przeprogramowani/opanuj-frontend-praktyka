@@ -1,23 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { operations, MathOperation } from './mathOperations';
 import { Button } from './OperationButton';
 import { OperationsPanel } from './OperationPanel';
-
-type NumericInputProps = {
-  value: number;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
-
-const NumericInput = ({ value, onChange }: NumericInputProps) => {
-  return (
-    <input
-      type="number"
-      className="rounded-md shadow-md p-4"
-      value={value}
-      onChange={onChange}
-    />
-  );
-};
+import { NumericInput } from './NumericInput';
 
 const App = () => {
   const [numA, setNumA] = useState<number>(0);
