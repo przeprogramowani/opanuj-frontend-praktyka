@@ -8,15 +8,15 @@ export const Calculator = () => {
   const { numA, numB, numC, setNumA, setNumB, calcResult } = useCalculate();
 
   return (
-    <>
+    <div className="flex flex-col">
       <div className="grid grid-cols-2 gap-x-4">
         <Input
           value={numA}
-          setValue={(e) => setNumA(CheckIsValid(e.target.value))}
+          setValue={({ target: { value } }) => setNumA(CheckIsValid(value))}
         />
         <Input
           value={numB}
-          setValue={(e) => setNumB(CheckIsValid(e.target.value))}
+          setValue={({ target: { value } }) => setNumB(CheckIsValid(value))}
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
@@ -25,7 +25,7 @@ export const Calculator = () => {
         <Button operation="*" calcResult={() => calcResult(f3)} />
         <Button operation="/" calcResult={() => calcResult(f4)} />
       </div>
-      <div>Result: {numC}</div>
-    </>
+      <div className="flex min-w-[500px]">Result: {numC}</div>
+    </div>
   );
 };
