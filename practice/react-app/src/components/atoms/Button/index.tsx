@@ -1,6 +1,5 @@
 import { memo } from 'react';
-
-type Operation = '+' | '-' | '*' | '/';
+import { Operation } from '../../../types/calculatorType';
 
 type ButtonProps = {
   operation: Operation;

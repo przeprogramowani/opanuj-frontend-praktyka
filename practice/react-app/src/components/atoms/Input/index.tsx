@@ -10,6 +10,8 @@ export const Input = ({ value, parseFunck }: InputProps) => {
       className="rounded-md shadow-md p-4"
       value={value}
       onChange={parseFunck}
+      min={0}
+      max={100}
     />
   );
 };
