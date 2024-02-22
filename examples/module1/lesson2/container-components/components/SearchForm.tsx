@@ -1,11 +1,14 @@
-type SearchFormProps = {
+import { SearchInput } from './SearchInput';
+import { SearchSelect } from './SearchSelect';
+
+interface Props {
   name: string;
   setName: (name: string) => void;
   gender: string;
   setGender: (gender: string) => void;
   sortOption: string;
   setSortOption: (sortOption: string) => void;
-};
+}
 
 function SearchForm({
   name,
@@ -14,45 +17,64 @@ function SearchForm({
   setGender,
   sortOption,
   setSortOption,
-}: SearchFormProps) {
+}: Props) {
+  const genderOptions = [
+    {
+      title: 'Any Gender',
+      value: ' ',
+    },
+    {
+      title: 'Female',
+      value: 'female',
+    },
+    {
+      title: 'Male',
+      value: 'male',
+    },
+    {
+      title: 'Genderless',
+      value: 'genderless',
+    },
+    {
+      title: 'Unknown',
+      value: 'unknown',
+    },
+  ];
+
+  const sortOptions = [
+    {
+      title: 'Initial',
+      value: ' ',
+    },
+    {
+      title: 'Name',
+      value: 'name',
+    },
+    {
+      title: 'Created Date',
+      value: 'created',
+    },
+  ];
+
   return (
     <form className="space-x-4 flex items-end justify-center">
-      <label className="flex flex-col">
+      <SearchInput name={name} handleChange={(e) => setName(e.target.value)}>
         Name
-        <input
-          className="border h-7 mt-1 indent-2"
-          type="text"
-          placeholder="Rick Sanchez..."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <label className="flex flex-col">
+      </SearchInput>
+      <SearchSelect
+        options={genderOptions}
+        value={gender}
+        handleChange={(e) => setGender(e.target.value)}
+      >
         Gender
-        <select
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          className="border h-7 mt-1"
-        >
-          <option value="">Any Gender</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="genderless">Genderless</option>
-          <option value="unknown">Unknown</option>
-        </select>
-      </label>
-      <label className="flex flex-col">
+      </SearchSelect>
+      <SearchSelect
+        value={sortOption}
+        handleChange={(e) => setSortOption(e.target.value)}
+        options={sortOptions}
+      >
         Sort by
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          className="border h-7 mt-1"
-        >
-          <option value="">Initial</option>
-          <option value="name">Name</option>
-          <option value="created">Created Date</option>
-        </select>
-      </label>
+      </SearchSelect>
     </form>
   );
 }
