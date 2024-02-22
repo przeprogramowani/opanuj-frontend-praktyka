@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { f1, f2, f3, f4 } from './functions';
 
-function App() {
-  const [count, setCount] = useState(0)
+import './App.css';
+import { Button } from './components/atoms/Button';
+import { useCalculate } from './hooks/UseCalculate';
+import { Input } from './components/atoms/Input';
+const App = () => {
+  const { numA, numB, numC, setNumA, setNumB, doWork } = useCalculate();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <div className="grid grid-cols-2 gap-x-4">
+        <Input
+          value={numA}
+          parseFunck={(e) => setNumA(parseFloat(e.target.value))}
+        />
+        <Input
+          value={numB}
+          parseFunck={(e) => setNumB(parseFloat(e.target.value))}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="grid grid-cols-4 gap-x-4 my-4">
+        <Button operation="+" doWork={() => doWork(f1)} />
+        <Button operation="-" doWork={() => doWork(f2)} />
+        <Button operation="*" doWork={() => doWork(f3)} />
+        <Button operation="/" doWork={() => doWork(f4)} />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <div>Result: {numC}</div>
+    </div>
+  );
+};
 
-export default App
+export default App;
