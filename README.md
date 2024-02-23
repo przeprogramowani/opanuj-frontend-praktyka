@@ -38,12 +38,14 @@ Korzystając z polecenia `npm run example` (szczegóły powyżej) uruchamiasz se
 Wszystkie zasoby znajdziesz w folderze `examples/scripts/data`, a w aplikacji pod `/api/data/{resource}`:
 
 ```bash
-http://localhost:3000/api/data/articles
-http://localhost:3000/api/data/authors
-http://localhost:3000/api/data/boostrap
-http://localhost:3000/api/data/comments
+GET http://localhost:3000/api/data/articles
+GET http://localhost:3000/api/data/authors
+GET http://localhost:3000/api/data/boostrap
+GET http://localhost:3000/api/data/comments
 ...
 ```
+
+Te same endpointy akceptują również metodę POST, które możesz wykorzystać do symulowania zapisu danych.
 
 ## Realizacja ćwiczeń
 
