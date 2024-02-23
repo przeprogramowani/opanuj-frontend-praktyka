@@ -12,11 +12,15 @@ export const Calculator = () => {
       <div className="grid grid-cols-2 gap-x-4">
         <Input
           value={numA}
-          setValue={({ target: { value } }) => setNumA(CheckIsValid(value))}
+          validateValue={({ target: { value } }) =>
+            setNumA(CheckIsValid(value))
+          }
         />
         <Input
           value={numB}
-          setValue={({ target: { value } }) => setNumB(CheckIsValid(value))}
+          validateValue={({ target: { value } }) =>
+            setNumB(CheckIsValid(value))
+          }
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
@@ -25,7 +29,7 @@ export const Calculator = () => {
         <Button operation="*" calcResult={() => calcResult(f3)} />
         <Button operation="/" calcResult={() => calcResult(f4)} />
       </div>
-      <div className="flex min-w-[500px]">Result: {numC}</div>
+      <h2 className="flex min-w-[500px]">Result: {numC}</h2>
     </div>
   );
 };
