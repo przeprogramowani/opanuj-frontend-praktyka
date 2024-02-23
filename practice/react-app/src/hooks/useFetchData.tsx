@@ -7,6 +7,7 @@ type FetchDataType = {
 
 export const useFetchData = <T,>({ name, gender }: FetchDataType) => {
   const [characters, setCharacters] = useState<T[]>();
+
   const API_URL = `https://rickandmortyapi.com/api/character/?name=${name}&gender=${gender}`;
 
   useEffect(() => {
