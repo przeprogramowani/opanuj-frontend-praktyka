@@ -63,6 +63,16 @@ cd react-app # lub vue-app / angular-app
 npm install
 ```
 
+## Przykładowe rozwiązania ćwiczeń
+
+Przykładowe rozwiązania ćwiczeń umieszczamy w folderach `examples/{module}/{lesson}/_solutions`.
+
+Aby uruchomić wybrany projekt, np. `module1/lesson1/_solutions/solver` wystarczy, że wykonasz polecenie:
+
+```bash
+npm run example _solutions/solver
+```
+
 ## Aktualizacja forka
 
 Do zaktualizowania Twojego forka tego repozytorium możesz wykorzystywać "Sync fork" z UI GitHuba lub uruchamiać poniższy skrypt Bash z terminalu:
