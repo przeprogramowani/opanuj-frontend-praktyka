@@ -20,7 +20,11 @@ export function Select<T extends string>({
         className="border h-7 mt-1"
       >
         {options &&
-          options.map((option) => <option value={option}>{option}</option>)}
+          options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
       </select>
     </label>
   );
