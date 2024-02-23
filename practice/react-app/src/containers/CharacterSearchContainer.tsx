@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import CharacterList from '../components/molecules/CharacterList';
-import SearchForm from '../components/molecules/SearchForm';
 import SearchTitle from '../components/atoms/SearchTitle';
 import { Character, GenderType } from '../types/Character';
 import { useFetchData } from '../hooks/useFetchData';
@@ -23,7 +22,7 @@ function CharacterSearchContainer() {
       <div className="pt-20" />
       <SearchTitle title="Wyszukiwarka postaci Rick and Morty" />
       <div className="pt-8" />
-      <SearchForm>
+      <form className="space-x-4 flex items-end justify-center">
         <Input
           label="Name"
           type="text"
@@ -43,7 +42,7 @@ function CharacterSearchContainer() {
           setGender={setSortOption}
           options={['created', 'name']}
         />
-      </SearchForm>
+      </form>
       <div className="pt-12" />
       {sortedCharacters && <CharacterList characters={sortedCharacters} />}
       <div className="pt-16" />
