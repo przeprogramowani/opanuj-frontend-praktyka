@@ -5,3 +5,5 @@ export type Character = {
   image: string;
   created: string;
 };
+
+export type GenderType = 'female' | 'male' | 'genderless' | 'unknown';

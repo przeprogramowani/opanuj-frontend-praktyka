@@ -11,6 +11,6 @@ export const sortData = <T extends SortOptionValue>({
     } else if (sortOption === 'created') {
       return new Date(a.created).getTime() - new Date(b.created).getTime();
     }
-    return 0;
+    return 1;
   });
 };

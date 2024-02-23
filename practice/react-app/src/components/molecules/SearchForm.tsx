@@ -1,12 +1,15 @@
-import { SortType } from '../../types/Sort';
+import { GenderType } from '../../types/Character';
+import { SortSearchOptions } from '../../types/Sort';
+import { Input } from '../atoms/Input';
+import { Select } from '../atoms/Select';
 
 type SearchFormProps = {
   name: string;
   setName: (name: string) => void;
-  gender: string;
-  setGender: (gender: string) => void;
-  sortOption: SortType;
-  setSortOption: (sortOption: SortType) => void;
+  gender: GenderType;
+  setGender: (gender: GenderType) => void;
+  sortOption: SortSearchOptions;
+  setSortOption: (sortOption: SortSearchOptions) => void;
 };
 
 function SearchForm({
@@ -19,42 +22,25 @@ function SearchForm({
 }: SearchFormProps) {
   return (
     <form className="space-x-4 flex items-end justify-center">
-      <label className="flex flex-col">
-        Name
-        <input
-          className="border h-7 mt-1 indent-2"
-          type="text"
-          placeholder="Rick Sanchez..."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <label className="flex flex-col">
-        Gender
-        <select
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          className="border h-7 mt-1"
-        >
-          <option value="">Any Gender</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="genderless">Genderless</option>
-          <option value="unknown">Unknown</option>
-        </select>
-      </label>
-      <label className="flex flex-col">
-        Sort by
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value as SortType)}
-          className="border h-7 mt-1"
-        >
-          <option value="">Initial</option>
-          <option value="name">Name</option>
-          <option value="created">Created Date</option>
-        </select>
-      </label>
+      <Input
+        label="Name"
+        type="text"
+        placeholder="Rick Sanchez..."
+        name={name}
+        setName={setName}
+      />
+      <Select<GenderType>
+        value={gender}
+        label="Gender"
+        setGender={setGender}
+        options={['female', 'genderless', 'male', 'unknown']}
+      />
+      <Select<SortSearchOptions>
+        value={sortOption}
+        label="Sort by"
+        setGender={setSortOption}
+        options={['created', 'name']}
+      />
     </form>
   );
 }

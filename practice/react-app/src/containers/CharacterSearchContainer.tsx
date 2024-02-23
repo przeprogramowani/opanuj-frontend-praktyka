@@ -2,15 +2,15 @@ import { useState } from 'react';
 import CharacterList from '../components/molecules/CharacterList';
 import SearchForm from '../components/molecules/SearchForm';
 import SearchTitle from '../components/atoms/SearchTitle';
-import { Character } from '../types/Character';
+import { Character, GenderType } from '../types/Character';
 import { useFetchData } from '../hooks/useFetchData';
 import { sortData } from '../utils/Sort';
-import { SortType } from '../types/Sort';
+import { SortSearchOptions } from '../types/Sort';
 
 function CharacterSearchContainer() {
   const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
-  const [sortOption, setSortOption] = useState<SortType>('');
+  const [gender, setGender] = useState<GenderType>('unknown');
+  const [sortOption, setSortOption] = useState<SortSearchOptions>('initial');
 
   const { characters } = useFetchData<Character>({ name, gender });
 
