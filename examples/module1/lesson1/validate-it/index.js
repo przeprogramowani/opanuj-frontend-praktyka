@@ -1,33 +1,33 @@
-function validator() {
-  const input = document.getElementById('input');
-  const button = document.getElementById('button');
-  const button2 = document.getElementById('button2');
-  const result = document.getElementById('result');
+import { validate } from './validate';
+import {
+  isEven,
+  isFilled,
+  isGreatherThan,
+  isInteger,
+  isLessThan,
+} from './validators';
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
+function validator() {
+  const numberInput = document.getElementById('numberInput');
+  const submitButton = document.getElementById('submitButton');
+  const clearButton = document.getElementById('clearButton');
+  const formResult = document.getElementById('formResult');
+
+  submitButton.addEventListener('click', () => {
+    const isValueCorrect = validate(
+      isFilled,
+      isInteger,
+      (value) => isGreatherThan(value, 0),
+      (value) => isLessThan(value, 100),
+      isEven
+    )(numberInput.value);
+
+    formResult.innerHTML = isValueCorrect ? 'Valid' : 'Invalid';
   });
 
-  button2.addEventListener('click', () => {
-    input.value = '';
-    result.innerHTML = '';
+  clearButton.addEventListener('click', () => {
+    numberInput.value = '';
+    formResult.innerHTML = '';
   });
 }
 
