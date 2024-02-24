@@ -1,13 +1,8 @@
-export function f1(a, b) {
-  return a + b;
-}
-export function f2(a, b) {
-  return a - b;
-}
-export function f3(a, b) {
-  return a * b;
+const functionOperations = {
+  add: (a: number, b: number) => a + b,
+  subtract: (a: number, b: number) => a - b,
+  multiply: (a: number, b: number) => a * b,
+  divide: (a: number, b: number) => a / b,
 }
 
-export function f4(a, b) {
-  return a / b;
-}
+export default functionOperations;
