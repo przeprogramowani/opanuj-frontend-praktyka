@@ -1,30 +1,24 @@
-function validator() {
+function validator(validateConditions) {
     const input = document.getElementById('input');
-    const button = document.getElementById('button');
-    const button2 = document.getElementById('button2');
+    const validateBtn = document.getElementById('button');
+    const clearBtn = document.getElementById('button2');
     const result = document.getElementById('result');
 
-    button.addEventListener('click', () => {
-        if (input.value) {
-            if (Number.isInteger(input.value)) {
-                if (Number(input.value) > 0 && Number(input.value) < 100 && Number(input.value) % 2 === 0) {
-                    result.innerHTML = 'Valid';
-                } else {
-                    result.innerHTML = 'Invalid';
-                }
-                result.innerHTML = 'Valid';
-            } else {
-                result.innerHTML = 'Invalid';
-            }
-        } else {
-            result.innerHTML = 'Invalid';
-        }
-    });
+    const validateNumber = () => {
+        const value = Number(input.value);
+        const isValid = value > 0 && value < 100 && validateConditions.every(condition => condition(value));
+        result.innerHTML = isValid ? 'Valid' : 'Invalid';
+    };
 
-    button2.addEventListener('click', () => {
+    const clearInput = () => {
         input.value = '';
         result.innerHTML = '';
-    });
+    };
+
+    validateBtn.addEventListener('click', validateNumber);
+    clearBtn.addEventListener('click', clearInput);
 }
 
-validator();
+const isDivisibleBy2 = value => value % 2 === 0;
+
+validator([isDivisibleBy2]);
