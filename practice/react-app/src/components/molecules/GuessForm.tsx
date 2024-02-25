@@ -23,6 +23,11 @@ export const GuessForm = () => {
     return;
   };
 
+  const drawNewCountry = async () => {
+    setAnswer('');
+    setCountries(await fetchCountryData(`${API_URL}/all`, 'GUESS'));
+  };
+
   const message = isSuccess ? 'Congratulation' : 'Try Again';
   return (
     <div className="flex flex-col items-center align-items justify-center border-2 ">
@@ -34,12 +39,7 @@ export const GuessForm = () => {
         setName={setAnswer}
       />
       <Button name="Check" onClick={() => checkUserAnswer(answer)} />
-      <Button
-        name="Draw again"
-        onClick={async () =>
-          setCountries(await fetchCountryData(`${API_URL}/all`, 'GUESS'))
-        }
-      />
+      <Button name="Draw again" onClick={async () => drawNewCountry()} />
       <Title
         title={showMessage ? message : 'What is the name of the country ?'}
       />
