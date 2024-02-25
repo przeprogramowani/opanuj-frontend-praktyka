@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { sortData } from '../utils/sort';
 import { CountryType } from '../types/country';
-import { useFetchData } from '../hooks/useFetchData';
+import { useFetchCountryData } from '../hooks/useFetchData';
 import { FilterOptions, ModeType, SortOptions } from '../types/filter';
 
 interface CountriesContextValues {
@@ -14,6 +14,7 @@ interface CountriesContextValues {
   filterOption: FilterOptions;
   setSortOption: React.Dispatch<React.SetStateAction<SortOptions>>;
   setFilterOption: React.Dispatch<React.SetStateAction<FilterOptions>>;
+  setCountries: React.Dispatch<React.SetStateAction<CountryType[]>>;
 }
 
 const defaultValues: CountriesContextValues = {
@@ -22,6 +23,7 @@ const defaultValues: CountriesContextValues = {
   filter: '',
   filterOption: 'initial',
   sortOption: 'initial',
+  setCountries: () => {},
   setSortOption: () => {},
   setFilterOption: () => {},
   setMode: () => {},
@@ -41,7 +43,11 @@ export const CountriesProvider = ({
   const [sortOption, setSortOption] = useState<SortOptions>('initial');
   const [filterOption, setFilterOption] = useState<FilterOptions>('initial');
 
-  const { countries } = useFetchData({ filterOption, filter, mode });
+  const { countries, setCountries } = useFetchCountryData({
+    filterOption,
+    filter,
+    mode,
+  });
 
   const value = {
     mode,
@@ -52,6 +58,7 @@ export const CountriesProvider = ({
     filterOption,
     setSortOption,
     setFilterOption,
+    setCountries,
     countries: sortData({ countries, sortOption }),
   };
 

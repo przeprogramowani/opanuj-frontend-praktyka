@@ -1,12 +1,31 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { Input } from '../atoms/Input';
+import { Button } from '../atoms/Button';
+import { UseCountriesContext } from '../../context/CountriesApiContext';
+import Title from '../atoms/Title';
+import { fetchCountryData } from '../../utils/api';
+import { API_URL } from '../../static/url';
 
 // type SearchFormType = {};
 
-export const GuessForm = memo(() => {
+export const GuessForm = () => {
   const [answer, setAnswer] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+
+  const { countries, setCountries } = UseCountriesContext();
+
+  const checkUserAnswer = (answer: string) => {
+    const [country] = countries;
+    const res = country.name.toLowerCase() === answer.toLowerCase();
+    setIsSuccess(res);
+    setShowMessage(true);
+    return;
+  };
+
+  const message = isSuccess ? 'Congratulation' : 'Try Again';
   return (
-    <form className="flex items-center justify-center">
+    <div className="flex flex-col items-center align-items justify-center border-2 ">
       <Input
         label="What is your answer ?"
         type="text"
@@ -14,6 +33,16 @@ export const GuessForm = memo(() => {
         name={answer}
         setName={setAnswer}
       />
-    </form>
+      <Button name="Check" onClick={() => checkUserAnswer(answer)} />
+      <Button
+        name="Draw again"
+        onClick={async () =>
+          setCountries(await fetchCountryData(`${API_URL}/all`, 'GUESS'))
+        }
+      />
+      <Title
+        title={showMessage ? message : 'What is the name of the country ?'}
+      />
+    </div>
   );
-});
+};

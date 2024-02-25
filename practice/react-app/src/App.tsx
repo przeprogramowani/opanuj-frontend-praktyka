@@ -1,10 +1,12 @@
 import './App.css';
 import Radio from './components/atoms/Radio';
-import { CountriesContainer } from './containers/CountriesContainer';
+import { CountriesSearchContainer } from './containers/CountriesSearchContainer';
 import { ModeType } from './types/filter';
 import { UseCountriesContext } from './context/CountriesApiContext';
 import { CountriesList } from './components/molecules/CountriesList';
 import { CountryType } from './types/country';
+import { Country } from './components/Country';
+import { CountriesGuessContainer } from './containers/CountriesGuessContainer';
 
 function App() {
   const { mode, setMode } = UseCountriesContext();
@@ -25,11 +27,20 @@ function App() {
           setStateValue={setMode}
         />
       </div>
-      <CountriesContainer
-        viewFn={(countries: CountryType[]) => (
-          <CountriesList countries={countries} />
-        )}
-      />
+      {mode === 'SEARCH' && (
+        <CountriesSearchContainer
+          viewFn={(countries: CountryType[]) => (
+            <CountriesList countries={countries} />
+          )}
+        />
+      )}
+      {mode == 'GUESS' && (
+        <CountriesGuessContainer
+          viewFn={({ flagsData }: CountryType) => (
+            <Country name="" flagData={flagsData} />
+          )}
+        />
+      )}
     </div>
   );
 }

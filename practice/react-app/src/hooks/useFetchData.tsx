@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import { APIData } from '../utils/data';
+import { useCallback, useEffect, useState } from 'react';
 import { CountryType } from '../types/country';
 import { FilterOptions, ModeType } from '../types/filter';
-import { buildApiUrl } from '../utils/api';
-import { selectingDataMode } from '../utils/random';
+import { buildApiUrl, fetchCountryData } from '../utils/api';
 
 type FetchDataType = {
   filterOption: FilterOptions;
@@ -11,7 +9,7 @@ type FetchDataType = {
   mode: ModeType;
 };
 
-export const useFetchData = ({
+export const useFetchCountryData = ({
   filterOption,
   filter,
   mode = 'SEARCH',
@@ -20,20 +18,16 @@ export const useFetchData = ({
 
   const { API } = buildApiUrl(filterOption, filter, mode);
 
+  const getCountryData = useCallback(async () => {
+    setCountries(await fetchCountryData(API, mode));
+  }, [API, mode]);
+
   useEffect(() => {
     if (mode === 'SEARCH' && filter.length <= 2) {
       return setCountries([]);
     }
-    fetch(API)
-      .then((response) => response.json())
-      .then((data: APIData) => {
-        const res = selectingDataMode(data, mode);
-        return setCountries(res);
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
-  }, [API, mode, filter.length]);
+    getCountryData();
+  }, [API, mode, filter.length, getCountryData]);
 
-  return { countries };
+  return { countries, setCountries };
 };
