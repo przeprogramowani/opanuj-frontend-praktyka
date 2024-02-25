@@ -1,15 +1,4 @@
-export type SortCountryOptions =
-  | 'countryName'
-  | 'currency'
-  | 'capital'
-  | 'language';
-
-// export type SortOptionValue = {
-//   countryName: string;
-//   currency: string;
-//   capital: string;
-//   language: string;
-// };
+export type SortCountryOptions = 'population' | 'name' | 'initial';
 
 export type SortDataType<T> = {
   countries: T[] | undefined;

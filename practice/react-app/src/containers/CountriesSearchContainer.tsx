@@ -2,22 +2,20 @@ import { useState } from 'react';
 import SearchTitle from '../components/atoms/SearchTitle';
 import { useFetchData } from '../hooks/useFetchData';
 import { sortData } from '../utils/Sort';
-import { SortCountryOptions } from '../types/Sort';
+import { SortCountryOptions } from '../types/sort';
 import { Input } from '../components/atoms/Input';
 import { Select } from '../components/atoms/Select';
-import { CountryData } from '../types/Country';
 import CountriesList from '../components/molecules/CountriesList';
 
 function CountriesSearchContainer() {
   const [name, setName] = useState('');
-  const [sortOption, setSortOption] =
-    useState<SortCountryOptions>('countryName');
+  const [sortOption, setSortOption] = useState<SortCountryOptions>('initial');
 
-  const { countries } = useFetchData<CountryData[]>();
+  const { countries } = useFetchData();
 
-  // const sortedCountry = sortData<CountryData>({ countries, sortOption });
+  const sortedCountry = sortData({ countries, sortOption });
 
-  console.log('country', countries);
+  console.log('sortedCountry', sortedCountry);
 
   return (
     <>
@@ -28,7 +26,7 @@ function CountriesSearchContainer() {
         <Input
           label="Name"
           type="text"
-          placeholder="Rick Sanchez..."
+          placeholder="Poland..."
           name={name}
           setName={setName}
         />
@@ -36,11 +34,11 @@ function CountriesSearchContainer() {
           value={sortOption}
           label="Sort by"
           setOption={setSortOption}
-          options={['capital', 'countryName', 'currency', 'language']}
+          options={['initial', 'population', 'name']}
         />
       </form>
       <div className="pt-12" />
-      {countries && <CountriesList countries={countries.slice(0, 20)} />}
+      {sortedCountry && <CountriesList countries={sortedCountry} />}
       <div className="pt-16" />
     </>
   );
