@@ -6,17 +6,16 @@ function validator() {
 
   button.addEventListener('click', () => {
     if (input.value) {
-      if (Number.isInteger(input.value)) {
+      const number = Number(input.value)
+      if (Number.isInteger(number)) {
         if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
+          number > 0 &&
+          number < 100
         ) {
           result.innerHTML = 'Valid';
         } else {
           result.innerHTML = 'Invalid';
         }
-        result.innerHTML = 'Valid';
       } else {
         result.innerHTML = 'Invalid';
       }
