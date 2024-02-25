@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react';
-import { CountryApiData } from '../types/apiData';
-import { agregateCountriesData } from '../utils/data';
-import { CountryType } from '../types/country';
+import { APIData, agregateCountriesData } from '../utils/data';
+import { CountryType } from '../types/Country';
+import { FilterOptions } from '../types/filter';
 
-// type FetchDataType = {
-//   name: string;
-// };
+type FetchDataType = {
+  filterOption: FilterOptions;
+  filter: string;
+};
 
-export const useFetchData = () => {
-  const [countries, setCountries] = useState<CountryType[]>();
+export const useFetchData = ({ filterOption, filter }: FetchDataType) => {
+  const [countries, setCountries] = useState<CountryType[]>([]);
 
-  const API_ALL_COUNTRIES = 'https://restcountries.com/v3.1/all';
-  // const API_COUNTRY = `https://restcountries.com/v3.1/name/${name}`;
+  const API_URL = `https://restcountries.com/v3.1`;
 
+  const API_COUNTRY = `${API_URL}/${filterOption}/${filter.toLowerCase()}`;
   useEffect(() => {
-    console.log('FETCH DATA');
-    fetch(API_ALL_COUNTRIES)
+    if (!filter) return;
+
+    console.log('Elegancko');
+    fetch(API_COUNTRY)
       .then((response) => response.json())
-      .then((data: CountryApiData[]) => {
-        setCountries(agregateCountriesData(data.slice(0, 20)));
-      })
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
+      .then((data: APIData) => setCountries(agregateCountriesData(data)))
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }, [API_COUNTRY, filter]);
 
   return { countries };
 };

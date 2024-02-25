@@ -1,13 +1,13 @@
-import { CountryType } from '../types/country';
-import { SortCountryOptions } from '../types/sort';
+import { CountryType } from '../types/Country';
+import { SortOptions } from '../types/Sort';
 
 type SortCountriesType = {
-  countries?: CountryType[];
-  sortOption: SortCountryOptions;
+  countries: CountryType[];
+  sortOption: SortOptions;
 };
 
 export const sortData = ({ countries, sortOption }: SortCountriesType) => {
-  if (!countries) return null;
+  if (sortOption == 'initial') return countries;
   return [...countries].sort((a, b) => {
     if (sortOption === 'population') return b.population - a.population;
     if (sortOption === 'name') return a.name.localeCompare(b.name);
