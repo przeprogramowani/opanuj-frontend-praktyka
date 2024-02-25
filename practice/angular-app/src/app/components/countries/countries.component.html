@@ -1,33 +1,10 @@
 <div>
-    <select (change)="onFilterChange($event)">
-        <option value="">Filtruj wszystko</option>
-        <option value="name">Filtruj po nazwie</option>
-        <option value="capital">Filtruj po stolicy</option>
-        <option value="lang">Filtruj po języku</option>
-        <option value="currency">Filtruj po walucie</option>
-    </select>
+    <app-filter-type-select [filterType]="filterType" (filterTypeChange)="onFilterChange($event)"></app-filter-type-select>
 
-    <input type="text" (input)="filterCountries($event)" placeholder="Wyszukaj...">
+    <app-search-value-input [inputValue]="inputValue" (searchInputValueChange)="onInputChange($event)"></app-search-value-input>
 
-    <div>
-        sortuj po:
-        <select (change)="onSortChange($event)">
-            <option value="name">Nazwie</option>
-            <option value="population">Populacji</option>
-        </select>
-    </div>
+    <app-sort-by-select [sortBy]="sortBy" (sortByChange)="onSortChange($event)"></app-sort-by-select>
+
+    <app-countries-list [countries]="countries"></app-countries-list>
 </div>
 
-<ng-container *ngIf="(filteredCountries$ | async) as filteredCountries">
-  <div *ngIf="filteredCountries.length > 0; else noResultsTemplate">
-      <ul>
-          <li *ngFor="let country of filteredCountries">
-              {{ country.name.common }} {{country.flag}}
-          </li>
-      </ul>
-  </div>
-</ng-container>
-
-<ng-template #noResultsTemplate>
-  <div>Brak wyników wyszukiwania</div>
-</ng-template>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterByComponent } from './filter-select.component';
+import { SortBySelectComponent } from './sort-by-select.component';
 
-describe('FilterByComponent', () => {
-  let component: FilterByComponent;
-  let fixture: ComponentFixture<FilterByComponent>;
+describe('SortBySelectComponent', () => {
+  let component: SortBySelectComponent;
+  let fixture: ComponentFixture<SortBySelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilterByComponent]
+      imports: [SortBySelectComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FilterByComponent);
+    fixture = TestBed.createComponent(SortBySelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

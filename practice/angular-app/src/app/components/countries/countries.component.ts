@@ -2,57 +2,59 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { GetCountriesService } from '../../services/get-countries.service';
 import { Country } from '../../types/Country';
-import { BehaviorSubject, combineLatest, map, switchMap } from 'rxjs';
+import { Subscription } from 'rxjs';
+
+import { FilterTypeSelectComponent } from './components/filter-type-select/filter-type-select.component';
+import { CountriesListComponent } from './components/countries-list/countries-list.component';
+import { SearchValueInputComponent } from './components/search-value-input/search-value-input.component';
+import { SortBySelectComponent } from './components/sort-by-select/sort-by-select.component';
 
 @Component({
   selector: 'app-countries',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FilterTypeSelectComponent, CountriesListComponent, SearchValueInputComponent, SortBySelectComponent],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss'
 })
 export class CountriesComponent {
-  private inputValue = new BehaviorSubject<string>('');
-  private filterType = new BehaviorSubject<string>('');
-  private sortBy = new BehaviorSubject<string>('name');
-
-  filteredCountries$ = combineLatest([
-    this.filterType,
-    this.inputValue,
-    this.sortBy
-  ]).pipe(
-    switchMap(([filterType, inputValue, sortBy]) =>
-      this.getCountriesService.getCountriesBy(inputValue, filterType).pipe(
-        map(countries => this.sortCountries(countries, sortBy))
-      )
-    )
-  );
+  sub: Subscription = new Subscription();
+  countries: Country[] = [];
 
   private getCountriesService = inject(GetCountriesService);
-  
+
   ngOnInit(): void {
-    this.filterType.next(this.filterType.value);
+    this.sub.add(
+      this.getCountriesService.filteredCountries$.subscribe((countries) => {
+        this.countries = countries;
+      })
+    );
   }
 
-  onFilterChange(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value;
-    this.filterType.next(value);
+  get filterType(): string {
+    return this.getCountriesService.filterType.value;
   }
 
-  filterCountries(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.inputValue.next(value);
+  get inputValue(): string {
+    return this.getCountriesService.inputValue.value;
   }
 
-  onSortChange(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value;
-    this.sortBy.next(value);
+  get sortBy(): string {
+    return this.getCountriesService.sortBy.value;
   }
 
-  private sortCountries(countries: Country[], sortBy: string): Country[] {
-    return countries.sort((a, b) => sortBy === 'population' ?
-      b.population - a.population :
-      a.name.common.localeCompare(b.name.common));
+  onSortChange(sortBy: string): void {
+    this.getCountriesService.setSortBy(sortBy);
   }
 
+  onFilterChange(filterType: string): void {
+    this.getCountriesService.setFilterType(filterType);
+  }
+
+  onInputChange(inputValue: string): void {
+    this.getCountriesService.setInputValue(inputValue);
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
