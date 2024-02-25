@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { GetCountriesService } from '../../services/get-countries.service';
 import { Country } from '../../types/Country';
 import { BehaviorSubject, combineLatest, map, switchMap } from 'rxjs';
@@ -8,7 +7,7 @@ import { BehaviorSubject, combineLatest, map, switchMap } from 'rxjs';
 @Component({
   selector: 'app-countries',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [CommonModule],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss'
 })

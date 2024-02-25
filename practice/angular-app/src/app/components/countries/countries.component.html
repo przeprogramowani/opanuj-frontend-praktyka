@@ -19,15 +19,15 @@
 </div>
 
 <ng-container *ngIf="(filteredCountries$ | async) as filteredCountries">
-    <div *ngIf="filteredCountries.length > 0; else noResultsTemplate">
-        <ul>
-            <li *ngFor="let country of filteredCountries">
-                {{ country.name.common }} {{country.flag}}
-            </li>
-        </ul>
-    </div>
-  </ng-container>
-  
-  <ng-template #noResultsTemplate>
-    <div>Brak wyników wyszukiwania</div>
-  </ng-template>
+  <div *ngIf="filteredCountries.length > 0; else noResultsTemplate">
+      <ul>
+          <li *ngFor="let country of filteredCountries">
+              {{ country.name.common }} {{country.flag}}
+          </li>
+      </ul>
+  </div>
+</ng-container>
+
+<ng-template #noResultsTemplate>
+  <div>Brak wyników wyszukiwania</div>
+</ng-template>
