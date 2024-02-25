@@ -1,13 +1,57 @@
 import React, { useState } from 'react';
-import { f1, f2, f3, f4 } from './functions';
+import { add, subtract, multiply, divide } from './functions';
+
+type Operation = {
+  symbol: string;
+  func: (a: number, b: number) => number;
+};
+
+type OperationButtonProps = {
+  operation: Operation;
+  onExecute: (func: (a: number, b: number) => number, operationSymbol: string) => void;
+};
+
+const operations: Operation[] = [
+  { symbol: '+', func: add },
+  { symbol: '-', func: subtract },
+  { symbol: '*', func: multiply },
+  { symbol: '/', func: divide },
+];
+
+const OperationButton: React.FC<OperationButtonProps> = ({ operation, onExecute }) => (
+  <button
+    className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
+    onClick={() => onExecute(operation.func, operation.symbol)}
+    aria-label={`Calculate ${operation.symbol}`}
+  >
+    {operation.symbol}
+  </button>
+);
 
 const App = () => {
-  const [numA, setNumA] = useState<number>(0);
-  const [numB, setNumB] = useState<number>(0);
-  const [numC, setNumC] = useState<number | string>(0);
+  const [state, setState] = useState({
+    numA: 0,
+    numB: 0,
+    numC: 0,
+    errorMessage: '',
+  });
 
-  const doWork = (func: (a: number, b: number) => number) => {
-    setNumC(func(numA, numB));
+  const handleInputChange = (name: 'numA' | 'numB') => (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      [name]: parseFloat(e.target.value),
+    }));
+  };
+
+  const doWork = (func: (a: number, b: number) => number, operationSymbol: string) => {
+    setState((prevState) => {
+      if (operationSymbol === '/' && prevState.numB === 0) {
+        return { ...prevState, errorMessage: 'Cannot divide by zero xdd' };
+      } else {
+        const result = func(prevState.numA, prevState.numB);
+        return { ...prevState, numC: result, errorMessage: '' };
+      }
+    });
   };
 
   return (
@@ -16,43 +60,25 @@ const App = () => {
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numA}
-          onChange={(e) => setNumA(parseFloat(e.target.value))}
+          value={state.numA}
+          onChange={handleInputChange('numA')}
+          aria-label="Input A"
         />
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numB}
-          onChange={(e) => setNumB(parseFloat(e.target.value))}
+          value={state.numB}
+          onChange={handleInputChange('numB')}
+          aria-label="Input B"
         />
       </div>
+
       <div className="grid grid-cols-4 gap-x-4 my-4">
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f1)}
-        >
-          +
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f2)}
-        >
-          -
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f3)}
-        >
-          *
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f4)}
-        >
-          /
-        </button>
+        {operations.map((operation, index) => (
+          <OperationButton key={index} operation={operation} onExecute={doWork} />
+        ))}
       </div>
-      <div>Result: {numC}</div>
+      <div>Result: {state.errorMessage || state.numC}</div>
     </div>
   );
 };
