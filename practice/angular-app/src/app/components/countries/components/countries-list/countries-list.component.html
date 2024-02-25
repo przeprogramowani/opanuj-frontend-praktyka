@@ -1,0 +1,11 @@
+<div *ngIf="countries.length ;else noResultsTemplate">
+    <ul>
+        <li *ngFor="let country of countries">
+            {{ country.name.common }} {{country.flag}}
+        </li>
+    </ul>
+</div>
+
+<ng-template #noResultsTemplate>
+    <div>Brak wyników wyszukiwania</div>
+</ng-template>

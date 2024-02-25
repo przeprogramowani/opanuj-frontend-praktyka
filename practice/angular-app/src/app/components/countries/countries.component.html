@@ -1,0 +1,10 @@
+<div>
+    <app-filter-type-select [filterType]="filterType" (filterTypeChange)="onFilterChange($event)"></app-filter-type-select>
+
+    <app-search-value-input [inputValue]="inputValue" (searchInputValueChange)="onInputChange($event)"></app-search-value-input>
+
+    <app-sort-by-select [sortBy]="sortBy" (sortByChange)="onSortChange($event)"></app-sort-by-select>
+
+    <app-countries-list [countries]="countries"></app-countries-list>
+</div>
+
