@@ -1,8 +1,17 @@
-export type SortSearchOptions = 'name' | 'created' | 'initial';
+export type SortCountryOptions =
+  | 'countryName'
+  | 'currency'
+  | 'capital'
+  | 'language';
 
-export type SortOptionValue = { name: string; created: string };
+// export type SortOptionValue = {
+//   countryName: string;
+//   currency: string;
+//   capital: string;
+//   language: string;
+// };
 
 export type SortDataType<T> = {
-  characters: T[] | undefined;
-  sortOption: SortSearchOptions;
+  countries: T[] | undefined;
+  sortOption: SortCountryOptions;
 };

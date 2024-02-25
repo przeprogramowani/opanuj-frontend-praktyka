@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 
-type FetchDataType = {
-  name: string;
-  gender: string;
-};
+// type FetchDataType = {
+//   name: string;
+// };
 
-export const useFetchData = <T,>({ name, gender }: FetchDataType) => {
-  const [characters, setCharacters] = useState<T[]>();
+export const useFetchData = <T,>() => {
+  const [countries, setCountries] = useState<T>();
 
-  const API_URL = `https://rickandmortyapi.com/api/character/?name=${name}&gender=${gender}`;
+  const API_ALL_COUNTRIES = 'https://restcountries.com/v3.1/all';
+  // const API_COUNTRY = `https://restcountries.com/v3.1/name/${name}`;
 
   useEffect(() => {
-    if (name || gender) {
-      fetch(API_URL)
-        .then((response) => response.json())
-        .then((data: { results: T[] }) => setCharacters(data.results || []))
-        .catch((error) => console.error('Error fetching data:', error));
-    }
-  }, [name, gender, API_URL]);
+    fetch(API_ALL_COUNTRIES)
+      .then((response) => response.json())
+      .then((data: T) => {
+        setCountries(data);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
 
-  return { characters };
+  return { countries };
 };
