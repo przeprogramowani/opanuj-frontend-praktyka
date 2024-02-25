@@ -1,5 +1,5 @@
 import { memo } from 'react';
-('Rick Sanchez...');
+
 type InputType = {
   label: string;
   name: string;

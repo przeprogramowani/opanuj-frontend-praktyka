@@ -1,30 +1,39 @@
 import { useEffect, useState } from 'react';
-import { APIData, agregateCountriesData } from '../utils/data';
-import { CountryType } from '../types/Country';
-import { FilterOptions } from '../types/filter';
+import { APIData } from '../utils/data';
+import { CountryType } from '../types/country';
+import { FilterOptions, ModeType } from '../types/filter';
+import { buildApiUrl } from '../utils/api';
+import { selectingDataMode } from '../utils/random';
 
 type FetchDataType = {
   filterOption: FilterOptions;
   filter: string;
+  mode: ModeType;
 };
 
-export const useFetchData = ({ filterOption, filter }: FetchDataType) => {
+export const useFetchData = ({
+  filterOption,
+  filter,
+  mode = 'SEARCH',
+}: FetchDataType) => {
   const [countries, setCountries] = useState<CountryType[]>([]);
 
-  const API_URL = `https://restcountries.com/v3.1`;
+  const { API } = buildApiUrl(filterOption, filter, mode);
 
-  const API_COUNTRY = `${API_URL}/${filterOption}/${filter.toLowerCase()}`;
   useEffect(() => {
-    if (!filter) return;
-
-    console.log('Elegancko');
-    fetch(API_COUNTRY)
+    if (mode === 'SEARCH' && filter.length <= 2) {
+      return setCountries([]);
+    }
+    fetch(API)
       .then((response) => response.json())
-      .then((data: APIData) => setCountries(agregateCountriesData(data)))
+      .then((data: APIData) => {
+        const res = selectingDataMode(data, mode);
+        return setCountries(res);
+      })
       .catch((error) => {
         throw new Error(error);
       });
-  }, [API_COUNTRY, filter]);
+  }, [API, mode, filter.length]);
 
   return { countries };
 };

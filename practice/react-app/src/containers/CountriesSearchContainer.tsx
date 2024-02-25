@@ -1,59 +1,59 @@
 import { useState } from 'react';
 import SearchTitle from '../components/atoms/SearchTitle';
 import { useFetchData } from '../hooks/useFetchData';
-import { SortOptions } from '../types/Sort';
-import { Input } from '../components/atoms/Input';
-import { Select } from '../components/atoms/Select';
 import CountriesList from '../components/molecules/CountriesList';
-import { sortData } from '../utils/Sort';
-import { FilterOptions } from '../types/filter';
+import { FilterOptions, ModeType, SortOptions } from '../types/filter';
+import Radio from '../components/atoms/Radio';
+import { sortData } from '../utils/sort';
+import { SearchForm } from '../components/molecules/SearchForm';
 
 function CountriesSearchContainer() {
+  const [mode, setMode] = useState<ModeType>('SEARCH');
+
   const [filter, setFilter] = useState('');
 
   const [sortOption, setSortOption] = useState<SortOptions>('initial');
   const [filterOption, setFiltetOption] = useState<FilterOptions>('initial');
 
-  const { countries } = useFetchData({ filterOption, filter });
+  const { countries } = useFetchData({ filterOption, filter, mode });
   const sortedCountry = sortData({ countries, sortOption });
 
-  console.log('sortedCountry', sortedCountry);
+  console.log('mode', mode);
 
   return (
     <>
-      <div className="pt-20" />
-      <SearchTitle title="Wyszukiwarka kraju" />
-      <div className="pt-8" />
-      <form className="space-x-12 flex items-center justify-center">
-        <Select<SortOptions>
-          value={sortOption}
-          label="Sort by"
-          setOption={setSortOption}
-          options={['initial', 'population', 'name']}
-        />
-        <div className="mx-8 flex flex-col border-2 min-w-[250px]">
-          <Select<FilterOptions>
-            value={filterOption}
-            label="Filter by"
-            setOption={setFiltetOption}
-            options={['capital', 'name', 'currency', 'lang', 'initial']}
+      <div className="flex flex-col mt-10 border-[1px] border-blue-500">
+        <SearchTitle title="Countries Search" />
+        <div className="flex ml-auto mr-32">
+          <Radio<ModeType>
+            label="Search Mode"
+            value="SEARCH"
+            stateValue={mode}
+            setStateValue={setMode}
           />
-          <Input
-            label={
-              filterOption !== 'initial'
-                ? `Please write your Country: ${filterOption}`
-                : 'Choose filter'
-            }
-            type="text"
-            placeholder="Country"
-            name={filter}
-            setName={setFilter}
+          <Radio<ModeType>
+            label="Guess Mode"
+            value="GUESS"
+            stateValue={mode}
+            setStateValue={setMode}
           />
         </div>
-      </form>
-      <div className="pt-12" />
-      {sortedCountry && <CountriesList countries={sortedCountry} />}
-      <div className="pt-16" />
+        <div className="flex w-full align-center justify-center min-h-[200px] pt-8">
+          {mode === 'SEARCH' && (
+            <SearchForm
+              setFilter={setFilter}
+              filter={filter}
+              filterOption={filterOption}
+              setFiltetOption={setFiltetOption}
+              setSortOption={setSortOption}
+              sortOption={sortOption}
+            />
+          )}
+        </div>
+        <div className="pt-12" />
+        {sortedCountry && <CountriesList countries={sortedCountry} />}
+        <div className="pt-16" />
+      </div>
     </>
   );
 }

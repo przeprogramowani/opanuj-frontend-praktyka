@@ -1,5 +1,5 @@
-import { CountryType } from '../types/Country';
-import { SortOptions } from '../types/Sort';
+import { CountryType } from '../types/country';
+import { SortOptions } from '../types/filter';
 
 type SortCountriesType = {
   countries: CountryType[];
