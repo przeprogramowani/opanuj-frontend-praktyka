@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Country } from '../Country';
-import { CountryType } from '../../types/Country';
+import { CountryType } from '../../types/country';
 
 type CountriesListType = {
   countries: CountryType[];
@@ -17,5 +17,3 @@ export const CountriesList = memo<CountriesListType>(({ countries }) => {
     <></>
   );
 });
-
-export default CountriesList;
