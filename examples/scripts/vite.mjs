@@ -7,7 +7,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import { configureExpressApp } from './vite-api.mjs';
 
 const projectName = process.argv.pop();
-const projectPaths = await glob(`./module*/**/${projectName}`);
+const projectPaths = await glob(`./module*/*/${projectName}`);
 
 if (projectPaths.length !== 1) {
   throw new Error(
