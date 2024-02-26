@@ -9,7 +9,6 @@ export const isGreaterThan =
   (testParameter: number): NumberValidateFn =>
   (input: number) => {
     const isValid = input < testParameter;
-    console.log("🚀 ~ isValid:", isValid)
     if (isValid) {
       return {
         isValid,
