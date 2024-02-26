@@ -1,4 +1,12 @@
-export const Button = ({children, onClick, id}) => {
+import React from 'react';
+
+type Props = {
+  children: React.ReactNode;
+  onClick: () => void;
+  id: string;
+}
+
+export const Button = ({children, onClick, id}:Props) => {
   return (
     <button
       key={id}

@@ -1,4 +1,12 @@
-const operations = [
+type execution = (a: number, b: number) => number
+
+type operation = {
+  name: string
+  execution: execution
+  operator: string
+}
+
+const operations:(operation)[] = [
   {
     name: 'add',
     execution: (a, b) => a + b,

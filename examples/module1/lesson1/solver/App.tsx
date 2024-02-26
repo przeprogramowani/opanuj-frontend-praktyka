@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import operations from './operations.ts'
 import { Button } from './Button.tsx';
+import operations from './operations.ts'
 
 const App = () => {
   const [x, setX] = useState<number>(0);
@@ -26,7 +26,7 @@ const App = () => {
       <div className="grid grid-cols-4 gap-x-4 my-4">
         {operations.map(({ execution, operator, name })=>{
           return (
-            <Button key={name} onClick={()=>{
+            <Button id={name} key={name} onClick={()=>{
               setResult(execution(x, y))
             }}>
               {operator}
