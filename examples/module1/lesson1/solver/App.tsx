@@ -28,6 +28,7 @@ const App = () => {
           onChange={(e) => setY(parseFloat(e.target.value))}
         />
       </div>
+      {/* Error handling for dividing by 0 is inside the component below */}
       <Operations {...Props} />
       <div>Result: {result}</div>
     </div>
