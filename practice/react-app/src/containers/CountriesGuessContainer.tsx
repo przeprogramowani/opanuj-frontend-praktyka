@@ -9,7 +9,7 @@ type ContainerType = {
 
 export const CountriesGuessContainer = memo<ContainerType>(({ viewFn }) => {
   const { countries } = UseCountriesContext();
-  const [country] = countries ?? {};
+  const [country] = countries ?? null;
 
   return (
     <div className="flex flex-col mt-10">

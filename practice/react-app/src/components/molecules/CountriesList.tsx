@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Country } from '../Country';
+import { Country } from '../atoms/Country';
 import { CountryType } from '../../types/country';
 
 type CountriesListType = {
