@@ -14,6 +14,6 @@ const fetchProxy = new Proxy(fetch, {
   },
 });
 
-fetchProxy('/api/users.json')
+fetchProxy('/api/data/users.json')
   .then((response) => response.json())
   .then((data) => console.log(data));
