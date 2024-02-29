@@ -1,0 +1,16 @@
+<div>
+  <div class="pt-24"></div>
+  <app-search-title />
+  <div class="pt-8"></div>
+  <form class="space-x-4 flex items-end justify-center">
+    <app-name-field [name]="name" (nameChange)="onNameChange($event)"></app-name-field>
+    <app-gender-select [gender]="gender" (genderChange)="onGenderChange($event)"></app-gender-select>
+    <app-sort-select [sortOption]="sortOption" (sortOptionChange)="onSortOptionChange($event)"></app-sort-select>
+    <label class="flex flex-col items-center">Show Rick Only
+      <input type="checkbox" id="showRickOnly" (change)="onShowRickOnlyChange($event)" class="w-7 h-7 mt-1 " />
+    </label>
+  </form>
+  <div class="pt-12"></div>
+  <app-character-list [characters]="characters()"  />
+  <div class="pt-16"></div>
+</div>
