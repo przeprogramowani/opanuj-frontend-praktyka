@@ -11,6 +11,7 @@ import {
   clearCart,
   selectCartItems,
   selectItemAmount,
+  selectTotal,
 } from '../state/cartSlice';
 import CartItem from './CartItem';
 
@@ -20,7 +21,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
-  const { total } = useContext(CartContext);
+  const total = useAppSelector(selectTotal);
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCartItems);
   const itemAmount = useAppSelector(selectItemAmount);
