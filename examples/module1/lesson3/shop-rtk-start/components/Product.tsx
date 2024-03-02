@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { BsEyeFill, BsPlus } from 'react-icons/bs';
 
@@ -11,8 +11,17 @@ const Product = ({ product }: { product: ProductType }) => {
   const dispatch = useAppDispatch();
   const { id, image, category, title, price } = product;
 
+  const addProductToCart = () => {
+    dispatch(addToCart(product));
+    toast.success(`${title} added to cart!`);
+  }
+
   return (
     <div>
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
       <div className="border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition">
         <div className="w-full h-full flex justify-center items-center">
           <div className="w-[200px] mx-auto flex justify-center items-center">
@@ -24,7 +33,7 @@ const Product = ({ product }: { product: ProductType }) => {
           </div>
         </div>
         <div className="absolute top-6 -right-11 group-hover:right-5 p-2 flex flex-col justify-center items-center gap-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <button onClick={() => dispatch(addToCart(product))}>
+          <button onClick={addProductToCart}>
             <div className="flex justify-center items-center text-white w-12 h-12 bg-teal-500">
               <BsPlus className="text-3xl" />
             </div>
