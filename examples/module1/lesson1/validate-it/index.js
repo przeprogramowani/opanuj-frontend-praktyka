@@ -25,10 +25,12 @@ function validator() {
     }
   });
 
-  button2.addEventListener('click', () => {
+  const handleClear = () => {
     input.value = '';
     result.innerHTML = '';
-  });
+  }
+
+  button2.addEventListener('click', handleClear);
 }
 
 validator();
