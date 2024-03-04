@@ -12,19 +12,19 @@ function validator() {
           Number(value) < 100 &&
           Number(value) % 2 === 0
         ) {
-          return 'Valid';
+          return true;
         } else {
-          return 'Invalid';
+          return false;
         }
       } else {
-        return 'Invalid';
+        return false;
       }
     } else {
-      return 'Invalid';
+      return false;
     }
   }
   const handleValidateIt = () => {
-      result.innerHTML = isValidated(input.value)
+      result.innerHTML = isValidated(input.value) ? 'Valid' : 'Invalid';
   }
 
   const handleClear = () => {
