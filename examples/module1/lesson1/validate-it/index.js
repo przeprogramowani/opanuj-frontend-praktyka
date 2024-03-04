@@ -5,23 +5,13 @@ function validator() {
   const result = document.getElementById('result');
 
   const isValidated = (value) => {
-    if (value) {
-      if (Number.isInteger(value)) {
-        if (
-          Number(value) > 0 &&
-          Number(value) < 100 &&
-          Number(value) % 2 === 0
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
+    if (!value) return false;
+    if (!Number.isInteger(value)) return false;
+    return (
+      Number(value) > 0 &&
+      Number(value) < 100 &&
+      Number(value) % 2 === 0
+    )
   }
   const handleValidateIt = () => {
       result.innerHTML = isValidated(input.value) ? 'Valid' : 'Invalid';
