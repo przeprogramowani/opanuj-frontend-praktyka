@@ -4,25 +4,27 @@ function validator() {
   const button2 = document.getElementById('button2');
   const result = document.getElementById('result');
 
-  const handleValidateIt = () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
+  const isValidated = (value) => {
+    if (value) {
+      if (Number.isInteger(value)) {
         if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
+          Number(value) > 0 &&
+          Number(value) < 100 &&
+          Number(value) % 2 === 0
         ) {
-          result.innerHTML = 'Valid';
+          return 'Valid';
         } else {
-          result.innerHTML = 'Invalid';
+          return 'Invalid';
         }
-        result.innerHTML = 'Valid';
       } else {
-        result.innerHTML = 'Invalid';
+        return 'Invalid';
       }
     } else {
-      result.innerHTML = 'Invalid';
+      return 'Invalid';
     }
+  }
+  const handleValidateIt = () => {
+      result.innerHTML = isValidated(input.value)
   }
 
   const handleClear = () => {
