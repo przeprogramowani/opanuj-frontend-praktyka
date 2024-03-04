@@ -4,7 +4,7 @@ function validator() {
   const button2 = document.getElementById('button2');
   const result = document.getElementById('result');
 
-  button.addEventListener('click', () => {
+  const handleValidateIt = () => {
     if (input.value) {
       if (Number.isInteger(input.value)) {
         if (
@@ -23,13 +23,14 @@ function validator() {
     } else {
       result.innerHTML = 'Invalid';
     }
-  });
+  }
 
   const handleClear = () => {
     input.value = '';
     result.innerHTML = '';
   }
 
+  button.addEventListener('click', handleValidateIt);
   button2.addEventListener('click', handleClear);
 }
 
