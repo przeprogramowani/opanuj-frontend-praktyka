@@ -1,13 +1,13 @@
-export function f1(a, b) {
+export function add(a, b) {
   return a + b;
 }
-export function f2(a, b) {
+export function subtract(a, b) {
   return a - b;
 }
-export function f3(a, b) {
+export function divide(a, b) {
   return a * b;
 }
 
-export function f4(a, b) {
+export function multiply(a, b) {
   return a / b;
 }
