@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { add, subtract, divide, multiply } from './functions';
+import Input from './Input';
 
 const App = () => {
   const [param1, setParam1] = useState<number>(0);
@@ -13,18 +14,8 @@ const App = () => {
   return (
     <div>
       <div className='grid grid-cols-2 gap-x-4'>
-        <input
-          type='number'
-          className='rounded-md shadow-md p-4'
-          value={param1}
-          onChange={(e) => setParam1(parseFloat(e.target.value))}
-        />
-        <input
-          type='number'
-          className='rounded-md shadow-md p-4'
-          value={param2}
-          onChange={(e) => setParam2(parseFloat(e.target.value))}
-        />
+        <Input value={param1} onChange={setParam1} />
+        <Input value={param2} onChange={setParam2} />
       </div>
       <div className='grid grid-cols-4 gap-x-4 my-4'>
         <button
