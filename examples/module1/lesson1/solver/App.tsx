@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { add, subtract, divide, multiply } from './functions';
 import Input from './Input';
+import Button from './Button.tsx';
 
 const App = () => {
   const [param1, setParam1] = useState<number>(0);
@@ -18,30 +19,10 @@ const App = () => {
         <Input value={param2} onChange={setParam2} />
       </div>
       <div className='grid grid-cols-4 gap-x-4 my-4'>
-        <button
-          className='bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md'
-          onClick={() => doWork(add)}
-        >
-          +
-        </button>
-        <button
-          className='bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md'
-          onClick={() => doWork(subtract)}
-        >
-          -
-        </button>
-        <button
-          className='bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md'
-          onClick={() => doWork(divide)}
-        >
-          *
-        </button>
-        <button
-          className='bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md'
-          onClick={() => doWork(multiply)}
-        >
-          /
-        </button>
+        <Button onClick={() => doWork(add)}>+</Button>
+        <Button onClick={() => doWork(subtract)}>-</Button>
+        <Button onClick={() => doWork(divide)}>*</Button>
+        <Button onClick={() => doWork(multiply)}>/</Button>
       </div>
       <div>Result: {result}</div>
     </div>
