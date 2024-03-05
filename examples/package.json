@@ -5,6 +5,7 @@
   "main": "-",
   "scripts": {
     "example": "node ./scripts/vite.mjs",
+    "solver": "node ./scripts/vite.mjs solver",
     "test": "vitest",
     "test:e2e": "npx playwright test"
   },
