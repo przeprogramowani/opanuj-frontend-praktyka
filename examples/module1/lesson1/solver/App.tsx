@@ -11,7 +11,11 @@ const App = () => {
   const [result, setResult] = useState<number | string>(0);
 
   const calculate = (func: (a: number, b: number) => number) => {
-    setResult(func(param1, param2));
+    try {
+      setResult(func(param1, param2));
+    } catch (e) {
+      setResult('Error');
+    }
   };
 
   return (
@@ -23,8 +27,8 @@ const App = () => {
       <Operations>
         <Button onClick={() => calculate(add)}>+</Button>
         <Button onClick={() => calculate(subtract)}>-</Button>
-        <Button onClick={() => calculate(divide)}>*</Button>
-        <Button onClick={() => calculate(multiply)}>/</Button>
+        <Button onClick={() => calculate(multiply)}>*</Button>
+        <Button onClick={() => calculate(divide)}>/</Button>
       </Operations>
       <div>Result: {result}</div>
     </div>
