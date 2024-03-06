@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useUsers from './useClients';
+import useUsers from './useUsers';
 
 const App = () => {
   const { isTimeoutError, users, resetUsers } = useUsers();
