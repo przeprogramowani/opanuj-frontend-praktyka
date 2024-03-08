@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { UsersList } from './UsersList';
 import { UserPreview, UserFriends, DetailedUser } from './Variants';
@@ -14,10 +13,12 @@ if (!rootElement.innerHTML) {
           header="User Preview"
           viewFn={(user) => <UserPreview {...user} />}
         ></UsersList>
+
         <UsersList
           header="Users with friends"
           viewFn={(user) => <UserFriends {...user} />}
         ></UsersList>
+
         <UsersList
           header="Detailed list"
           viewFn={(user) => <DetailedUser {...user} />}
