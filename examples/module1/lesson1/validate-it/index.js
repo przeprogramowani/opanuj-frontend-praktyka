@@ -4,31 +4,27 @@ function validator() {
   const button2 = document.getElementById('button2');
   const result = document.getElementById('result');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
-  });
+  const isNotEmpty = (value) => !!value;
+  const greaterThen = (value, then = 0) => value > then;
+  const lessThen = (value, then = 100) => value < then;
+  const checkEven = (value) => value % 2 === 0;
 
-  button2.addEventListener('click', () => {
+  const checkValidationRoles = (value, rules) => {
+    const valueAsNumber = Number(value);
+    return rules.every((rule) => rule(valueAsNumber));
+  };
+  const handleValidateIt = () => {
+    const isValid = checkValidationRoles(input.value, [isNotEmpty, Number.isInteger, greaterThen, lessThen, checkEven]);
+    result.innerHTML = isValid ? 'Valid' : 'Invalid';
+  };
+
+  const handleClear = () => {
     input.value = '';
     result.innerHTML = '';
-  });
+  };
+
+  button.addEventListener('click', handleValidateIt);
+  button2.addEventListener('click', handleClear);
 }
 
 validator();
