@@ -1,34 +1,31 @@
 function validator() {
   const input = document.getElementById('input');
-  const button = document.getElementById('button');
-  const button2 = document.getElementById('button2');
+  const buttonValidate = document.getElementById('button');
+  const buttonClear = document.getElementById('button2');
   const result = document.getElementById('result');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
-  });
+  const status = { invalid: 'Invalid', valid: 'Valid', clear: '' };
+  const setStatus = (status) => (result.innerHTML = status);
+  const isValid = (value) => value > 0 && value < 100 && value % 2 === 0;
 
-  button2.addEventListener('click', () => {
+  const validate = () => {
+    const value = Number(input.value);
+
+    if (Number.isNaN(value)) {
+      setStatus(status.invalid);
+      return;
+    }
+
+    isValid(value) ? setStatus(status.valid) : setStatus(status.invalid);
+  };
+
+  const clear = () => {
     input.value = '';
-    result.innerHTML = '';
-  });
+    setStatus(status.clear);
+  };
+
+  buttonValidate.addEventListener('click', validate);
+  buttonClear.addEventListener('click', clear);
 }
 
 validator();
