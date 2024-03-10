@@ -1,8 +1,33 @@
 {
-  "angular.enable-strict-mode-prompt": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "graphql-config.dotEnvPath": "./.env",
+  "graphql-config.load.configName": "graphql",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.5,
   "workbench.colorCustomizations": {
-    "activityBar.background": "#22330E",
-    "titleBar.activeBackground": "#2F4714",
-    "titleBar.activeForeground": "#F8FCF3"
+    "titleBar.activeBackground": "#7b00ff",
+    "titleBar.activeForeground": "#e8d316",
+    "activityBar.background": "#7b00ff",
+    "activityBarBadge.foreground": "#7b00ff",
+    "activityBar.inactiveForeground": "#e8d316",
+    "activityBar.activeFocusBorder": "#ffdd00",
+    "activityBar.activeBackground": "#ffdd00",
+    "activityBar.activeBorder": "#ffdd00",
+    "activityBar.dropBorder": "#e8d316",
+    "activityBar.border": "#ffdd00",
+    "activityBar.foreground": "#e8d316",
+    "activityBarBadge.background": "#e8d316"
   }
 }
