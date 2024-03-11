@@ -1,31 +1,40 @@
-function validator() {
-  const input = document.getElementById('input');
-  const buttonValidate = document.getElementById('button');
-  const buttonClear = document.getElementById('button2');
-  const result = document.getElementById('result');
-
+const useStatus = (result) => {
   const status = { invalid: 'Invalid', valid: 'Valid', clear: '' };
   const setStatus = (status) => (result.innerHTML = status);
-  const isValid = (value) => value > 0 && value < 100 && value % 2 === 0;
+
+  return [status, setStatus];
+};
+
+const getValidators = () => {
+  const isNumber = (value) => Number.isNaN(value);
+  const isScope = (value) => value > 0 && value < 100 && value % 2 === 0;
+
+  return [isNumber, isScope];
+};
+
+function validator() {
+  const input = document.getElementById('input');
+  const result = document.getElementById('result');
+  const buttonValidate = document.getElementById('button');
+  const buttonClear = document.getElementById('button2');
+
+  const [{ valid, invalid, clear }, setStatus] = useStatus(result);
 
   const validate = () => {
     const value = Number(input.value);
 
-    if (Number.isNaN(value)) {
-      setStatus(status.invalid);
-      return;
-    }
-
-    isValid(value) ? setStatus(status.valid) : setStatus(status.invalid);
+    getValidators().forEach((validator) => {
+      validator(value) ? setStatus(valid) : setStatus(invalid);
+    });
   };
 
-  const clear = () => {
-    input.value = '';
-    setStatus(status.clear);
+  const clearResult = () => {
+    input.value = clear;
+    setStatus(clear);
   };
 
   buttonValidate.addEventListener('click', validate);
-  buttonClear.addEventListener('click', clear);
+  buttonClear.addEventListener('click', clearResult);
 }
 
 validator();
