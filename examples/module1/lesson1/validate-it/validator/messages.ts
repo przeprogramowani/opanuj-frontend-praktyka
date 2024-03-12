@@ -1,2 +1,2 @@
-export const VALIDATOR_MESSAGE_INVALID = 'invalid';
-export const VALIDATOR_MESSAGE_VALID = 'valid';
+export const VALIDATOR_NUMBER_MESSAGE_INVALID = 'invalid';
+export const VALIDATOR_NUMBER_MESSAGE_VALID = 'valid';
