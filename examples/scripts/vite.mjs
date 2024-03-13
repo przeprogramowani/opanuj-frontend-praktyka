@@ -5,6 +5,8 @@ import express from 'express';
 import react from '@vitejs/plugin-react';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { configureExpressApp } from './vite-api.mjs';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import preprocess from 'svelte-preprocess';
 
 const projectName = process.argv.pop();
 const projectPaths = await glob(`./module*/*/${projectName}`);
@@ -29,6 +31,10 @@ if (projectPaths[0].includes('angular')) {
     },
     plugins: [
       react(),
+      svelte({
+        configFile: false,
+        preprocess: [preprocess()],
+      }),
       createHtmlPlugin({
         inject: {
           data: {
