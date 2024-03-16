@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import main from './index.ts';
 
 main();
@@ -44,3 +45,6 @@ function validator() {
 
 validator();
 >>>>>>> 853f81b8ada8477963fc786bcaade7a8410c916e
+=======
+import './index.ts';
+>>>>>>> 31f6bf41b0578c69292bbccaec743843f891d41b
