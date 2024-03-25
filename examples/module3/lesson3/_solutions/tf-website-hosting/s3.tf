@@ -1,4 +1,4 @@
-# Unikalna nazwa bucketu jest wymagana do utworzenia zasobu S3
+# Wymagana jest unikalna nazwa bucketu w ramach całego AWS
 resource "aws_s3_bucket" "ofe_bucket" {
   bucket = "ofe-rmcatalog"
 }
