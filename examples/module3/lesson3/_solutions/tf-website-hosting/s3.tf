@@ -52,10 +52,3 @@ resource "aws_s3_bucket_website_configuration" "example_website_configuration" {
     suffix = "index.html"
   }
 }
-
-"aws_s3_bucket"
-"aws_s3_bucket_ownership_controls"
-"aws_s3_bucket_public_access_block"
-"aws_s3_bucket_acl"
-"aws_s3_bucket_policy"
-"aws_s3_bucket_website_configuration"
