@@ -1,0 +1,34 @@
+{
+  "name": "@przeprogramowani/design-tokens",
+  "version": "0.1.0",
+  "description": "Design tokens collection for Przeprogramowani Design System",
+  "license": "MIT",
+  "keywords": [
+    "design tokens",
+    "przeprogramowani"
+  ],
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build:tokens && npm run test",
+    "build:tokens": "node build.js",
+    "release": "npm run build && np",
+    "test": "echo 'No test specified yet' && exit 0"
+  },
+  "devDependencies": {
+    "np": "^10.0.3",
+    "style-dictionary": "^3.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/przeprogramowani/opanuj-frontend-praktyka.git",
+    "directory": "examples/module4/lesson2/design-tokens"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
