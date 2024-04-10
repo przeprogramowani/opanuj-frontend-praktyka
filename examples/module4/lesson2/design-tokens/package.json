@@ -10,18 +10,34 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "build": "npm run build:tokens && npm run test",
+    "build": "npm run clean && npm run build:tokens && npm run build:bundle && npm run test",
     "build:tokens": "node build.js",
+    "build:bundle": "rollup -c",
+    "clean": "rimraf dist",
     "release": "npm run build && np",
-    "test": "echo 'No test specified yet' && exit 0"
+    "test": "vitest run"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-typescript": "^11.1.6",
     "np": "^10.0.3",
-    "style-dictionary": "^3.9.2"
+    "rimraf": "^5.0.5",
+    "rollup": "^4.14.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "style-dictionary": "^3.9.2",
+    "vitest": "^1.4.0"
   },
   "repository": {
     "type": "git",
