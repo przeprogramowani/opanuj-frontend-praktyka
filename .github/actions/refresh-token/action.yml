@@ -1,0 +1,70 @@
+name: Refresh Token
+description: Refresh CodeArtifact token stored in GH Secrets
+
+inputs:
+  gh-token:
+    description: 'GitHub Personal token with repo access'
+    required: true
+  ca-token-expiration-time:
+    description: 'Last calculated CodeArtifact token expiration time in seconds since epoch'
+    required: true
+  ca-domain:
+    description: 'CodeArtifact domain name'
+    required: true
+  ca-domain-owner:
+    description: 'CodeArtifact domain owner account ID'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Check token expiration
+      id: check_token_validity
+      run: |
+        AWS_CA_TOKEN_EXPIRATION_TIME=${{ inputs.ca-token-expiration-time }}
+        CURRENT_TIME=$(date +%s)
+
+        if [ -z "$AWS_CA_TOKEN_EXPIRATION_TIME" ]; then
+          echo "No token expiration time found in secrets. Generating a new token."
+          echo "token_expired=true" >> $GITHUB_OUTPUT
+        elif [ $CURRENT_TIME -ge $((AWS_CA_TOKEN_EXPIRATION_TIME)) ]; then
+          echo "Token expired. Generating a new token."
+          echo "token_expired=true" >> $GITHUB_OUTPUT
+        else
+          REMAINING_TIME=$(($AWS_CA_TOKEN_EXPIRATION_TIME - CURRENT_TIME))
+          echo "Reusing existing token. Token expires in $(printf '%02dh:%02dm:%02ds' $(($REMAINING_TIME/3600)) $(($REMAINING_TIME%3600/60)) $(($REMAINING_TIME%60)))"
+          echo "token_expired=false" >> $GITHUB_OUTPUT
+        fi
+      shell: bash
+
+    - name: Generate AWS CodeArtifact token
+      if: ${{ steps.check_token_validity.outputs.token_expired == 'true' }}
+      run: |
+        export AWS_CA_TOKEN=$(aws codeartifact get-authorization-token --domain ${{ inputs.ca-domain }} --domain-owner ${{ inputs.ca-domain-owner }} --query authorizationToken --output text)
+        echo "AWS_CA_TOKEN=$AWS_CA_TOKEN" >> $GITHUB_ENV
+        echo "::add-mask::$AWS_CA_TOKEN"
+      shell: bash
+
+    - name: Calculate token expiration time
+      if: ${{ steps.check_token_validity.outputs.token_expired == 'true' }}
+      run: |
+        TOKEN_VALIDITY_PERIOD=42600 # 11 hours and 50 minutes in seconds, AWS CA token is valid for 12h
+        export AWS_CA_TOKEN_EXPIRATION_TIME=$(($(date +%s) + $TOKEN_VALIDITY_PERIOD))
+        echo "AWS_CA_TOKEN_EXPIRATION_TIME=$AWS_CA_TOKEN_EXPIRATION_TIME" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Update code artifact token secret
+      if: ${{ steps.check_token_validity.outputs.token_expired == 'true' }}
+      uses: action-pack/set-secret@v1
+      with:
+        name: 'AWS_CA_TOKEN'
+        value: ${{ env.AWS_CA_TOKEN }}
+        token: ${{ inputs.gh-token }}
+
+    - name: Update token expiration time secret
+      if: ${{ steps.check_token_validity.outputs.token_expired == 'true' }}
+      uses: action-pack/set-secret@v1
+      with:
+        name: 'AWS_CA_TOKEN_EXPIRATION_TIME'
+        value: ${{ env.AWS_CA_TOKEN_EXPIRATION_TIME }}
+        token: ${{ inputs.gh-token }}
