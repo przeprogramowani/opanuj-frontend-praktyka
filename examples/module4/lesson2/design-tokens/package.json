@@ -28,7 +28,8 @@
     "build:bundle": "rollup -c",
     "clean": "rimraf dist",
     "release": "npm run build && np",
-    "test": "vitest run"
+    "test": "vitest run",
+    "update:token": "./update_token.sh"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
