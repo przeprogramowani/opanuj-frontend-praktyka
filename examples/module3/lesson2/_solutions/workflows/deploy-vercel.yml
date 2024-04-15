@@ -1,0 +1,35 @@
+name: Deploy - Vercel
+
+on:
+  workflow_call:
+
+jobs:
+  deploy-vercel:
+    environment:
+      name: 'Staging'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure node
+        uses: ./.github/actions/setup-project
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Build app
+        run: npm run build
+
+      - name: Deploy app to Vercel production env
+        uses: ./.github/actions/deploy-vercel
+        with:
+          mode: 'production'
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

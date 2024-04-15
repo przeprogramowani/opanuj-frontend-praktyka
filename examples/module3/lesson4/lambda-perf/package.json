@@ -1,0 +1,19 @@
+{
+  "name": "lambda-perf",
+  "version": "1.0.0",
+  "description": "AWS Lambda - Performance Tracking",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.ts -o dist && cd dist && zip -r lambda.zip index.js"
+  },
+  "author": "Przeprogramowani",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.540.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.136",
+    "@vercel/ncc": "0.38.1",
+    "typescript": "5.4.3"
+  }
+}

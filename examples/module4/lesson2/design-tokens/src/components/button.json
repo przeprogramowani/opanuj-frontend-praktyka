@@ -1,0 +1,9 @@
+{
+  "button": {
+    "text": {
+      "color": {
+        "value": "{color.alias.foreground.1.value}"
+      }
+    }
+  }
+}

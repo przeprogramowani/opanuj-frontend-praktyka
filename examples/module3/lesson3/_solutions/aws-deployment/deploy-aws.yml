@@ -1,0 +1,45 @@
+name: Deploy - AWS
+
+on:
+  workflow_call:
+
+jobs:
+  deploy-aws:
+    environment:
+      name: 'Production'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure node
+        uses: ./.github/actions/setup-project
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Build app
+        run: npm run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Terraform Apply
+        uses: ./.github/actions/terraform-apply
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Deploy to AWS
+        run: aws s3 sync dist s3://ofe-rmcatalog
+
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id E17T62NW62AGXW --path "/*"
