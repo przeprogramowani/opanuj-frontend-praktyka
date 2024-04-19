@@ -1,0 +1,22 @@
+{
+  "name": "doc-creator",
+  "version": "1.0.0",
+  "description": "TypeScript Documentation with GPT-4",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.ts -o dist",
+    "start": "npm run build && node dist/index.js"
+  },
+  "author": "Przeprogramowani",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "20.1.0",
+    "dotenv": "16.4.5",
+    "glob": "10.3.12",
+    "openai": "4.37.1"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "0.38.1",
+    "typescript": "5.4.3"
+  }
+}
