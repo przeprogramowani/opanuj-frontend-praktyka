@@ -10,6 +10,7 @@
   "author": "Przeprogramowani",
   "license": "ISC",
   "dependencies": {
+    "@anthropic-ai/sdk": "0.20.6",
     "@octokit/rest": "20.1.0",
     "dotenv": "16.4.5",
     "glob": "10.3.12",

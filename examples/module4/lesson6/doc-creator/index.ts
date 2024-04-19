@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { join } from 'path';
 import { patterns, ignoreDirs } from './config.json';
 import { buildPaths } from './src/path-finder';
-import { uploadToStore } from './src/openai-client/openai-utils';
+import { uploadToStore } from './src/openai-client/openai-platform';
 import { recreateDocs } from './src/docs-creator';
 
 const config = {

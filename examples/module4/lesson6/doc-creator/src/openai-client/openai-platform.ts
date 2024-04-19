@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { createReadStream } from 'fs';
-import { createPrompt } from './prompt';
-import { OPENAI_MODEL_VERSION, VECTOR_STORE_ID } from './store-config';
+import { createPrompt } from '../prompt';
+import { OPENAI_MODEL_VERSION, VECTOR_STORE_ID } from './platform-config';
 
 const openai = new OpenAI();
 

@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync, readFileSync } from 'fs';
 import { join, relative, dirname, basename, extname } from 'path';
-import { generateDocumentation } from './openai-client/openai-utils';
+import { generateDocumentation } from './anthropic-client/anthropic-platform';
 
 export async function recreateDocs(rootDir: string, paths: string[]) {
   const docsPath = join(rootDir, 'docs');

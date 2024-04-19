@@ -9,10 +9,18 @@ export const createPrompt = (filePath: string, fileContent: string) => `
 
     Create documentation in a markdown format - follow the template below:
 
-    1. File path <PATH>
-    2. Type: CODE | TESTS | CONFIG | DOCS | OTHER
-    3. Purpose: <PURPOSE>
-    4. Content: <CONTENT>
-    5. Tech stack (if applicable): <TECH_STACK>
+    # <FILE_NAME>
+    File path <PATH>
 
+    ## Type
+    Enum: CODE | TESTS | CONFIG | DOCS | OTHER
+
+    ## Purpose
+    <PURPOSE>
+
+    ## File content
+    <FILE_CONTENT>
+
+    ## Tech stack (if applicable)
+    <TECH_STACK>
   `;
