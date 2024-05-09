@@ -1,0 +1,73 @@
+name: Publish to AWS CodeArtifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-type:
+        description: 'Version type'
+        required: true
+        default: 'minor'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+env:
+  AWS_CA_TOKEN: ${{ secrets.AWS_CA_TOKEN }}
+  AWS_CA_REGION: eu-central-1
+  AWS_CA_DOMAIN: przeprogramowani-ofe
+  AWS_CA_REPOSITORY: przeprogramowani-opanuj-frontend
+  AWS_CA_DOMAIN_OWNER: 438634852085
+  LIB_PACKAGEJSON_DIR: examples/module4/lesson2/design-tokens
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Build library
+        working-directory: ${{ env.LIB_PACKAGEJSON_DIR }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_CA_REGION }}
+
+      - name: Refresh AWS CodeArtifact Token (if needed)
+        uses: ./.github/actions/refresh-token
+        with:
+          gh-token: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
+          ca-token-expiration-time: ${{ secrets.AWS_CA_TOKEN_EXPIRATION_TIME }}
+          ca-domain: ${{ env.AWS_CA_DOMAIN }}
+          ca-domain-owner: ${{ env.AWS_CA_DOMAIN_OWNER }}
+
+      - name: 'Automated Version Bump'
+        uses: 'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
+          PACKAGEJSON_DIR: ${{ env.LIB_PACKAGEJSON_DIR }}
+        with:
+          version-type: ${{ github.event.inputs.version-type }}
+
+      - name: Publish to registry
+        working-directory: ${{ env.LIB_PACKAGEJSON_DIR }}
+        run: |
+          REGISTRY_BASE_URL="${{ env.AWS_CA_DOMAIN }}-${{ env.AWS_CA_DOMAIN_OWNER }}.d.codeartifact.${{ env.AWS_CA_REGION }}.amazonaws.com/npm/${{ env.AWS_CA_REPOSITORY }}/"
+          npm config set registry "https://$REGISTRY_BASE_URL"
+          npm set "//$REGISTRY_BASE_URL:_authToken=${{ env.AWS_CA_TOKEN }}"
+
+          npm publish

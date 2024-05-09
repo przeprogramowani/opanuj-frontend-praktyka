@@ -1,0 +1,4 @@
+{
+  "patterns": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "ignoreDirs": ["node_modules"]
+}
