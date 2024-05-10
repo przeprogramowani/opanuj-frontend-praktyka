@@ -7,29 +7,26 @@ type FetchUsersOptions = {
 };
 
 const API_URL = '/api/data/users?timeout=10000';
+const DEFAULT_TIMEOUT = 5000;
 
 export const useUsers = () => {
   const controllerRef = useRef<AbortController | null>(null);
-
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   async function fetchUsers(options?: FetchUsersOptions) {
-    const { timeout = 5000 } = options || {};
-
     if (controllerRef.current) {
       controllerRef.current.abort();
     }
 
     controllerRef.current = new AbortController();
-    const signal = controllerRef.current.signal;
 
     try {
       const {
         data: { users },
       } = await axios.get(API_URL, {
-        signal,
-        timeout,
+        signal: controllerRef.current.signal,
+        timeout: options?.timeout ?? DEFAULT_TIMEOUT,
       });
 
       controllerRef.current = null;
@@ -48,7 +45,7 @@ export const useUsers = () => {
     }
   }
 
-  function retryRequest() {
+  function retryFetchUsers() {
     setError(null);
     fetchUsers({ timeout: 11000 });
   }
@@ -56,7 +53,7 @@ export const useUsers = () => {
   return {
     users,
     fetchUsers,
-    retryRequest,
+    retryFetchUsers,
     error,
   };
 };

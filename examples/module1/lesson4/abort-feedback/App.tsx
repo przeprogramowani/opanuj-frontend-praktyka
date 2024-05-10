@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useUsers } from './useUsesrs';
 
 const App = () => {
-  const { users, error, fetchUsers, retryRequest } = useUsers();
+  const { users, error, fetchUsers, retryFetchUsers } = useUsers();
 
   useEffect(() => {
     fetchUsers();
@@ -17,7 +17,7 @@ const App = () => {
           {error && <p className="mr-2">{error}</p>}
 
           <button
-            onClick={() => retryRequest()}
+            onClick={() => retryFetchUsers()}
             className="text-blue-400 bg-blue-200 hover:text-blue-200 hover:bg-blue-400 rounded-md p-4"
           >
             Try again
