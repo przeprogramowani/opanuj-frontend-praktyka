@@ -4,7 +4,13 @@ const DataList = () => {
   const { data: authors, isLoading, error } = useAuthors();
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading authors: {error.message}</div>;
+  if (error)
+    return (
+      <div>
+        <b>Error loading authors: </b>
+        {error.message}
+      </div>
+    );
 
   return (
     <div>

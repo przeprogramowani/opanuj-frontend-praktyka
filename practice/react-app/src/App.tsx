@@ -1,14 +1,15 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 import './App.css';
-import DataList from './Datalist';
+// import DataList from './Datalist';
+import AuthorsList from './AuthorsList';
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <DataList />
+      <AuthorsList />
     </QueryClientProvider>
   );
 }

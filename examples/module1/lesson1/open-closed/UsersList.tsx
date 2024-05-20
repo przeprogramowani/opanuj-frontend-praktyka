@@ -28,7 +28,13 @@ export const UsersList = ({ header, viewFn }: UsersListProps) => {
       </div>
       <div className="space-y-2">
         {users.map((user: User) => (
-          <div key={user.id}>{viewFn(user)}</div>
+          <div key={user.id}>
+            {
+              /* {(user) => <DetailedUser {...user} />} */
+              /*  (user) => <UserFriends {...user} /> */
+              viewFn(user)
+            }
+          </div>
         ))}
       </div>
     </div>
