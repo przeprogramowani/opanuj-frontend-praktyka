@@ -84,27 +84,53 @@ function CommentsForm({
   const { commentsAPI } = useLoaderData() as Bootstrap;
   const [newComment, setNewComment] = useState('');
   const [newRating, setNewRating] = useState('');
+  const [errorNetwork, setErrorNetwork] = useState(false);
+  const [commentID, setCommentID] = useState(0);
 
   function storeNewComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setCommentID(comments.length + 1);
+
     dispatch({
       type: 'ADD_COMMENT',
       payload: {
-        id: comments.length + 1,
+        id: commentID,
         text: newComment,
         author: 'John Doe',
         rating: parseInt(newRating, 10),
       },
     });
-    setNewComment('');
-    setNewRating('');
+
     axios
       .post(commentsAPI, {
         comment: newComment,
         rating: newRating,
       })
-      .catch(() => {
-        // Rollback the comment if the request fails
+      .then(() => {
+        setNewComment('');
+        setNewRating('');
+        setErrorNetwork(false);
+      })
+      .catch((error: Error) => {
+        if (axios.isAxiosError(error)) {
+          if (!error.response) {
+            // Network error occurred
+            console.error('Network error:', error);
+            setErrorNetwork(true);
+
+            dispatch({
+              type: 'REMOVE_COMMENT',
+              payload: {
+                id: commentID,
+              },
+            });
+          } else {
+            // The server responded with a status other than 200 range
+            console.error('Error response:', error.response);
+          }
+        } else {
+          console.error('Unexpected error fetching articles:', error);
+        }
       });
   }
 
@@ -129,7 +155,7 @@ function CommentsForm({
             />
           </div>
           <button className="bg-violet-400 text-white p-2 rounded-lg mt-2">
-            Submit
+            {!errorNetwork ? 'Submit' : 'Retry'}
           </button>
         </form>
       )}
