@@ -1,0 +1,80 @@
+{
+  "FR": {
+    "Paris": [
+      {
+        "date": "10-04-2024",
+        "type": "sunny",
+        "averageTemperature": 10
+      },
+      {
+        "date": "11-04-2024",
+        "type": "sunny",
+        "averageTemperature": 11
+      },
+      {
+        "date": "12-04-2024",
+        "type": "rainy",
+        "averageTemperature": 4
+      }
+    ]
+  },
+  "PL": {
+    "Warsaw": [
+      {
+        "date": "10-04-2024",
+        "type": "rainy",
+        "averageTemperature": 8
+      },
+      {
+        "date": "11-04-2024",
+        "type": "rainy",
+        "averageTemperature": 7
+      },
+      {
+        "date": "12-04-2024",
+        "type": "sunny",
+        "averageTemperature": 10
+      }
+    ]
+  },
+  "US": {
+    "New York": {
+      "Weather": [
+        {
+          "date": "04-10-2024",
+          "type": "rainy",
+          "average_temperature": 8
+        },
+        {
+          "date": "04-11-2024",
+          "type": "rainy",
+          "average_temperature": 7
+        },
+        {
+          "date": "04-12-2024",
+          "type": "sunny",
+          "average_temperature": 10
+        }
+      ]
+    },
+    "Los Angeles": {
+      "Weather": [
+        {
+          "date": "04-10-2024",
+          "type": "sunny",
+          "average_temperature": 20
+        },
+        {
+          "date": "04-11-2024",
+          "type": "sunny",
+          "average_temperature": 21
+        },
+        {
+          "date": "04-12-2024",
+          "type": "rainy",
+          "average_temperature": 14
+        }
+      ]
+    }
+  }
+}

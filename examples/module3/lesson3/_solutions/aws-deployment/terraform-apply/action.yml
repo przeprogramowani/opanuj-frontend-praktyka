@@ -1,0 +1,22 @@
+name: Run Terraform
+description: Plan and apply required infrastructure changes
+
+inputs:
+  aws-access-key-id:
+    description: 'AWS Access Key ID'
+    required: true
+  aws-secret-access-key:
+    description: 'AWS Secret Access Key'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Init
+      run: cd terraform && terraform init && terraform validate -no-color && terraform plan && terraform apply --auto-approve
+      shell: bash
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Vitals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div id="app"></div>
+    <script data->
+      // Dane zwrócone w procesie renderowania na serwerze
+      window.OFE_BOOTSTRAP_DATA = {
+        articlesAPI: '<%- ARTICLES_API %>',
+        authorsAPI: '<%- AUTHORS_API%>',
+        commentsAPI: '<%- COMMENTS_API %>',
+        batchAPI: '<%- BATCH_API %>',
+      };
+    </script>
+    <script type="module" src="main.tsx"></script>
+  </body>
+</html>

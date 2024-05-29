@@ -38,12 +38,14 @@ Korzystając z polecenia `npm run example` (szczegóły powyżej) uruchamiasz se
 Wszystkie zasoby znajdziesz w folderze `examples/scripts/data`, a w aplikacji pod `/api/data/{resource}`:
 
 ```bash
-http://localhost:3000/api/data/articles
-http://localhost:3000/api/data/authors
-http://localhost:3000/api/data/boostrap
-http://localhost:3000/api/data/comments
+GET http://localhost:3000/api/data/articles
+GET http://localhost:3000/api/data/authors
+GET http://localhost:3000/api/data/boostrap
+GET http://localhost:3000/api/data/comments
 ...
 ```
+
+Te same endpointy akceptują również metodę POST, które możesz wykorzystać do symulowania zapisu danych.
 
 ## Realizacja ćwiczeń
 
@@ -59,6 +61,16 @@ Aby zainstalować niezbędne zależności, wykonaj te polecenia:
 cd practice
 cd react-app # lub vue-app / angular-app
 npm install
+```
+
+## Przykładowe rozwiązania ćwiczeń
+
+Przykładowe rozwiązania ćwiczeń umieszczamy w folderach `examples/{module}/{lesson}/_solutions`.
+
+Aby uruchomić wybrany projekt, np. `module1/lesson1/_solutions/solver` wystarczy, że wykonasz polecenie:
+
+```bash
+npm run example _solutions/solver
 ```
 
 ## Aktualizacja forka

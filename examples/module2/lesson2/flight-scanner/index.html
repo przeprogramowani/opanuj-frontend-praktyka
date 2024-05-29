@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zod Form Validation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-md p-4 shadow-md">
+        <h1 class="text-xl text-center font-bold">🛩️ Flight Scanner</h1>
+        <form id="flight-form" class="space-y-4 mt-4">
+          <label for="origin" class="flex flex-col">
+            Origin
+            <input
+              id="origin"
+              name="origin"
+              type="text"
+              value="Kraków"
+              placeholder="Cracow, Poland"
+              class="border border-gray-200 rounded-md p-2"
+            />
+          </label>
+          <label for="destination" class="flex flex-col">
+            Destination
+            <input
+              id="destination"
+              name="destination"
+              type="text"
+              value="Boston"
+              placeholder="Boston, USA"
+              class="border border-gray-200 rounded-md p-2"
+            />
+          </label>
+          <div class="flex flex-col">
+            <label for="one-way">
+              <input
+                type="radio"
+                id="one-way"
+                name="trip"
+                value="one-way"
+                checked
+              />
+              One way
+            </label>
+            <label for="round-trip">
+              <input
+                type="radio"
+                id="round-trip"
+                name="trip"
+                value="round-trip"
+              />
+              Round trip
+            </label>
+          </div>
+          <div class="grid grid-cols-2 space-x-2">
+            <label for="startDate" class="flex flex-col">
+              Start at
+              <input
+                id="startDate"
+                name="startDate"
+                type="text"
+                value="01-05-2024"
+                placeholder="01-05-2024"
+                class="border border-gray-200 rounded-md p-2"
+              />
+            </label>
+            <label for="endDate" class="flex flex-col">
+              Return at
+              <input
+                id="endDate"
+                name="endDate"
+                type="text"
+                value="10-05-2024"
+                placeholder="10-05-2024"
+                class="border border-gray-200 rounded-md p-2"
+              />
+            </label>
+          </div>
+          <button class="bg-blue-500 text-white rounded-md p-2 w-full">
+            Search
+          </button>
+        </form>
+        <ul class="mt-4 text-red-500" id="errors"></ul>
+      </div>
+    </div>
+    <script type="module" src="index.ts"></script>
+  </body>
+</html>
