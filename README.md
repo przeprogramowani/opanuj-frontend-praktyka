@@ -4,12 +4,12 @@
 
 W tym repozytorium znajdziesz:
 
-- kod prezentowany w lekcjach kursu
-- narzędzia do realizowania ćwiczeń w każdej lekcji
+-   kod prezentowany w lekcjach kursu
+-   narzędzia do realizowania ćwiczeń w każdej lekcji
 
 ## Wymagania
 
-- Node w wersji 20.9.0 lub nowszej (możesz wykorzystać narzędzie nvm)
+-   Node w wersji 20.9.0 lub nowszej (możesz wykorzystać narzędzie nvm)
 
 ## Przykłady z lekcji
 
