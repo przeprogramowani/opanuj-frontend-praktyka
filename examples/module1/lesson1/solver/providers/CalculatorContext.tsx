@@ -19,8 +19,14 @@ export const CalculatorProvider: FC<CalculatorContextProps> = ({ children }) => 
 
     const optimizedDispatch = useCallback(dispatch, []);
 
+    const contextValue = useMemo(() => ({
+        ...calculator,
+        dispatch: optimizedDispatch
+    }), [calculator, dispatch]);
+
+
     return (
-        <CalculatorContext.Provider value={{ ...calculator, dispatch: optimizedDispatch }}>
+        <CalculatorContext.Provider value={contextValue}>
             {children}
         </CalculatorContext.Provider>
     )
