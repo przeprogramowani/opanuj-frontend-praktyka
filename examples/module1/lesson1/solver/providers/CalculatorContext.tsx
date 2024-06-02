@@ -1,4 +1,4 @@
-import { FC, ReactNode, createContext, useReducer, useContext } from 'react'
+import { FC, ReactNode, createContext, useReducer, useContext, useCallback, useMemo } from 'react'
 import calculatorReducer, { initialState } from '../reducers/calculatorReducer';
 import { CalculatorPayload, CalculatorState } from '../reducers/types';
 
@@ -17,8 +17,10 @@ export function useCalculator() {
 export const CalculatorProvider: FC<CalculatorContextProps> = ({ children }) => {
     const [calculator, dispatch] = useReducer(calculatorReducer, initialState)
 
+    const optimizedDispatch = useCallback(dispatch, []);
+
     return (
-        <CalculatorContext.Provider value={{ ...calculator, dispatch }}>
+        <CalculatorContext.Provider value={{ ...calculator, dispatch: optimizedDispatch }}>
             {children}
         </CalculatorContext.Provider>
     )
