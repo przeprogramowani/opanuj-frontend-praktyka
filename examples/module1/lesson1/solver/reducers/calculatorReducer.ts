@@ -1,3 +1,4 @@
+import { DIVIDE_BY_ZERO } from '../consts/errorMessages';
 import { add, substract, multiply, divide } from '../helpers/mathOperations';
 import { CALCULATOR_ACTIONS, CALCULATOR_OPERATIONS } from './consts';
 import { CalculatorPayload, CalculatorState } from './types';
@@ -37,6 +38,12 @@ const calculatorReducer = (state: CalculatorState, action: CalculatorPayload) =>
                     result = multiply(firstNumber, secondNumber);
                     break;
                 case CALCULATOR_OPERATIONS.DIVIDE:
+                    if (secondNumber === 0) {
+                        return {
+                            ...state,
+                            errorMsg: DIVIDE_BY_ZERO,
+                        };
+                    }
                     result = divide(firstNumber, secondNumber);
                     break;
                 default:
