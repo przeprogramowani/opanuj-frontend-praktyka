@@ -4,7 +4,7 @@ import { ArticlesList } from './ArticlesList';
 
 const rootElement = document.getElementById('app')!;
 if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
+    const root = ReactDOM.createRoot(rootElement);
 
-  root.render(<ArticlesList />);
+    root.render(<ArticlesList />);
 }

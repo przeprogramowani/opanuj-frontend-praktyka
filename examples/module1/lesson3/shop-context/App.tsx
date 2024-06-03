@@ -8,23 +8,20 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
 const App = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  return (
-    <div className="overflow-hidden">
-      <Router>
-        <Header setIsSidebarOpen={setIsSidebarOpen} />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/product/:id" element={<ProductDetails />}></Route>
-        </Routes>
-        <Sidebar
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-        />
-      </Router>
-    </div>
-  );
+    return (
+        <div className="overflow-hidden">
+            <Router>
+                <Header setIsSidebarOpen={setIsSidebarOpen} />
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/product/:id" element={<ProductDetails />}></Route>
+                </Routes>
+                <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+            </Router>
+        </div>
+    );
 };
 
 export default App;

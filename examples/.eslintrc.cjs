@@ -12,7 +12,6 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:playwright/recommended',
         'prettier',
-        'prettier/@typescript-eslint',
     ],
     rules: {
         '@typescript-eslint/require-await': 'error',

@@ -1,4 +1,4 @@
 export type CalculationResult = {
-  result: number;
-  error?: string;
+    result: number;
+    error?: string;
 };

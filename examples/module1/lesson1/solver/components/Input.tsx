@@ -1,12 +1,12 @@
-import { useCalculator } from "../providers/CalculatorContext";
-import { CALCULATOR_ACTIONS } from "../reducers/consts";
+import { useCalculator } from '../providers/CalculatorContext';
+import { CALCULATOR_ACTIONS } from '../reducers/consts';
 
 type InputProps = {
     field: 'firstNumber' | 'secondNumber';
 };
 
 export const Input: React.FC<InputProps> = ({ field }) => {
-    const calculator = useCalculator()
+    const calculator = useCalculator();
     const value = calculator[field];
 
     const handleChange = (value: string) => {
@@ -15,16 +15,16 @@ export const Input: React.FC<InputProps> = ({ field }) => {
             payload: {
                 field,
                 value,
-            }
-        })
-    }
+            },
+        });
+    };
 
     return (
         <input
             type="text"
             className="rounded-md shadow-md p-4"
             value={value}
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={e => handleChange(e.target.value)}
         />
     );
 };

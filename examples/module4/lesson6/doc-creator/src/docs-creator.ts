@@ -3,25 +3,25 @@ import { join, relative, dirname, basename, extname } from 'path';
 import { generateDocumentation } from './anthropic-client/anthropic-platform';
 
 export async function recreateDocs(rootDir: string, paths: string[]) {
-  const docsPath = join(rootDir, 'docs');
+    const docsPath = join(rootDir, 'docs');
 
-  const docFileNames = [];
+    const docFileNames = [];
 
-  for (const path of paths) {
-    const dirPath = dirname(path);
-    const markdownFilePath = relative(rootDir, dirPath);
-    const docDirPlaceholder = join(docsPath, markdownFilePath);
+    for (const path of paths) {
+        const dirPath = dirname(path);
+        const markdownFilePath = relative(rootDir, dirPath);
+        const docDirPlaceholder = join(docsPath, markdownFilePath);
 
-    mkdirSync(docDirPlaceholder, { recursive: true });
+        mkdirSync(docDirPlaceholder, { recursive: true });
 
-    console.log(`Generating documentation for ${path}...`);
-    const content = readFileSync(path, 'utf-8');
-    const docsContent = await generateDocumentation(path, content);
+        console.log(`Generating documentation for ${path}...`);
+        const content = readFileSync(path, 'utf-8');
+        const docsContent = await generateDocumentation(path, content);
 
-    const mdPath = `${join(docDirPlaceholder, basename(path, extname(path)))}.md`;
-    docFileNames.push(mdPath);
-    writeFileSync(mdPath, docsContent);
-  }
+        const mdPath = `${join(docDirPlaceholder, basename(path, extname(path)))}.md`;
+        docFileNames.push(mdPath);
+        writeFileSync(mdPath, docsContent);
+    }
 
-  return docFileNames;
+    return docFileNames;
 }

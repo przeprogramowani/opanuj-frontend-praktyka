@@ -8,13 +8,13 @@ import './index.css';
 import { store } from './store.js';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <CartProvider>
-        <ProductProvider>
-          <App />
-        </ProductProvider>
-      </CartProvider>
-    </Provider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Provider store={store}>
+            <CartProvider>
+                <ProductProvider>
+                    <App />
+                </ProductProvider>
+            </CartProvider>
+        </Provider>
+    </React.StrictMode>
 );

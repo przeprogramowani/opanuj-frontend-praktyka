@@ -5,12 +5,12 @@ import Comments from './Comments';
 
 const rootElement = document.getElementById('app')!;
 if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
+    const root = ReactDOM.createRoot(rootElement);
 
-  root.render(
-    <>
-      <Articles />
-      <Comments />
-    </>
-  );
+    root.render(
+        <>
+            <Articles />
+            <Comments />
+        </>
+    );
 }

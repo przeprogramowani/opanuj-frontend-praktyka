@@ -1,14 +1,14 @@
 import { z } from 'zod';
 
 export const ArticleSchema = z.object({
-  id: z.number(),
-  author: z.string(),
-  title: z.string(),
-  content: z.string(),
+    id: z.number(),
+    author: z.string(),
+    title: z.string(),
+    content: z.string(),
 });
 
 export const ArticleResponseSchema = z.object({
-  articles: z.array(ArticleSchema),
+    articles: z.array(ArticleSchema),
 });
 
 export type Article = z.infer<typeof ArticleSchema>;

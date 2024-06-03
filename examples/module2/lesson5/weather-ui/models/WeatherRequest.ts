@@ -1,4 +1,4 @@
 export interface WeatherRequest {
-  city: string;
-  country: string;
+    city: string;
+    country: string;
 }

@@ -9,72 +9,67 @@ import { SortSelectComponent } from '../../components/sort-select/sort-select.co
 import { CharacterSearchService } from '../../services/character-search.service';
 
 @Component({
-  selector: 'app-character-search-container',
-  standalone: true,
-  imports: [
-    SearchTitleComponent,
-    NameFieldComponent,
-    GenderSelectComponent,
-    SortSelectComponent,
-    CharacterListComponent,
-    CharacterCardComponent,
-    CommonModule,
-  ],
-  templateUrl: './character-search-container.component.html',
-  styleUrl: './character-search-container.component.scss',
+    selector: 'app-character-search-container',
+    standalone: true,
+    imports: [
+        SearchTitleComponent,
+        NameFieldComponent,
+        GenderSelectComponent,
+        SortSelectComponent,
+        CharacterListComponent,
+        CharacterCardComponent,
+        CommonModule,
+    ],
+    templateUrl: './character-search-container.component.html',
+    styleUrl: './character-search-container.component.scss',
 })
 export class CharacterSearchContainerComponent {
-  showRickOnly = signal(false);
-  characters = computed(() => {
-    if (this.showRickOnly()) {
-      return this.characterSearchService
-        .characters()
-        .filter((character) => character.name.includes('Rick'));
-    } else {
-      return this.characterSearchService.characters();
+    showRickOnly = signal(false);
+    characters = computed(() => {
+        if (this.showRickOnly()) {
+            return this.characterSearchService.characters().filter(character => character.name.includes('Rick'));
+        } else {
+            return this.characterSearchService.characters();
+        }
+    });
+
+    constructor(private characterSearchService: CharacterSearchService) {
+        effect(() => {
+            console.log('showRickOnly changed to', this.showRickOnly());
+        });
+
+        effect(() => {
+            console.log('characters changed to', this.characterSearchService.characters());
+        });
     }
-  });
 
-  constructor(private characterSearchService: CharacterSearchService) {
-    effect(() => {
-      console.log('showRickOnly changed to', this.showRickOnly());
-    });
+    get name(): string {
+        return this.characterSearchService.name;
+    }
 
-    effect(() => {
-      console.log(
-        'characters changed to',
-        this.characterSearchService.characters()
-      );
-    });
-  }
+    get gender(): string {
+        return this.characterSearchService.gender;
+    }
 
-  get name(): string {
-    return this.characterSearchService.name;
-  }
+    get sortOption(): string {
+        return this.characterSearchService.sortOption;
+    }
 
-  get gender(): string {
-    return this.characterSearchService.gender;
-  }
+    onNameChange(newName: string): void {
+        this.characterSearchService.setName(newName);
+    }
 
-  get sortOption(): string {
-    return this.characterSearchService.sortOption;
-  }
+    onGenderChange(newGender: string): void {
+        this.characterSearchService.setGender(newGender);
+    }
 
-  onNameChange(newName: string): void {
-    this.characterSearchService.setName(newName);
-  }
+    onSortOptionChange(newSortOption: string): void {
+        this.characterSearchService.setSortOption(newSortOption);
+    }
 
-  onGenderChange(newGender: string): void {
-    this.characterSearchService.setGender(newGender);
-  }
+    onShowRickOnlyChange(event: Event): void {
+        const value = (event.target as HTMLInputElement).checked;
 
-  onSortOptionChange(newSortOption: string): void {
-    this.characterSearchService.setSortOption(newSortOption);
-  }
-
-  onShowRickOnlyChange(event: Event): void {
-    const value = (event.target as HTMLInputElement).checked;
-
-    this.showRickOnly.set(value);
-  }
+        this.showRickOnly.set(value);
+    }
 }

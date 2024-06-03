@@ -11,73 +11,70 @@ import { CharacterSearchService } from '../../services/character-search.service'
 import { Character } from '../../types/Character';
 
 @Component({
-  selector: 'app-character-search-container',
-  standalone: true,
-  imports: [
-    SearchTitleComponent,
-    NameFieldComponent,
-    GenderSelectComponent,
-    SortSelectComponent,
-    CharacterListComponent,
-    CharacterCardComponent,
-    CommonModule,
-  ],
-  templateUrl: './character-search-container.component.html',
-  styleUrl: './character-search-container.component.scss',
+    selector: 'app-character-search-container',
+    standalone: true,
+    imports: [
+        SearchTitleComponent,
+        NameFieldComponent,
+        GenderSelectComponent,
+        SortSelectComponent,
+        CharacterListComponent,
+        CharacterCardComponent,
+        CommonModule,
+    ],
+    templateUrl: './character-search-container.component.html',
+    styleUrl: './character-search-container.component.scss',
 })
 export class CharacterSearchContainerComponent {
-  characters: Character[] = [];
-  sub: Subscription = new Subscription();
-  showRickOnly = new BehaviorSubject<boolean>(false);
+    characters: Character[] = [];
+    sub: Subscription = new Subscription();
+    showRickOnly = new BehaviorSubject<boolean>(false);
 
-  constructor(private characterSearchService: CharacterSearchService) {}
+    constructor(private characterSearchService: CharacterSearchService) {}
 
-  ngOnInit() {
-    this.sub = combineLatest([
-      this.characterSearchService.characters$,
-      this.showRickOnly,
-    ]).subscribe(([characters, showRickOnly]) => {
-      if (showRickOnly) {
-        this.characters = characters.filter((character) =>
-          character.name.includes('Rick')
+    ngOnInit() {
+        this.sub = combineLatest([this.characterSearchService.characters$, this.showRickOnly]).subscribe(
+            ([characters, showRickOnly]) => {
+                if (showRickOnly) {
+                    this.characters = characters.filter(character => character.name.includes('Rick'));
+                } else {
+                    this.characters = characters;
+                }
+            }
         );
-      } else {
-        this.characters = characters;
-      }
-    });
-  }
+    }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 
-  get name(): string {
-    return this.characterSearchService.name;
-  }
+    get name(): string {
+        return this.characterSearchService.name;
+    }
 
-  get gender(): string {
-    return this.characterSearchService.gender;
-  }
+    get gender(): string {
+        return this.characterSearchService.gender;
+    }
 
-  get sortOption(): string {
-    return this.characterSearchService.sortOption;
-  }
+    get sortOption(): string {
+        return this.characterSearchService.sortOption;
+    }
 
-  onNameChange(newName: string): void {
-    this.characterSearchService.setName(newName);
-  }
+    onNameChange(newName: string): void {
+        this.characterSearchService.setName(newName);
+    }
 
-  onGenderChange(newGender: string): void {
-    this.characterSearchService.setGender(newGender);
-  }
+    onGenderChange(newGender: string): void {
+        this.characterSearchService.setGender(newGender);
+    }
 
-  onSortOptionChange(newSortOption: string): void {
-    this.characterSearchService.setSortOption(newSortOption);
-  }
+    onSortOptionChange(newSortOption: string): void {
+        this.characterSearchService.setSortOption(newSortOption);
+    }
 
-  onShowRickOnlyChange(event: Event): void {
-    const value = (event.target as HTMLInputElement).checked;
+    onShowRickOnlyChange(event: Event): void {
+        const value = (event.target as HTMLInputElement).checked;
 
-    this.showRickOnly.next(value);
-  }
+        this.showRickOnly.next(value);
+    }
 }

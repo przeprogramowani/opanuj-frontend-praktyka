@@ -8,33 +8,33 @@ import { serverSideApiLoader } from './loaders/serverSideApiLoader';
 import { Home } from './routes/Home';
 
 export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    children: [
-      {
-        id: 'home',
-        index: true,
-        element: <Home />,
-      },
-      {
-        id: 'slow-app',
-        loader: clientSideApiLoader,
-        path: 'v1',
-        element: <SlowApp />,
-      },
-      {
-        id: 'fast-app',
-        loader: serverSideApiLoader,
-        path: 'v2',
-        element: <FastApp />,
-      },
-      {
-        id: 'faster-app',
-        loader: serverSideApiLoader,
-        path: 'v3',
-        element: <FasterApp />,
-      },
-    ],
-  },
+    {
+        path: '/',
+        element: <Root />,
+        children: [
+            {
+                id: 'home',
+                index: true,
+                element: <Home />,
+            },
+            {
+                id: 'slow-app',
+                loader: clientSideApiLoader,
+                path: 'v1',
+                element: <SlowApp />,
+            },
+            {
+                id: 'fast-app',
+                loader: serverSideApiLoader,
+                path: 'v2',
+                element: <FastApp />,
+            },
+            {
+                id: 'faster-app',
+                loader: serverSideApiLoader,
+                path: 'v3',
+                element: <FasterApp />,
+            },
+        ],
+    },
 ]);
