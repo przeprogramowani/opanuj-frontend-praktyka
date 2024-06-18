@@ -1,59 +1,81 @@
 import React, { useState } from 'react';
-import { f1, f2, f3, f4 } from './functions';
+import { add, subtract, multiply, divide } from './functions';
+import { Button } from './components/Button';
 
 const App = () => {
-  const [numA, setNumA] = useState<number>(0);
-  const [numB, setNumB] = useState<number>(0);
-  const [numC, setNumC] = useState<number | string>(0);
+  const [firstNumber, setFirstNumber] = useState<number>(0);
+  const [secondNumber, setSecondNumber] = useState<number>(0);
+  const [result, setResult] = useState<number | string>(0);
 
-  const doWork = (func: (a: number, b: number) => number) => {
-    setNumC(func(numA, numB));
-  };
+  const setFirstNumberValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstNumber(parseFloat(event.target.value));
+  }
+
+  const setSecondNumberValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSecondNumber(parseFloat(event.target.value));
+  }
+
+  const addNumbers = () => {
+    setResultValue(add(firstNumber, secondNumber));
+  }
+
+  const subtractNumbers = () => {
+    setResultValue(subtract(firstNumber, secondNumber));
+  }
+
+  const multiplyNumbers = () => {
+    setResultValue(multiply(firstNumber, secondNumber));
+  }
+
+  const divideNumbers = () => {
+    if (secondNumber === 0) return;
+    setResultValue(divide(firstNumber, secondNumber));
+  }
+
+  const setResultValue = (value: number) => {
+    setResult(value.toFixed(2));
+  }
 
   return (
-    <div>
+    <main>
       <div className="grid grid-cols-2 gap-x-4">
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numA}
-          onChange={(e) => setNumA(parseFloat(e.target.value))}
+          value={firstNumber}
+          onChange={setFirstNumberValue}
         />
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numB}
-          onChange={(e) => setNumB(parseFloat(e.target.value))}
+          value={secondNumber}
+          onChange={setSecondNumberValue}
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f1)}
+        <Button
+          onClick={addNumbers}
         >
           +
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f2)}
+        </Button>
+        <Button
+          onClick={subtractNumbers}
         >
           -
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f3)}
+        </Button>
+        <Button
+          onClick={multiplyNumbers}
         >
           *
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f4)}
+        </Button>
+        <Button
+          onClick={divideNumbers}
         >
           /
-        </button>
+        </Button>
       </div>
-      <div>Result: {numC}</div>
-    </div>
+      <span>Result: {result}</span>
+    </main>
   );
 };
 
