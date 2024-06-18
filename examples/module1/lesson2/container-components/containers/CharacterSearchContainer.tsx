@@ -1,52 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CharacterList from '../components/CharacterList';
-import SearchForm from '../components/SearchForm';
 import SearchTitle from '../components/SearchTitle';
-import { Character } from '../types/Character';
+import { useFetchCharacters } from './hooks/useFetchCharacters';
+import { State } from '../types/State';
+import { NameField } from '../../prop-drilling-finish/components/NameField';
+import { GenderSelect } from '../components/GenderSelect';
+import { SortSelect } from '../components/SortSelect';
+import { sortCharacters } from './utils/sortCharacters';
 
 function CharacterSearchContainer() {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
-  const [characters, setCharacters] = useState<Character[]>([]);
   const [sortOption, setSortOption] = useState('');
+  const { characters, state } = useFetchCharacters(name, gender);
 
-  useEffect(() => {
-    if (name || gender) {
-      fetch(
-        `https://rickandmortyapi.com/api/character/?name=${name}&gender=${gender}`
-      )
-        .then((response) => response.json())
-        .then((data) => setCharacters(data.results || []))
-        .catch((error) => console.error('Error fetching data:', error));
-    }
-  }, [name, gender]);
-
-  const sortedCharacters = [...characters].sort((a, b) => {
-    if (sortOption === 'name') {
-      return a.name.localeCompare(b.name);
-    } else if (sortOption === 'created') {
-      return new Date(a.created).getTime() - new Date(b.created).getTime();
-    }
-    return 0;
-  });
+  const sortedCharacters = sortCharacters(characters, sortOption);
 
   return (
-    <>
-      <div className="pt-20" />
-      <SearchTitle />
-      <div className="pt-8" />
-      <SearchForm
-        name={name}
-        setName={setName}
-        gender={gender}
-        setGender={setGender}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
-      />
-      <div className="pt-12" />
-      <CharacterList characters={sortedCharacters} />
-      <div className="pt-16" />
-    </>
+    <main className='flex flex-col gap-4 p-6'>
+      <SearchTitle title="Wyszukiwarka postaci Rick and Morty" />
+      <form className="space-x-4 flex items-end justify-center">
+        <NameField name={name} setName={setName} />
+        <GenderSelect gender={gender} setGender={setGender} />
+        <SortSelect sortOption={sortOption} setSortOption={setSortOption} />
+      </form>
+      {
+        state === State.loading && <p className='text-center'>Ładowanie...</p>
+      }
+      {
+        state === State.error && <p className='text-center'>Wystąpił błąd podczas ładowania danych</p>
+      }
+      {
+        state === State.loaded && characters.length > 0 && <CharacterList characters={sortedCharacters} />
+      }
+    </main>
   );
 }
 
