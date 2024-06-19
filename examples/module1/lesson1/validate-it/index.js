@@ -5,18 +5,15 @@ function validator() {
   const result = document.getElementById('result');
 
   button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
+    //value of input converted to Number and assigned to inputValue
+    const inputValue = Number(input.value);
+    if (inputValue) {
+      if (Number.isInteger(inputValue)) {
+        if (inputValue > 0 && inputValue < 100 && inputValue % 2 === 0) {
           result.innerHTML = 'Valid';
         } else {
           result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
+        } // removed else condition with condition overwrite validation result
       } else {
         result.innerHTML = 'Invalid';
       }
