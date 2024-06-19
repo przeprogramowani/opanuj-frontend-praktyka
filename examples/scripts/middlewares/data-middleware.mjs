@@ -5,7 +5,7 @@ import express from 'express';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-async function readContent(pathToResource) {
+export async function readContent(pathToResource) {
   let resource = '{}';
 
   try {

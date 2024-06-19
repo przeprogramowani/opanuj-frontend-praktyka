@@ -1,0 +1,4 @@
+- budujemy frontend portalu do wyświetlania pogody w Europie
+- dostawca danych pogodowych wykupił konkurenta z USA i informuje, że nowe dane są dostępne i nie wymaga to żadnych zmian w kodzie po naszej stronie
+- w dniu wdrożenia użytkownicy zaczynają nas informować o błędach w wyświetlaniu danych
+- po analizie okazuje się, że nowe dane są w innej formie niż poprzednie
