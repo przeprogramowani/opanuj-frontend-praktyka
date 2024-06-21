@@ -1,13 +1,25 @@
-export function addNumbers(numA: number, numB: number) {
-  return numA + numB;
+export function addNumbers(firstNumber: number, secondNumber: number) {
+  return firstNumber + secondNumber;
 }
-export function subtractNumbers(numA: number, numB: number) {
-  return numA - numB;
+export function subtractNumbers(firstNumber: number, secondNumber: number) {
+  return firstNumber - secondNumber;
 }
-export function multiplicationNumbers(numA: number, numB: number) {
-  return numA * numB;
+export function multiplicationNumbers(firstNumber: number, secondNumber: number) {
+  return firstNumber * secondNumber;
 }
 
-export function dividingNumbers(numA: number, numB: number) {
-  return numA / numB;
+export function dividingNumbers(firstNumber: number, secondNumber: number) {
+  return firstNumber / secondNumber;
+}
+
+export function clearAll(
+  setFirstNumber: React.Dispatch<React.SetStateAction<number>>, 
+  setSecondNumber: React.Dispatch<React.SetStateAction<number>>, 
+  setResult: React.Dispatch<React.SetStateAction<number | string>>, 
+  setOperator: React.Dispatch<React.SetStateAction<string>>
+) {
+  setFirstNumber(0);
+  setSecondNumber(0);
+  setResult(0);
+  setOperator("Here comes your choose operator!");
 }
