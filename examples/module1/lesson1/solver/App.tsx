@@ -7,7 +7,7 @@ const App = () => {
   const [operator, setOperator] = useState<string>("Here comes your choose operator!");
   const [result, setResult] = useState<number | string>(0);
 
-  const calculateNumbers = (func: (a: number, b: number) => number) => {
+  const calculateNumbers = (func: (firstNumber: number, secondNumber: number) => number) => {
     if (func === dividingNumbers && secondNumber === 0) {
       setResult("Do not divide by zero!");
     } else {
