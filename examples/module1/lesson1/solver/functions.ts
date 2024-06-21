@@ -1,13 +1,13 @@
-export function f1(a, b) {
-  return a + b;
+export function addNumbers(numA: number, numB: number) {
+  return numA + numB;
 }
-export function f2(a, b) {
-  return a - b;
+export function subtractNumbers(numA: number, numB: number) {
+  return numA - numB;
 }
-export function f3(a, b) {
-  return a * b;
+export function multiplicationNumbers(numA: number, numB: number) {
+  return numA * numB;
 }
 
-export function f4(a, b) {
-  return a / b;
+export function dividingNumbers(numA: number, numB: number) {
+  return numA / numB;
 }
