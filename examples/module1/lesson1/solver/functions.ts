@@ -1,13 +1,27 @@
-export function f1(a, b) {
-  return a + b;
+export type CalculationResult = {
+  result: number;
+  error?: string;
+};
+
+export function sum(firstInput: number, secondInput: number): CalculationResult {
+  return {
+    result: firstInput + secondInput
+  };
 }
-export function f2(a, b) {
-  return a - b;
+export function substract(firstInput: number, secondInput: number): CalculationResult {
+  return {
+    result: firstInput - secondInput
+  };
 }
-export function f3(a, b) {
-  return a * b;
+export function multiply(firstInput: number, secondInput: number): CalculationResult {
+  return {
+    result: firstInput * secondInput
+  }
 }
 
-export function f4(a, b) {
-  return a / b;
+export function divide(firstInput: number, secondInput: number): CalculationResult {
+  return {
+    result: secondInput !== 0 ? firstInput / secondInput: 0,
+    error: secondInput === 0 ? 'Cannot divide by zero' : ''
+  };
 }
