@@ -1,3 +1,4 @@
+import React from 'react';
 import { Character } from '../types/Character';
 
 function CharacterList({ characters }: { characters: Character[] }) {

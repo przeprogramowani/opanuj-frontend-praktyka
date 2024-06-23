@@ -1,3 +1,5 @@
+import React from "react";
+
 type SearchFormProps = {
   name: string;
   setName: (name: string) => void;
