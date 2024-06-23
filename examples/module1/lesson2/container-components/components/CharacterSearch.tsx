@@ -16,9 +16,9 @@ function CharacterSearch(name: string, gender: string){
 
 
   const sortedCharacters = [...characters].sort((a, b) => {
-    if (sortOption === "name") a.name.localeCompare(b.name);
-    if (sortOption === 'created') new Date(a.created).getTime() - new Date(b.created).getTime();
-
+    if (sortOption === 'name') return a.name.localeCompare(b.name);
+    if (sortOption === 'created') return new Date(a.created).getTime() - new Date(b.created).getTime();
+    
     return 0;
   });
 
