@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import CharacterList from '../components/CharacterList';
 import SearchForm from '../components/SearchForm';
