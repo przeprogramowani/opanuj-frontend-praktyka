@@ -1,0 +1,1 @@
+export const setResult = (isValid) => isValid ? 'Valid' : 'Invalid';
