@@ -4,31 +4,33 @@ function validator() {
   const button2 = document.getElementById('button2');
   const result = document.getElementById('result');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
+  const validationRules = [
+      value => value !== '' || 'Input cannot be empty',
+      value => !isNaN(value) || 'Input must be a number',
+      value => Number.isInteger(Number(value)) || 'Input must be an integer',
+      value => Number(value) > 0 || 'Number must be positive',
+      value => Number(value) < 100 || 'Number must be less than 100',
+      value => Number(value) % 2 === 0 || 'Number must be even',
+  ]
+
+  function validate(value) {
+    for (let rule of validationRules) {
+      const result = rule(value);
+      if (result !== true) return result;
     }
-  });
+    return "Valid";
+  }
 
-  button2.addEventListener('click', () => {
-    input.value = '';
-    result.innerHTML = '';
-  });
+  function clearInput() {
+    input.value = "";
+    result.innerHTML = "";
+  }
+
+  button.addEventListener("click", () => {
+    const validationResult = validate(input.value);
+    result.innerHTML = validationResult;
+  })
+
+  button2.addEventListener('click', clearInput);
 }
-
 validator();
