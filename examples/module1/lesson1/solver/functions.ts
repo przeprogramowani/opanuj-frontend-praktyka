@@ -1,16 +1,16 @@
-export function add(a: number, b: number) {
-  return a + b;
-}
-export function sub(a: number, b: number) {
-  return a - b;
-}
-export function multi(a: number, b: number) {
-  return a * b;
-}
+export const add = (operandLeft: number, operandRight: number) => {
+  return operandLeft + operandRight;
+};
+export const sub = (operandLeft: number, operandRight: number) => {
+  return operandLeft - operandRight;
+};
+export const multi = (operandLeft: number, operandRight: number) => {
+  return operandLeft * operandRight;
+};
 
-export function div(a: number, b: number) {
-  return a / b;
-}
+export const div = (operandLeft: number, operandRight: number) => {
+  return operandLeft / operandRight;
+};
 
 export const calculate = (
   setResult: (a: number) => void,
