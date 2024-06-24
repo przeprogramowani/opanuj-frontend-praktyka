@@ -33,4 +33,5 @@ function validator() {
 
   button2.addEventListener('click', clearInput);
 }
+
 validator();
