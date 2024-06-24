@@ -41,11 +41,11 @@ const App = () => {
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
         <Button onClick={handleCalculation(Operations.ADDITION)}>+</Button>
-        <Button onClick={handleCalculation(Operations.DIVISION)}>-</Button>
+        <Button onClick={handleCalculation(Operations.SUBTRACTION)}>-</Button>
         <Button onClick={handleCalculation(Operations.MULTIPLICATION)}>
           *
         </Button>
-        <Button onClick={handleCalculation(Operations.SUBTRACTION)}>/</Button>
+        <Button onClick={handleCalculation(Operations.DIVISION)}>/</Button>
       </div>
       <div>{result && `Result: ${result}`}</div>
       <div>{error && `Error: ${error}`}</div>

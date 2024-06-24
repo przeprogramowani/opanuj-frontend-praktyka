@@ -15,13 +15,13 @@ export function calculate({
     case Operations.ADDITION:
       return firstNumber + secondNumber;
 
-    case Operations.DIVISION:
+    case Operations.SUBTRACTION:
       return firstNumber - secondNumber;
 
     case Operations.MULTIPLICATION:
       return firstNumber * secondNumber;
 
-    case Operations.SUBTRACTION:
+    case Operations.DIVISION:
       if (secondNumber === 0) throw new Error('Invalid divisor');
       return firstNumber / secondNumber;
 
