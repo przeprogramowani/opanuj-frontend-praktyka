@@ -10,7 +10,7 @@ const App = () => {
   const [result, setResult] = useState<number>(0);
   const [error, setError] = useState<string>('');
 
-  const calulateResult = (
+  const calculateResult = (
     func: (a: number, b: number) => CalculationResult
   ) => {
     const calcResult = func(firstInput, secondInput);
@@ -35,10 +35,10 @@ const App = () => {
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
-        <Button onClick={() => calulateResult(add)}>+</Button>
-        <Button onClick={() => calulateResult(subtract)}>-</Button>
-        <Button onClick={() => calulateResult(multiply)}>*</Button>
-        <Button onClick={() => calulateResult(divide)}>/</Button>
+        <Button onClick={() => calculateResult(add)}>+</Button>
+        <Button onClick={() => calculateResult(subtract)}>-</Button>
+        <Button onClick={() => calculateResult(multiply)}>*</Button>
+        <Button onClick={() => calculateResult(divide)}>/</Button>
       </div>
       <div>Result: {result}</div>
       <p>{error}</p>
