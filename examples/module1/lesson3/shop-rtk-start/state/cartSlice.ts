@@ -51,7 +51,11 @@ export const cartSlice = createSlice({
       }
   
       if (cartItem.amount <= 1) {
-        removeFromCart(cartItem.id);
+        const newCart = state.items.filter((item) => {
+          return item.id !== action.payload;
+        });
+  
+        state.items = newCart
         return;
       }
   
