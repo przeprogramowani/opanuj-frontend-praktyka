@@ -1,3 +1,10 @@
+import { Validator } from './Validator.js';
+
+const isInteger = (input) => Number.isInteger(input);
+const isGreaterThanZero = (input) => input > 0;
+const isLessThanHundred = (input) => input < 100;
+const isEven = (input) => input % 2 === 0;
+
 function validator() {
   const input = document.getElementById('input');
   const button = document.getElementById('button');
@@ -5,24 +12,12 @@ function validator() {
   const result = document.getElementById('result');
 
   button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
+    const validator = new Validator({
+      rules: [isInteger, isGreaterThanZero, isLessThanHundred, isEven],
+    });
+    const parsedInput = parseInt(input.value);
+
+    result.innerHTML = validator.validate(parsedInput) ? 'Valid' : 'Invalid';
   });
 
   button2.addEventListener('click', () => {
