@@ -1,34 +1,33 @@
-function validator() {
-  const input = document.getElementById('input');
-  const button = document.getElementById('button');
-  const button2 = document.getElementById('button2');
-  const result = document.getElementById('result');
+const numberInput = document.getElementById('numberInput');
+const validateButton = document.getElementById('validateButton');
+const clearButton = document.getElementById('clearButton');
+const result = document.getElementById('result');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
+const setResultText = (text) => {
+  result.textContent = text;
+};
+
+const clearResult = () => {
+  numberInput.value = '';
+  result.textContent = '';
+};
+
+const validator = () => {
+  validateButton.addEventListener('click', () => {
+    if (!numberInput.value) {
+      setResultText('Value should not be empty');
+      return;
     }
+
+    if (Number(numberInput.value) >= 0 && Number(numberInput.value) <= 100) {
+      setResultText('Value is in range 0-100');
+      return;
+    }
+
+    setResultText('Value should be in range 0-100');
   });
 
-  button2.addEventListener('click', () => {
-    input.value = '';
-    result.innerHTML = '';
-  });
-}
+  clearButton.addEventListener('click', clearResult());
+};
 
 validator();
