@@ -1,16 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { addToCart } from '../state/cartSlice';
 import { useDispatch } from 'react-redux';
-import { useGetProductsQuery } from '../services/products';
+import { useGetProductQuery } from '../services/products';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { data } = useGetProductsQuery();
-
-  const product = data?.find((item) => {
-    return item.id === parseInt(id!);
-  });
+  const { data: product } = useGetProductQuery(id);
 
   if (!product) {
     return (
