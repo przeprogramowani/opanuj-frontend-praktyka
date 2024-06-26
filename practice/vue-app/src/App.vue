@@ -1,30 +1,51 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import cCountryFilters from './components/countryFilters.vue'
+import cCountryList from './components/countryList.vue'
+import { reactive, ref, type Ref } from 'vue'
+import { CountryData, CountryFilters } from './types/country.types.ts';
+
+
+const filters: CountryFilters = reactive({
+  currency: 'usd',
+  sort: ''
+})
+
+const countryData: Ref<CountryData> = ref([])
+const getData = () => {
+  fetch(`https://restcountries.com/v3.1/currency/${filters.currency}`)
+    .then((response) => response.json())
+    .then((data) => transformData(data))
+    .catch((error) => {
+      console.error('Error fetching data:', error)
+      countryData.value = []
+    });
+}
+
+const transformData = (data) => {
+  const filteredCountry = ref(data)
+
+  if(filters.sort === 'population'){
+    filteredCountry.value.sort((a, b) => b.population - a.population);
+  }
+  if(filters.sort === 'alphabetical'){
+    filteredCountry.value.sort((a, b) => a.name.common.localeCompare(b.name.common));
+  }
+
+  countryData.value = filteredCountry.value.map(country => ({ name: country.name.common, flag: country.flag }));
+}
+
+getData()
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h2>Countries</h2>
+    <cCountryFilters :filters="filters"
+                     @rerenderData="getData" />
+
+    <cCountryList :country-data="countryData" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>
