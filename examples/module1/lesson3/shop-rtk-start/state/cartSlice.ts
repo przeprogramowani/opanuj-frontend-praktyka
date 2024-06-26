@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { CartItem } from '../types/CartItem';
 import { RootState } from '../store';
+import { CartItem } from '../types/CartItem';
 import { Product } from '../types/Product';
 
 interface CartState {
@@ -45,4 +45,4 @@ export const selectItemAmount = (state: RootState) =>
     return accumulator + currentItem.amount;
   }, 0);
 
-export default cartSlice.reducer;
+export const cartReducer = cartSlice.reducer;
