@@ -1,13 +1,32 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { ProductContext } from '../contexts/ProductContext';
 import { addToCart } from '../state/cartSlice';
 import { useAppDispatch } from '../hooks/rtk';
+import {
+  useProducts,
+  useProductsError,
+  useProductsLoading,
+} from '../hooks/productSelectors';
+import { useEffect } from 'react';
+import { getProductsAsync } from '../state/productSlice';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { products } = useContext(ProductContext);
+  const products = useProducts();
+  const loading = useProductsLoading();
+  const error = useProductsError();
+
+  useEffect(() => {
+    void dispatch(getProductsAsync());
+  }, [dispatch]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   const product = products.find((item) => {
     return item.id === parseInt(id!);
