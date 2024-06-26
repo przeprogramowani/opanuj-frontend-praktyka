@@ -31,18 +31,31 @@ export const cartSlice = createSlice({
         state.items.push(newItem);
       }
     },
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      
+      
+    },
+    decreaseAmount: (state, action: PayloadAction<number>) => {
+      
+    },
     clearCart: (state) => {
       state.items = [];
     },
   },
 });
 
-export const { addToCart, clearCart } = cartSlice.actions;
+export const { addToCart, clearCart, removeFromCart, decreaseAmount } = cartSlice.actions;
 
 export const selectCartItems = (state: RootState) => state.cart.items;
 export const selectItemAmount = (state: RootState) =>
   state.cart.items.reduce((accumulator, currentItem) => {
     return accumulator + currentItem.amount;
   }, 0);
+
+export const selectTotal = (state: RootState) => {
+  return state.cart.items.reduce((accumulator, currentItem) => {
+    return accumulator + currentItem.amount * currentItem.price;
+  }, 0);
+};
 
 export const cartReducer = cartSlice.reducer;

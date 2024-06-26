@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CartItem } from '../types/CartItem';
+import { Product } from '../types/Product';
 
-interface ProductSlace {
-  items: CartItem[];
+interface ProductsSlace {
+  products: Product[];
 }
 
-const initialState: ProductSlace = {
-  items: [],
+const initialState: ProductsSlace = {
+  products: [],
 };
 
-export const cartSlice = createSlice({
-  name: 'cart',
+export const productsSlice = createSlice({
+  name: 'products',
   initialState,
   reducers: {},
 });
 
-export const {} = cartSlice.actions;
+export const {} = productsSlice.actions;
 
-export const productReducer = cartSlice.reducer;
+export const productReducer = productsSlice.reducer;
