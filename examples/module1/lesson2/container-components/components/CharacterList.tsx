@@ -1,12 +1,12 @@
+import CharacterCard from './CharacterCard';
 import { Character } from '../types/Character';
 
 function CharacterList({ characters }: { characters: Character[] }) {
   return (
     <ol className="grid grid-cols-1 gap-4 list-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {characters.map((character) => (
-        <li key={character.id} className="flex flex-col items-center">
-          <h3>{character.name}</h3>
-          <img src={character.image} alt={character.name} />
+      {characters.map(({ id, name, image }) => (
+        <li key={id} className="flex flex-col items-center">
+          <CharacterCard key={id} name={name} image={image} />
         </li>
       ))}
     </ol>
