@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
-import { f1, f2, f3, f4 } from './functions';
+import Button from './components/Button';
+import { add, div, multi, sub } from './functions';
 
 const App = () => {
-  const [numA, setNumA] = useState<number>(0);
-  const [numB, setNumB] = useState<number>(0);
-  const [numC, setNumC] = useState<number | string>(0);
+  const [operandLeft, setOperandLeft] = useState<number>(0);
+  const [operandRight, setOperandRight] = useState<number>(0);
+  const [result, setResult] = useState<number | string>(0);
+  const [error, setError] = useState<boolean>(false);
 
-  const doWork = (func: (a: number, b: number) => number) => {
-    setNumC(func(numA, numB));
+  const operations = [
+    { operationSign: '+', mathOperationFunction: add },
+    { operationSign: '-', mathOperationFunction: sub },
+    { operationSign: '*', mathOperationFunction: multi },
+    { operationSign: '/', mathOperationFunction: div },
+  ];
+
+  const handleInputChange = (
+    setOperand: React.Dispatch<React.SetStateAction<number>>,
+    input: string
+  ) => {
+    setError(false);
+    setOperand(parseFloat(input));
   };
 
   return (
@@ -16,43 +29,32 @@ const App = () => {
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numA}
-          onChange={(e) => setNumA(parseFloat(e.target.value))}
+          value={operandLeft}
+          onChange={(e) => handleInputChange(setOperandLeft, e.target.value)}
         />
         <input
           type="number"
           className="rounded-md shadow-md p-4"
-          value={numB}
-          onChange={(e) => setNumB(parseFloat(e.target.value))}
+          value={operandRight}
+          onChange={(e) => handleInputChange(setOperandRight, e.target.value)}
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f1)}
-        >
-          +
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f2)}
-        >
-          -
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f3)}
-        >
-          *
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f4)}
-        >
-          /
-        </button>
+        {operations.map((operation, index) => (
+          <Button
+            key={index}
+            setResult={setResult}
+            setError={setError}
+            mathOperationFunction={operation.mathOperationFunction}
+            setOperandLeft={operandLeft}
+            setOperandRight={operandRight}
+          >
+            {operation.operationSign}
+          </Button>
+        ))}
       </div>
-      <div>Result: {numC}</div>
+      {!error && <div>Result: {result}</div>}
+      {error && <div className="text-red-500">Nie dzielimy przez zero</div>}
     </div>
   );
 };

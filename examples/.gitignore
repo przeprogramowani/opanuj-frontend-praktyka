@@ -9,4 +9,5 @@ node_modules/
 *-recording/
 **/playwright/
 
+package-lock.json
 dist/
