@@ -5,7 +5,7 @@ import { Article, ArticleResponse } from './types';
 export function useArticlesClient() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<string | null>();
 
   useEffect(() => {
     setLoading(true);
