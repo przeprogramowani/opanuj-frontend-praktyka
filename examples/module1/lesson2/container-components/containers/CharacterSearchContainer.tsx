@@ -8,16 +8,14 @@ import { useSortedCharacters } from '../hooks/useSortedCharacters';
 export const CharacterSearchContainer = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
-  const [sortOption, setSortOption] = useState('');
-
   const characters = useCharacterSearch(name, gender);
+
+  const [sortOption, setSortOption] = useState('');
   const sortedCharacters = useSortedCharacters(characters, sortOption);
 
   return (
     <>
-      <div className="pt-20" />
       <SearchTitle title="Wyszukiwarka postaci Rick and Morty" />
-      <div className="pt-8" />
       <SearchForm
         name={name}
         setName={setName}
@@ -26,9 +24,7 @@ export const CharacterSearchContainer = () => {
         sortOption={sortOption}
         setSortOption={setSortOption}
       />
-      <div className="pt-12" />
       <CharacterList characters={sortedCharacters} />
-      <div className="pt-16" />
     </>
   );
 };
