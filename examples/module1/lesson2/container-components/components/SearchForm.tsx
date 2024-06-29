@@ -1,5 +1,5 @@
-import SelectInput from './form-elements/SelectInput';
-import TextInput from './form-elements/TextInput';
+import SelectInput from './SelectInput';
+import TextInput from './TextInput';
 
 type SearchFormProps = {
   name: string;
