@@ -5,7 +5,12 @@ type SelectInputProps = {
   options: { value: string; label: string }[];
 };
 
-function SelectInput({ label, value, onChange, options }: SelectInputProps) {
+export const SelectInput = ({
+  label,
+  value,
+  onChange,
+  options,
+}: SelectInputProps) => {
   return (
     <label className="flex flex-col">
       {label}
@@ -22,6 +27,4 @@ function SelectInput({ label, value, onChange, options }: SelectInputProps) {
       </select>
     </label>
   );
-}
-
-export default SelectInput;
+};

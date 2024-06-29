@@ -1,5 +1,5 @@
-import SelectInput from './SelectInput';
-import TextInput from './TextInput';
+import { SelectInput } from './SelectInput';
+import { TextInput } from './TextInput';
 
 type SearchFormProps = {
   name: string;
@@ -10,14 +10,14 @@ type SearchFormProps = {
   setSortOption: (sortOption: string) => void;
 };
 
-function SearchForm({
+export const SearchForm = ({
   name,
   setName,
   gender,
   setGender,
   sortOption,
   setSortOption,
-}: SearchFormProps) {
+}: SearchFormProps) => {
   return (
     <form className="flex items-end justify-center space-x-4">
       <TextInput
@@ -50,6 +50,4 @@ function SearchForm({
       />
     </form>
   );
-}
-
-export default SearchForm;
+};

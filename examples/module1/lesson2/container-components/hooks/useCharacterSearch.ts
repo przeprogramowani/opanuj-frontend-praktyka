@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Character } from '../types/Character';
 
-const useCharacterSearch = (name: string, gender: string) => {
+export const useCharacterSearch = (name: string, gender: string) => {
   const [characters, setCharacters] = useState<Character[]>([]);
 
   useEffect(() => {
@@ -17,5 +17,3 @@ const useCharacterSearch = (name: string, gender: string) => {
 
   return characters;
 };
-
-export default useCharacterSearch;

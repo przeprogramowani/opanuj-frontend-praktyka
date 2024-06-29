@@ -5,7 +5,12 @@ type TextInputProps = {
   placeholder?: string;
 };
 
-function TextInput({ label, value, onChange, placeholder }: TextInputProps) {
+export const TextInput = ({
+  label,
+  value,
+  onChange,
+  placeholder,
+}: TextInputProps) => {
   return (
     <label className="flex flex-col">
       {label}
@@ -18,6 +23,4 @@ function TextInput({ label, value, onChange, placeholder }: TextInputProps) {
       />
     </label>
   );
-}
-
-export default TextInput;
+};
