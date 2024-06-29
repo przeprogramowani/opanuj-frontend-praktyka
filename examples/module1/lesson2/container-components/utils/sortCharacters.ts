@@ -1,6 +1,6 @@
 import { Character } from '../types/Character';
 
-export const useSortedCharacters = (characters: Character[], sortOption: string): Character[] => {
+export const sortCharacters = (characters: Character[], sortOption: string): Character[] => {
   return [...characters].sort((a, b) => {
     if (sortOption === 'name') {
       return a.name.localeCompare(b.name);
