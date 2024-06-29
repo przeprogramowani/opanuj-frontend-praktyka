@@ -15,7 +15,7 @@ export const CharacterSearchContainer = () => {
 
   return (
     <>
-      <SearchTitle title="Wyszukiwarka postaci Rick and Morty" />
+      <SearchTitle name="Rick and Morty" />
       <SearchForm
         name={name}
         setName={setName}

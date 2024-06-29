@@ -1,5 +1,5 @@
-type SearchTitleProps = { title: string };
+type SearchTitleProps = { name: string };
 
-export const SearchTitle = ({ title }: SearchTitleProps) => (
-  <h1 className="pt-20 pb-8 text-2xl">{title}</h1>
+export const SearchTitle = ({ name }: SearchTitleProps) => (
+  <h1 className="pt-20 pb-8 text-2xl">Character finder {name}</h1>
 );
