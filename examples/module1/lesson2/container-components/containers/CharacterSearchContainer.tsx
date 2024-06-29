@@ -6,7 +6,7 @@ import { SelectInput } from '../components/SelectInput';
 import { TextInput } from '../components/TextInput';
 
 import { useCharacterSearch } from '../hooks/useCharacterSearch';
-import { useSortedCharacters } from '../hooks/useSortedCharacters';
+import { sortCharacters } from '../utils/sortCharacters';
 
 export const CharacterSearchContainer = () => {
   const [name, setName] = useState('');
@@ -14,7 +14,7 @@ export const CharacterSearchContainer = () => {
   const characters = useCharacterSearch(name, gender);
 
   const [sortOption, setSortOption] = useState('');
-  const sortedCharacters = useSortedCharacters(characters, sortOption);
+  const sortedCharacters = sortCharacters(characters, sortOption);
 
   return (
     <>
