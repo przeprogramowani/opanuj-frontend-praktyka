@@ -1,58 +1,47 @@
 import React, { useState } from 'react';
-import { f1, f2, f3, f4 } from './functions';
+import { Button } from './components/Button.tsx';
+import { Input } from './components/Input.tsx';
+import { operations, operationTypes, divideError } from './consts/consts.ts';
+import { OperationTypeProps } from './types/types.ts';
 
 const App = () => {
-  const [numA, setNumA] = useState<number>(0);
-  const [numB, setNumB] = useState<number>(0);
-  const [numC, setNumC] = useState<number | string>(0);
+  const [firstNumber, setFirstNumber] = useState<number>(0);
+  const [secondNumber, setSecondNumber] = useState<number>(0);
+  const [result, setResult] = useState<number | string>(0);
+  const [error, setError] = useState<string | null>(null)
 
-  const doWork = (func: (a: number, b: number) => number) => {
-    setNumC(func(numA, numB));
+  const handleCalculate = (operationType: OperationTypeProps) => () => {
+    if (operationType === operationTypes.divide && secondNumber === 0) {
+      setResult(0)
+      setError(divideError)
+
+    } else {
+      setResult(operations[operationType](firstNumber, secondNumber));
+      setError(null);
+    }
   };
+
+  const handleFirstNumber = (e: React.ChangeEvent<HTMLInputElement>) =>  {
+    setFirstNumber(parseFloat(e.target.value))
+  }
+
+  const handleSecondNumber = (e: React.ChangeEvent<HTMLInputElement>) =>  {
+    setSecondNumber(parseFloat(e.target.value))
+  }
 
   return (
     <div>
       <div className="grid grid-cols-2 gap-x-4">
-        <input
-          type="number"
-          className="rounded-md shadow-md p-4"
-          value={numA}
-          onChange={(e) => setNumA(parseFloat(e.target.value))}
-        />
-        <input
-          type="number"
-          className="rounded-md shadow-md p-4"
-          value={numB}
-          onChange={(e) => setNumB(parseFloat(e.target.value))}
-        />
+        <Input value={firstNumber} onChange={handleFirstNumber}/>
+        <Input value={secondNumber} onChange={handleSecondNumber}/>
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f1)}
-        >
-          +
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f2)}
-        >
-          -
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f3)}
-        >
-          *
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f4)}
-        >
-          /
-        </button>
+        {Object.values(operationTypes).map(type => (
+            <Button onClick={handleCalculate(type)}>+</Button>
+        ))}
       </div>
-      <div>Result: {numC}</div>
+      <div>Result: {result}</div>
+      {error && <p>{error}</p>}
     </div>
   );
 };
