@@ -1,12 +1,12 @@
 // CONSTANTS
-const VALIDATE_SUCCESS_MESSAGE = 'Valid';
-const VALIDATE_ERROR_MESSAGE = 'Invalid';
-const MIN_VAL = 0;
-const MAX_VAL = 100;
+const validateSuccessMessage = 'Valid';
+const validateErrorMessage = 'Invalid';
+const minVal = 0;
+const maxVal = 100;
 
 // VALIDATE METHODS
 const isNumber = (num) => !!Number(num);
-const isBetween = (num) => num > MIN_VAL && num < MAX_VAL
+const isBetween = (num) => num > minVal && num < maxVal
 const isEven = (num) => num % 2 === 0;
 const validate = (num) => isNumber(num) && isBetween(num) && isEven(num);
 
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const inputValue = input.value;
 
     if (validate(inputValue)) {
-      result.innerHTML = VALIDATE_SUCCESS_MESSAGE;
+      result.innerHTML = validateSuccessMessage;
       return;
     }
 
-    result.innerHTML = VALIDATE_ERROR_MESSAGE;
+    result.innerHTML = validateErrorMessage;
   });
 
   clearButton.addEventListener('click', () => {
