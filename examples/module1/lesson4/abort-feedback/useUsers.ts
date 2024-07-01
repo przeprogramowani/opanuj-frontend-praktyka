@@ -15,11 +15,9 @@ export const  useUsers = () => {
 
   const getUsers = () => 
     axios
-      .get<User[]>(API_URL, { timeout: 5000 })
+      .get<{users: User[]}>(API_URL, { timeout: 5000 })
       .then((response) => {
         const { users } = response.data;
-
-        console.log(users);
         
         setUsers(users);
       })
