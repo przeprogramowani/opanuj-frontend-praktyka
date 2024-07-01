@@ -3,7 +3,7 @@ import { User } from './types/User';
 import { Header } from './components/Header';
 import { UserList } from './components/UserList';
 
-const API_URL = '/api/data/usesdrs?timeout=10000';
+const API_URL = '/api/data/users?timeout=10000';
 const TIMEOUT = 5000;
 const MESSAGE_TIMEOUT = 'Sorry, there seems to be connectivity issues...';
 
