@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
-import { f1, f2, f3, f4 } from './functions';
+import { sum, subtraction, divide, multiply, Result } from './functions';
+import Button from './components/Button';
+import {validateEmptyNumbers} from './utils/utils';
+import {ERROR_NULL_NUMBER} from './utils/errorName';
 
 const App = () => {
   const [numA, setNumA] = useState<number>(0);
   const [numB, setNumB] = useState<number>(0);
-  const [numC, setNumC] = useState<number | string>(0);
+  const [result, setResult] = useState<number>(0);
+  const [error, setError] = useState<string>('');
 
-  const doWork = (func: (a: number, b: number) => number) => {
-    setNumC(func(numA, numB));
+  const mathOperation = (func: (a: number, b: number) => Result ) => {
+
+    if (!validateEmptyNumbers(numA, numB)) {
+        setError(ERROR_NULL_NUMBER);
+        return;
+    }
+    const result = func(numA, numB);
+    if(!result.error) {
+      setError('');
+      setResult(result.result);
+    } else {
+      setError(result.error);
+    }
+   
+    
   };
 
   return (
@@ -27,32 +44,13 @@ const App = () => {
         />
       </div>
       <div className="grid grid-cols-4 gap-x-4 my-4">
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f1)}
-        >
-          +
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f2)}
-        >
-          -
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f3)}
-        >
-          *
-        </button>
-        <button
-          className="bg-blue-200 px-2 py-4 text-lg hover:bg-blue-500 hover:text-white rounded-md"
-          onClick={() => doWork(f4)}
-        >
-          /
-        </button>
+        <Button onClick={() => mathOperation(sum)}>+</Button>
+        <Button onClick={() => mathOperation(subtraction)}>-</Button>
+        <Button onClick={() => mathOperation(multiply)}>*</Button>
+        <Button onClick={() => mathOperation(divide)} >/</Button>
       </div>
-      <div>Result: {numC}</div>
+      <div>Result: {result}</div>
+      {error && <div>Error: {error}</div>}
     </div>
   );
 };
