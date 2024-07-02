@@ -39,6 +39,15 @@ export function Home() {
             Otwórz
           </Link>
         </div>
+        <div className="bg-white p-4 rounded-md">
+          <h2 className="font-bold text-xl mb-2">App v3</h2>
+          <ul className="list-disc pl-4">
+            <li>Praktyka</li>
+          </ul>
+          <Link className="text-blue-500" to="/v4">
+            Otwórz
+          </Link>
+        </div>
       </div>
     </>
   );
