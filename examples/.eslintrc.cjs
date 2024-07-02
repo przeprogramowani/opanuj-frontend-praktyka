@@ -6,6 +6,7 @@ module.exports = {
     project: true,
     tsconfigRootDir: __dirname,
   },
+  ignorePatterns: ['scripts/*'],
   overrides: [
     // Konfiguracja dla lekcji 2x3: Testy e2e
     {
