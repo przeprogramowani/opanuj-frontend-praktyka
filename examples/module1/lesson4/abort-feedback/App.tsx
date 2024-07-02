@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface User {
   id: number;
@@ -9,11 +9,12 @@ const API_URL = '/api/data/users?timeout=10000';
 
 const getNotificationAboutTimeout = (
   message: string,
-  timeout: number,
+  timeoutInMs: number,
 ): Promise<string> => {
-  return new Promise<string>((resolve) =>
-    setTimeout(() => resolve(message), timeout),
-  );
+  let timeout: NodeJS.Timeout;
+  return new Promise<string>((resolve) => {
+    timeout = setTimeout(() => resolve(message), timeoutInMs);
+  }).finally(() => clearTimeout(timeout));
 };
 
 const CONNECTIVITY_PROBLEM_MESSAGE = 'CONNECTIVITY_PROBLEM_MESSAGE';
