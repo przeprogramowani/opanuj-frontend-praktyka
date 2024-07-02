@@ -40,7 +40,7 @@ Wszystkie zasoby znajdziesz w folderze `examples/scripts/data`, a w aplikacji po
 ```bash
 GET http://localhost:3000/api/data/articles
 GET http://localhost:3000/api/data/authors
-GET http://localhost:3000/api/data/boostrap
+GET http://localhost:3000/api/data/bootstrap
 GET http://localhost:3000/api/data/comments
 ...
 ```
