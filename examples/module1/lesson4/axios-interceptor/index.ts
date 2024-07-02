@@ -1,23 +1,19 @@
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
+import { ExtendedAxiosRequestConfig } from './types/ExtendedAxiosRequestConfig';
+import { requestLogger } from './utils/requestLogger';
 
-const requestLogger = (config: InternalAxiosRequestConfig, success: boolean) => {
-  const duration = new Date().getTime() - new Date(config.headers['Request-Start-Time']).getTime();
-  const status = success ? 'succeeded' : 'failed';
-  console.log(`Request to ${config.url} ${status} after ${duration} ms`);
-};
-
-axios.interceptors.request.use((config) => {
-  config.headers['Request-Start-Time'] = new Date().toISOString();
+axios.interceptors.request.use((config: ExtendedAxiosRequestConfig) => {
+  config.metadata = { startTime: new Date() };
   return config;
 });
 
 axios.interceptors.response.use(
   (response) => {
-    requestLogger(response.config, true);
+    requestLogger(response);
     return response;
   },
   (error) => {
-    requestLogger(error.config, false);
+    requestLogger(error);
     return Promise.reject(error);
   }
 );
