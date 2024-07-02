@@ -7,15 +7,45 @@ interface User {
 
 const API_URL = '/api/data/users?timeout=10000';
 
+const getNotificationAboutTimeout = (
+  message: string,
+  timeout: number,
+): Promise<string> => {
+  return new Promise<string>((resolve) =>
+    setTimeout(() => resolve(message), timeout),
+  );
+};
+
+const CONNECTIVITY_PROBLEM_MESSAGE = 'CONNECTIVITY_PROBLEM_MESSAGE';
+
 const App = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [connectivityProblem, setConnectivityProblem] = useState(false);
+
+  let abortController: AbortController | undefined;
+
+  const loadUsers = async () => {
+    if (abortController) {
+      abortController.abort();
+    }
+    abortController = new AbortController();
+
+    const connectivityProblem: string | void = await Promise.race([
+      fetch(API_URL, { signal: abortController.signal })
+        .then((res) => res.json())
+        .then(({ users }) => {
+          setUsers(users);
+          setConnectivityProblem(false);
+        }),
+      getNotificationAboutTimeout(CONNECTIVITY_PROBLEM_MESSAGE, 5000),
+    ]);
+    if (connectivityProblem === CONNECTIVITY_PROBLEM_MESSAGE) {
+      setConnectivityProblem(true);
+    }
+  };
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then(({ users }) => {
-        setUsers(users);
-      });
+    loadUsers();
   }, []);
 
   return (
@@ -23,10 +53,15 @@ const App = () => {
       <div className="flex flex-row items-center justify-between py-4">
         <h1 className="text-2xl font-bold">Users</h1>
         <div className="flex flex-row items-center">
-          <p className="mr-2">
-            Sorry, there seems to be connectivity issues...
-          </p>
-          <button className="text-blue-400 bg-blue-200 hover:text-blue-200 hover:bg-blue-400 rounded-md p-4">
+          {connectivityProblem && (
+            <p className="mr-2">
+              Sorry, there seems to be connectivity issues...
+            </p>
+          )}
+          <button
+            className="text-white bg-blue-800 hover:text-blue-200 hover:bg-blue-400 rounded-md p-4"
+            onClick={loadUsers}
+          >
             Try again
           </button>
         </div>
