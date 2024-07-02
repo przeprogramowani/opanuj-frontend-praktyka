@@ -63,6 +63,10 @@ cd react-app # lub vue-app / angular-app
 npm install
 ```
 
+### Zasoby lokalne dla twoich projektów w folderze `practice`
+
+Aby twoje projekty mogły korzystać z tych samych zasobów, które są dostępne w przykładach, możesz równolegle uruchomić dowolne ćwiczenie z folderu `examples` - pliki JSON znajdziesz pod `localhost:3000/api/data/{resource}`.
+
 ## Przykładowe rozwiązania ćwiczeń
 
 Przykładowe rozwiązania ćwiczeń umieszczamy w folderach `examples/{module}/{lesson}/_solutions`.
