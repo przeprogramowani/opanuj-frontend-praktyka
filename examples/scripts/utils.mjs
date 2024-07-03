@@ -12,7 +12,12 @@ export async function findAvailablePort(startPort, maxPort = 4200) {
   for (let port = startPort; port <= maxPort; port++) {
     try {
       await testPort(port);
-      console.log('🤠 Found available port:', port);
+      console.log(`
+=================
+|| ✅ SUCCESS  ||
+=================
+Found available port: ${port}
+`);
       return port; // If we reach here, the port is available
     } catch (err) {
       notStartPort = true;
