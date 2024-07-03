@@ -1,12 +1,13 @@
-import { createServer as createViteServer } from 'vite';
-import express from 'express';
-import { createServer as createHttpServer } from 'http';
-import { execSync } from 'child_process';
-import { glob } from 'glob';
-import react from '@vitejs/plugin-react';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import react from '@vitejs/plugin-react';
+import { execSync } from 'child_process';
+import express from 'express';
+import { glob } from 'glob';
+import { createServer as createHttpServer } from 'http';
 import preprocess from 'svelte-preprocess';
+import { createServer as createViteServer } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import { findAvailablePort } from './utils.mjs';
 import { configureExpressApp } from './vite-api.mjs';
 
 const API_ROOT = 'http://localhost:3000/api/data';
@@ -65,7 +66,9 @@ async function startServer() {
   app.use(vite.middlewares);
 
   // Start the server
-  const port = 3000;
+  const desiredPort = 3000;
+  const port = await findAvailablePort(desiredPort);
+
   httpServer.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });
