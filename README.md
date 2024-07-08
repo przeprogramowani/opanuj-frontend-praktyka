@@ -40,7 +40,7 @@ Wszystkie zasoby znajdziesz w folderze `examples/scripts/data`, a w aplikacji po
 ```bash
 GET http://localhost:3000/api/data/articles
 GET http://localhost:3000/api/data/authors
-GET http://localhost:3000/api/data/boostrap
+GET http://localhost:3000/api/data/bootstrap
 GET http://localhost:3000/api/data/comments
 ...
 ```
@@ -62,6 +62,10 @@ cd practice
 cd react-app # lub vue-app / angular-app
 npm install
 ```
+
+### Zasoby lokalne dla twoich projektów w folderze `practice`
+
+Aby twoje projekty mogły korzystać z tych samych zasobów, które są dostępne w przykładach, możesz równolegle uruchomić dowolne ćwiczenie z folderu `examples` - pliki JSON znajdziesz pod `localhost:3000/api/data/{resource}`.
 
 ## Przykładowe rozwiązania ćwiczeń
 
