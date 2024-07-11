@@ -2,3 +2,13 @@ node_modules
 .DS_Store
 
 .npmrc
+/.idea/.gitignore
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/jsLibraryMappings.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/opanuj-frontend-praktyka.iml
+/.idea/codeStyles/Project.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/dictionaries/user.xml
+/.idea/vcs.xml
