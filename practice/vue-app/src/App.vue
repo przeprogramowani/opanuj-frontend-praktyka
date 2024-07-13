@@ -2,21 +2,16 @@
 </script>
 
 <template>
-  <nav class="navbar">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+  <nav class="flex w-auto gap-x-1">
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/solver">Solver</RouterLink>
   </nav>
-  <main class="app-content">
+  <main class="mt-8 w-full">
     <RouterView />
   </main>
 </template>
 
 <style scoped>
-.navbar {
-  display: flex;
-  column-gap: 1rem;
-}
-.app-content {
-  width: 75vw;
-}
 </style>
