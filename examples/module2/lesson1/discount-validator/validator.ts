@@ -1,3 +1,10 @@
+import {
+  AGE_MUST_BE_NUMBER,
+  FIRST_NAME_TOO_SHORT,
+  LAST_NAME_TOO_SHORT,
+  AGE_MUST_BE_POSITIVE
+} from './errorMessages.consts.ts';
+
 export function formValidator(
   firstName: string,
   lastName: string,
@@ -5,16 +12,24 @@ export function formValidator(
 ) {
   const errors: string[] = [];
 
-  if (!firstName) {
-    errors.push('First name is required');
+  // wiek musi być typu number
+  if (typeof age !== 'number' || isNaN(age)) {
+    throw new Error(AGE_MUST_BE_NUMBER);
   }
 
-  if (!lastName) {
-    errors.push('Last name is required');
+  // imię musi mieć co najmniej 1 znak
+  if (firstName.trim().length < 1) {
+    errors.push(FIRST_NAME_TOO_SHORT);
   }
 
+  // nazwisko musi mieć co najmniej 1 znak
+  if (lastName.trim().length < 1) {
+    errors.push(LAST_NAME_TOO_SHORT);
+  }
+
+  // wiek nie może być mniejszy od 0
   if (age < 0) {
-    errors.push('Age must be a positive number');
+    errors.push(AGE_MUST_BE_POSITIVE);
   }
 
   return errors;
