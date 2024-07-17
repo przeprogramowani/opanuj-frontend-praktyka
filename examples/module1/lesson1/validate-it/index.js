@@ -1,34 +1,32 @@
-function validator() {
+import {isUpperThan, isLowerThan} from './utils/utils.js';
+import { STATUS } from './constants/statusConstant.js';
+
+function validate(input, array) {
+   const checkAllValidate = array.every((fn) => fn(Number(input)));
+
+   if(checkAllValidate) {
+    return STATUS.VALID;
+   }
+
+   return STATUS.INVALID;
+}
+
+const validators = () => [isUpperThan(0), isLowerThan(100)];
+
+function main() {
   const input = document.getElementById('input');
-  const button = document.getElementById('button');
-  const button2 = document.getElementById('button2');
+  const validateButton = document.getElementById('validateButton');
+  const clearButton = document.getElementById('clearButton');
   const result = document.getElementById('result');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
+  validateButton.addEventListener('click', () => {
+      result.innerHTML = validate(input.value, validators);
   });
 
-  button2.addEventListener('click', () => {
+  clearButton.addEventListener('click', () => {
     input.value = '';
     result.innerHTML = '';
   });
 }
 
-validator();
+main();
