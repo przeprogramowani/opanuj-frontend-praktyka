@@ -1,0 +1,8 @@
+.front-page {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    border: 1px solid rgb(116, 112, 112);
+    border-radius: 12px;
+}
