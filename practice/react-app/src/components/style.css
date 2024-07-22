@@ -1,0 +1,36 @@
+.article-list {
+    max-width: 300px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+   
+
+    .article-list__article {
+        background-color: rgb(211, 149, 149);
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid blue
+    }
+}
+
+.container {
+    display: flex;
+    gap: 5px;
+    max-width: 500px;
+    flex-wrap: wrap;
+
+    .container__author {
+        background-color: rgb(149, 219, 240);
+        padding: 8px;
+        width: 100px;
+        border-radius: 12px;
+        border: 1px solid black;
+    }
+
+    .container__articles {
+        padding: 8px;
+        background-color: aliceblue;
+        border: 1px solid black;
+        border-radius: 12px;
+    }
+}
