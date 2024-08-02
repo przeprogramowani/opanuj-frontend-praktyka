@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Signal, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import {
   BehaviorSubject,
   Observable,
+  catchError,
   combineLatest,
+  from,
   map,
   of,
   switchMap,
@@ -19,23 +21,29 @@ export class CharacterSearchService {
     Character[]
   >();
   characters: Signal<Character[]> = signal([]);
-  private nameSubject = new BehaviorSubject<string>('');
-  private genderSubject = new BehaviorSubject<string>('');
-  private sortOptionSubject = new BehaviorSubject<string>('');
+  private nameSignal = signal<string>('');
+  private genderSignal = signal<string>('');
+  private sortOptionSignal = signal<string>('');
   private apiBaseUrl = 'https://rickandmortyapi.com/api/character/';
 
   constructor(private http: HttpClient) {
-    this.charactersSource$ = combineLatest([
-      this.nameSubject,
-      this.genderSubject,
-    ]).pipe(
-      switchMap(([name, gender]) => {
+    const name$ = toObservable(this.nameSignal);
+    const gender$ = toObservable(this.genderSignal);
+    const sortOption$ = toObservable(this.sortOptionSignal);
+    this.charactersSource$ = combineLatest([name$, gender$]).pipe(
+      switchMap(([name, gender]: [string, string]) => {
         if (name !== '' || gender !== '') {
           return this.http
             .get<{ results: Character[] }>(
               `${this.apiBaseUrl}?name=${name}&gender=${gender}`
             )
-            .pipe(map((response) => response.results || []));
+            .pipe(
+              map((response) => response.results || []),
+              catchError((error) => {
+                console.log(error);
+                return of([]);
+              })
+            );
         } else {
           return of([]);
         }
@@ -43,7 +51,7 @@ export class CharacterSearchService {
     );
 
     this.characters = toSignal(
-      combineLatest([this.charactersSource$, this.sortOptionSubject]).pipe(
+      combineLatest([this.charactersSource$, sortOption$]).pipe(
         map(([characters, sortOption]) =>
           this.sortCharacters(characters, sortOption)
         )
@@ -53,27 +61,27 @@ export class CharacterSearchService {
   }
 
   setName(name: string) {
-    this.nameSubject.next(name);
+    this.nameSignal.set(name);
   }
 
   setGender(gender: string) {
-    this.genderSubject.next(gender);
+    this.genderSignal.set(gender);
   }
 
   setSortOption(sortOption: string) {
-    this.sortOptionSubject.next(sortOption);
+    this.sortOptionSignal.set(sortOption);
   }
 
   get name(): string {
-    return this.nameSubject.value;
+    return this.nameSignal();
   }
 
   get gender(): string {
-    return this.genderSubject.value;
+    return this.genderSignal();
   }
 
   get sortOption(): string {
-    return this.sortOptionSubject.value;
+    return this.sortOptionSignal();
   }
 
   sortCharacters(characters: Character[], sortOption: string): Character[] {
