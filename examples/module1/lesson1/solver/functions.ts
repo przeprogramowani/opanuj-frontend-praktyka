@@ -1,13 +1,15 @@
-export function f1(a, b) {
-  return a + b;
+import {Result} from "./types/result.ts";
+
+export function addition(a: number, b: number): Result {
+  return {result: a + b};
 }
-export function f2(a, b) {
-  return a - b;
+export function subtraction(a: number, b: number): Result {
+  return {result: a - b};
 }
-export function f3(a, b) {
-  return a * b;
+export function multiplication(a: number, b: number): Result {
+  return {result: a * b};
 }
 
-export function f4(a, b) {
-  return a / b;
+export function division(a: number, b: number): Result {
+  return {result: a / b, error: b === 0 ? "Cannot divide by 0" : undefined  };
 }
