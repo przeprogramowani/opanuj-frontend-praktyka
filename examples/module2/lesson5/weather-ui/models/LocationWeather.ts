@@ -11,8 +11,14 @@ export interface DailyWeather {
   averageTemperature: number;
 }
 
+export interface DailyWeatherAPI {
+  date: string;
+  type: WeatherType;
+  average_temperature: number;
+}
+
 export interface LocationWeather {
   city: string;
   country: string;
-  weatherDetails: DailyWeather[];
+  weatherDetails: DailyWeather[] | { Weather: DailyWeatherAPI[] };
 }

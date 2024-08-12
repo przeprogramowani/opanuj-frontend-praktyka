@@ -171,3 +171,62 @@ describe('(GPT-4) GuessPassword', () => {
     expect(screen.queryAllByText(/niepoprawne hasło/i).length).toBe(1);
   });
 });
+
+vi.stubGlobal('alert', vi.fn());
+
+describe('GuessPassword Edge Cases', () => {
+  beforeEach(() => {
+    render(<GuessPassword />);
+  });
+
+  it('displays error message for a password with extra spaces in between words', async () => {
+    const passwordInput = screen.getByPlaceholderText(/wpisz hasło.../i);
+    const submitButton = screen.getByRole('button', { name: /zgadnij/i });
+
+    await userEvent.type(passwordInput, 'pickle  rick');
+    await userEvent.click(submitButton);
+
+    expect(screen.getByText(/niepoprawne hasło/i)).toBeInTheDocument();
+  });
+
+  it('retains the error message if the incorrect password is typed again after an initial incorrect attempt', async () => {
+    const passwordInput = screen.getByPlaceholderText(/wpisz hasło.../i);
+    const submitButton = screen.getByRole('button', { name: /zgadnij/i });
+
+    await userEvent.type(passwordInput, 'wrong password');
+    await userEvent.click(submitButton);
+
+    expect(screen.getByText(/niepoprawne hasło/i)).toBeInTheDocument();
+
+    await userEvent.clear(passwordInput);
+    await userEvent.type(passwordInput, 'wrong password');
+    await userEvent.click(submitButton);
+
+    expect(screen.getByText(/niepoprawne hasło/i)).toBeInTheDocument();
+  });
+
+  it('handles quick successive inputs correctly by only processing the final submission', async () => {
+    const passwordInput = screen.getByPlaceholderText(/wpisz hasło.../i);
+    const submitButton = screen.getByRole('button', { name: /zgadnij/i });
+
+    await userEvent.type(passwordInput, 'wrong password');
+    await userEvent.click(submitButton);
+
+    await userEvent.clear(passwordInput);
+    await userEvent.type(passwordInput, 'pickle rick');
+    await userEvent.click(submitButton);
+
+    expect(screen.queryByText(/niepoprawne hasło/i)).toBeNull();
+    expect(window.alert).toHaveBeenCalledWith('Brawo! Zgadłeś hasło.');
+  });
+
+  it('does not allow spaces-only input as a valid password', async () => {
+    const passwordInput = screen.getByPlaceholderText(/wpisz hasło.../i);
+    const submitButton = screen.getByRole('button', { name: /zgadnij/i });
+
+    await userEvent.type(passwordInput, '    ');
+    await userEvent.click(submitButton);
+
+    expect(screen.getByText(/niepoprawne hasło/i)).toBeInTheDocument();
+  });
+});

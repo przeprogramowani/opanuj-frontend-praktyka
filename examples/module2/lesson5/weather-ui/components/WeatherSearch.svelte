@@ -9,6 +9,7 @@
     const locationQuery = (event.target as HTMLInputElement).value;
     try {
       const result = await fetchWeather(locationQuery);
+      console.log(result)
       if (result) {
         weather = result;
       }

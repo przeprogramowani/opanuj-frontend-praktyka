@@ -10,5 +10,5 @@
     <WeatherIcon type={dailyWeather.type} />
     <span>{dailyWeather.date}</span>
   </h2>
-  <p class="text-xl font-bold mt-4">{dailyWeather.averageTemperature} *(C)</p>
+  <p class="text-xl font-bold mt-4">{dailyWeather.averageTemperature} °C</p>
 </div>

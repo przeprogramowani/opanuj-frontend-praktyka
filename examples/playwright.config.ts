@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config();
 
-const BASE_URL = 'https://en.wikipedia.org';
-const PROJECT_DIR = './module2/lesson2/base';
+const BASE_URL = 'http://localhost:3000/';
+const PROJECT_DIR = './module2/lesson6-ai/tests';
 const SETUP_PATH_REGEX = '**/*.setup.ts';
 const LOGGED_IN_PATH_REGEX = '**/logged-in/*.spec.ts';
 

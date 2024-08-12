@@ -1,8 +1,22 @@
 <script lang="ts">
-  import { LocationWeather } from '../models/LocationWeather';
-  import DailyWeather from './DailyWeather.svelte';
+  import { LocationWeather, DailyWeather, WeatherType } from '../models/LocationWeather';
+  import DailyWeatherComponent from './DailyWeather.svelte';
 
   export let weather: LocationWeather;
+
+  let details: DailyWeather[] = [];
+
+  if (weather.weatherDetails.hasOwnProperty('Weather')) {
+    details = (weather.weatherDetails as any).Weather.map((detail: any) => {
+      return {
+        averageTemperature: detail.average_temperature,
+        date: detail.date,
+        type: detail.type as WeatherType
+      };
+    });
+  } else {
+    details = weather.weatherDetails as DailyWeather[];
+  }
 </script>
 
 <div>
@@ -10,8 +24,8 @@
     {weather.city}, {weather.country}
   </h2>
   <ul class="space-y-4">
-    {#each weather.weatherDetails as details}
-      <DailyWeather dailyWeather={details} />
+    {#each details as detail}
+      <DailyWeatherComponent dailyWeather={detail} />
     {/each}
   </ul>
 </div>
