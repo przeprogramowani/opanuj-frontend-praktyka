@@ -1,33 +1,80 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { BookCase } from './components/BookCase/BookCase'
+
+export interface Book {
+  title: string,
+  description: string
+}
+
+export const bookMocks = [
+  {
+    title: "Książka 1",
+    description: "Opis książki 1"
+  },
+  {
+    title: "Książka 2",
+    description: "Opis książki 2"
+  },
+  {
+    title: "Książka 3",
+    description: "Opis książki 3"
+  },
+  {
+    title: "Książka 4",
+    description: "Opis książki 4"
+  },
+  {
+    title: "Książka 5",
+    description: "Opis książki 5"
+  },
+  {
+    title: "Książka 6",
+    description: "Opis książki 6"
+  },
+  {
+    title: "Książka 7",
+    description: "Opis książki 7"
+  },
+  {
+    title: "Książka 8",
+    description: "Opis książki 8"
+  },
+  {
+    title: "Książka 9",
+    description: "Opis książki 9"
+  },
+
+]
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [books, setBooks] = useState<Book[]>(bookMocks)
 
+  const addNewBook = () => {
+    const newBook = {
+      title: `Książka`,
+      description: `Opis książki`
+    }
+    setBooks([...books, newBook])
+  }
+
+  const removeBook = (book: Book) => {
+    setBooks(books.filter(b => b.title !== book.title))
+  }
+  
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <div className='book-case-list__header'>
+      <h1>Lista książek </h1>
+      <button onClick={addNewBook}>+</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className='book-case-list'>
+       {books.map((book, index) => (
+         <BookCase key={`${index}-book.title`} data={book} removeBook={removeBook} />
+       ))}
+       </div>
+    </div>
     </>
   )
 }

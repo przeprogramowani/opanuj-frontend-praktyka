@@ -25,4 +25,17 @@ describe('User renderer', () => {
     renderItems(container, users);
     expect(Array.from(container.querySelectorAll('li'))).toHaveLength(2);
   });
+
+  test('should render correct name for each user', () => {
+    localStorage.setItem('userRole', 'admin');
+
+    const container = document.createElement('div');
+    renderItems(container, users);
+
+    const expectedItems = users.map(user => `${user.role === 'admin' && '(Admin)'} Name: ${user.name}, Age: ${user.age}`);
+
+    const actualItems = Array.from(container.querySelectorAll('li')).map(li => li.textContent);
+
+    expect(actualItems).toEqual(expectedItems);
+  });
 });
