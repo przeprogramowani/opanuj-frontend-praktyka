@@ -55,7 +55,7 @@
     "@vitejs/plugin-react": "4.2.1",
     "eslint": "8.57.0",
     "eslint-plugin-playwright": "1.5.1",
-    "glob": "10.3.10",
+    "glob": "^10.3.10",
     "jsdom": "24.0.0",
     "msw": "2.2.2",
     "playwright-msw": "3.0.1",
