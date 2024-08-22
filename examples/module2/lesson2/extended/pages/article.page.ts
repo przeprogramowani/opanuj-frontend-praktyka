@@ -8,6 +8,7 @@ export class ArticlePage {
   private readonly watchStarStickyHeader = '#ca-watchstar-sticky-header';
   private readonly stickybarWatchButton: Locator;
   private readonly stickybarUnwatchButton: Locator;
+  private readonly titleOfPage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -26,6 +27,9 @@ export class ArticlePage {
     this.stickybarUnwatchButton = page
       .locator(this.stickyHeader)
       .getByTitle('Remove this page from your watchlist');
+    this.titleOfPage = page
+      .getByRole('heading', { name: 'Playwright' })
+      .locator('span');
   }
 
   clickTopbarWatchButton() {
@@ -70,5 +74,8 @@ export class ArticlePage {
 
   getTitle() {
     return this.page.getByRole('main').getByRole('heading').first();
+  }
+  getTitleOfPage() {
+    return this.titleOfPage;
   }
 }

@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: Rick and Morty API
+  description: To API pozwala uzyskiwać informacje o bohaterach serialu Rick and Morty.
+  version: 1.0.0
+servers:
+  - url: 'https://rickandmortyapi.com/api'
+paths:
+  /character:
+    get:
+      summary: Pobierz postacie serialu Rick And Morty
+      operationId: getCharacter
+      responses:
+        '200':
+          description: Odpowiedź zakończona sukcesem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+        '404':
+          description: Odpowiedź zakończona porażką
+components:
+  schemas:
+    Character:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unikalny identyfikator postaci
+        name:
+          type: string
+          description: Nazwa postaci
+        status:
+          type: string
+          description: Status postaci (np. Alive, Dead)
+        species:
+          type: string
+          description: Gatunek postaci
+        type:
+          type: string
+          description: Dodatkowa klasyfikacja postaci (np. Cyborg)
+        gender:
+          type: string
+          description: Płeć postaci
+        origin:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Nazwa miejsca pochodzenia
+            url:
+              type: string
+              description: URL do miejsca pochodzenia
+          description: Pochodzenie postaci
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Nazwa aktualnej lokalizacji postaci
+            url:
+              type: string
+              description: URL do aktualnej lokalizacji postaci
+          description: Aktualna lokalizacja postaci
+        image:
+          type: string
+          description: URL do obrazu postaci
+        episode:
+          type: array
+          items:
+            type: string
+            description: URL do odcinka, w którym wystąpiła postać
+          description: Lista odcinków, w których wystąpiła postać
+        url:
+          type: string
+          description: URL do szczegółowych informacji o postaci
+        created:
+          type: string
+          format: date-time
+          description: Data utworzenia postaci w bazie danych
+    CharactersResponse:
+      type: object
+      properties:
+        info:
+          type: object
+          properties:
+            count:
+              type: integer
+              description: Całkowita liczba postaci
+            pages:
+              type: integer
+              description: Liczba stron z wynikami
+            next:
+              type: string
+              nullable: true
+              description: URL do następnej strony z wynikami (jeśli istnieje)
+            prev:
+              type: string
+              nullable: true
+              description: URL do poprzedniej strony z wynikami (jeśli istnieje)
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Character'
+          description: Lista postaci
