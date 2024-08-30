@@ -10,24 +10,24 @@ test.beforeEach(async ({ page }) => {
 
 test.afterEach(async ({ page }) => {
   const articlePage = new ArticlePage(page);
-  await articlePage.clickTopbarUnwatchButton();
+  await articlePage.clickTopBarUnwatchButton();
 
-  await expect(articlePage.getTopbarWatchButton()).toBeVisible();
+  await expect(articlePage.getTopBarWatchButton()).toBeVisible();
 });
 
 test.describe('add featured article to watchlist', () => {
-  test('via topbar', async ({ page }) => {
+  test('via top bar', async ({ page }) => {
     const articlePage = new ArticlePage(page);
-    await articlePage.clickTopbarWatchButton();
+    await articlePage.clickTopBarWatchButton();
 
-    await expect(articlePage.getTopbarUnwatchButton()).toBeVisible();
+    await expect(articlePage.getTopBarUnwatchButton()).toBeVisible();
   });
 
-  test('via stickybar', async ({ page }) => {
+  test('via sticky bar', async ({ page }) => {
     const articlePage = new ArticlePage(page);
     await articlePage.goToFirstSection();
-    await articlePage.clickStickybarWatchButton();
+    await articlePage.clickStickyBarWatchButton();
 
-    await expect(articlePage.getStickybarUnwatchButton()).toBeVisible();
+    await expect(articlePage.getStickyBarUnwatchButton()).toBeVisible();
   });
 });

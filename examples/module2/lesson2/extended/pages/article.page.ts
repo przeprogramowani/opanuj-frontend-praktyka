@@ -2,46 +2,45 @@ import { Locator, Page } from '@playwright/test';
 
 export class ArticlePage {
   readonly page: Page;
-  private readonly topbarWatchButton: Locator;
-  private readonly topbarUnwatchButton: Locator;
+  private readonly topBarWatchButton: Locator;
+  private readonly topBarUnwatchButton: Locator;
   private readonly stickyHeader = '#vector-sticky-header';
-  private readonly watchStarStickyHeader = '#ca-watchstar-sticky-header';
-  private readonly stickybarWatchButton: Locator;
-  private readonly stickybarUnwatchButton: Locator;
+  private readonly stickyBarWatchButton: Locator;
+  private readonly stickyBarUnwatchButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.topbarWatchButton = page
+    this.topBarWatchButton = page
       .getByRole('navigation', { name: 'Views' })
       .getByRole('link', { name: 'Watch', exact: true });
 
-    this.topbarUnwatchButton = page
+    this.topBarUnwatchButton = page
       .getByRole('navigation', { name: 'Views' })
       .getByRole('link', { name: 'Unwatch', exact: true });
 
-    this.stickybarWatchButton = page
+    this.stickyBarWatchButton = page
       .locator(this.stickyHeader)
       .getByTitle('Add this page to your watchlist');
 
-    this.stickybarUnwatchButton = page
+    this.stickyBarUnwatchButton = page
       .locator(this.stickyHeader)
       .getByTitle('Remove this page from your watchlist');
   }
 
-  clickTopbarWatchButton() {
-    return this.topbarWatchButton.click();
+  clickTopBarWatchButton() {
+    return this.topBarWatchButton.click();
   }
 
-  clickTopbarUnwatchButton() {
-    return this.topbarUnwatchButton.click();
+  clickTopBarUnwatchButton() {
+    return this.topBarUnwatchButton.click();
   }
 
-  clickStickybarWatchButton() {
-    return this.stickybarWatchButton.click();
+  clickStickyBarWatchButton() {
+    return this.stickyBarWatchButton.click();
   }
 
-  clickStickybarUnwatchButton() {
-    return this.stickybarUnwatchButton.click();
+  clickStickyBarUnwatchButton() {
+    return this.stickyBarUnwatchButton.click();
   }
 
   goToFirstSection() {
@@ -52,20 +51,20 @@ export class ArticlePage {
       .click();
   }
 
-  getTopbarWatchButton() {
-    return this.topbarWatchButton;
+  getTopBarWatchButton() {
+    return this.topBarWatchButton;
   }
 
-  getTopbarUnwatchButton() {
-    return this.topbarUnwatchButton;
+  getTopBarUnwatchButton() {
+    return this.topBarUnwatchButton;
   }
 
-  getStickybarWatchButton() {
-    return this.stickybarWatchButton;
+  getStickyBarWatchButton() {
+    return this.stickyBarWatchButton;
   }
 
-  getStickybarUnwatchButton() {
-    return this.stickybarUnwatchButton;
+  getStickyBarUnwatchButton() {
+    return this.stickyBarUnwatchButton;
   }
 
   getTitle() {

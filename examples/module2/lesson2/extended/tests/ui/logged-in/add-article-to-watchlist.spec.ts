@@ -4,9 +4,9 @@ import { MainPage } from '../../../pages/main.page';
 
 test.afterEach(async ({ page }) => {
   const articlePage = new ArticlePage(page);
-  await articlePage.clickTopbarUnwatchButton();
+  await articlePage.clickTopBarUnwatchButton();
 
-  await expect(articlePage.getTopbarWatchButton()).toBeVisible();
+  await expect(articlePage.getTopBarWatchButton()).toBeVisible();
 });
 
 test('add featured article to watchlist', async ({ page }) => {
@@ -15,7 +15,7 @@ test('add featured article to watchlist', async ({ page }) => {
   await mainPage.goToFeaturedArticle();
 
   const articlePage = new ArticlePage(page);
-  await articlePage.clickTopbarWatchButton();
+  await articlePage.clickTopBarWatchButton();
 
-  await expect(articlePage.getTopbarUnwatchButton()).toBeVisible();
+  await expect(articlePage.getTopBarUnwatchButton()).toBeVisible();
 });
