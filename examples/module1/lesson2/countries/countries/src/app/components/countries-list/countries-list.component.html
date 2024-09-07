@@ -1,0 +1,6 @@
+<ol class="country-grid">
+  <li class="country-item" *ngFor="let country of countries">
+    <img class="flag" [src]="country.flags.png" alt="{{ country.name.common }} flag">
+    <h2>{{ country.name.common }}</h2>
+  </li>
+</ol>

@@ -1,0 +1,35 @@
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .country-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .country-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.country-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.flag {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+}

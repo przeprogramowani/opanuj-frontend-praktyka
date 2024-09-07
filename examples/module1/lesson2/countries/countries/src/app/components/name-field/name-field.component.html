@@ -1,0 +1,9 @@
+<label class="field">
+  Name
+  <input
+    class="input"
+    type="text"
+    [value]="nameService.name"
+    (input)="handleNameChange($event)"
+  />
+</label>

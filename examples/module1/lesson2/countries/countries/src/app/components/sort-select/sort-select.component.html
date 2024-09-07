@@ -1,0 +1,8 @@
+<label class="sort-container">
+  Sortuj po
+  <select [(ngModel)]="sortOption" (change)="onSortChange()">
+    <option value="">bez sortowania</option>
+    <option value="name">nazwie (alfabetycznie)</option>
+    <option value="population">liczbie populacji</option>
+  </select>
+</label>
