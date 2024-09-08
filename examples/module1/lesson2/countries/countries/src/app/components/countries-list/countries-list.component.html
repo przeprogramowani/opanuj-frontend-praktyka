@@ -1,0 +1,10 @@
+<div class="no-results" *ngIf="noResults">
+  <p>Nie znaleziono państwa o podanej nazwie.</p>
+</div>
+
+<ol class="country-grid" *ngIf="!noResults">
+  <li class="country-item" *ngFor="let country of countries">
+    <img class="flag" [src]="country.flags.png" alt="{{ country.name.common }} flag">
+    <h2>{{ country.name.common }}</h2>
+  </li>
+</ol>

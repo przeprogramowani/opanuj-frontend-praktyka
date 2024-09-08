@@ -1,0 +1,18 @@
+<div class="filter-container">
+  <label for="property-select">Wybierz filtr:</label>
+  <select id="property-select" [(ngModel)]="selectedProperty">
+    <option value="all">Wszystkie kraje</option>
+    <option value="name">Nazwa kraju</option>
+    <option value="currency">Waluta</option>
+    <option value="lang">Język</option>
+    <option value="capital">Stolica</option>
+  </select>
+
+  <input
+    type="text"
+    placeholder="wprowadź wartość"
+    [(ngModel)]="filterValue"
+    (input)="onFilterChange()"
+    [disabled]="selectedProperty === 'all'"
+  />
+</div>
