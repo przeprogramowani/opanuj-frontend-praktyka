@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, BehaviorSubject } from "rxjs";
-import { switchMap, map } from "rxjs";
+import { Observable, BehaviorSubject, of } from "rxjs";
+import { switchMap, map, catchError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -22,10 +22,18 @@ export class CountryService {
   constructor(private http: HttpClient) {}
 
   private fetchCountries(property: string, value: string): Observable<any> {
+    if (!value.trim() && property !== "all") {
+      return of([]);
+    }
+
     if (property === "all") {
-      return this.http.get(`${this.baseUrl}all`);
+      return this.http.get(`${this.baseUrl}all`).pipe(
+        catchError(() => of([]))
+      );
     } else {
-      return this.http.get(`${this.baseUrl}${property}/${value}`);
+      return this.http.get(`${this.baseUrl}${property}/${value}`).pipe(
+        catchError(() => of([]))
+      );
     }
   }
 

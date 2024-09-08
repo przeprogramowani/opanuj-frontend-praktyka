@@ -1,3 +1,10 @@
+.no-results {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
 .country-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

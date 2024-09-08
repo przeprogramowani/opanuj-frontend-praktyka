@@ -9,12 +9,14 @@ import { CountryService } from "../../services/country.service";
 })
 export class CountriesListComponent implements OnInit {
   countries: any[] = [];
+  noResults = false;
 
   constructor(private countryService: CountryService) {}
 
   ngOnInit(): void {
     this.countryService.countries$.subscribe((data) => {
       this.countries = data;
+      this.noResults = data.length === 0;
     });
   }
 }
