@@ -7,18 +7,18 @@ export class MainPage {
   readonly navigation: Locator;
   private readonly featuredArticleExcerpt: Locator;
   private readonly searchInput: Locator;
+  private readonly clickSearchButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.navigation = page.getByRole('navigation', {
       name: 'Personal tools',
     });
-
     this.featuredArticleExcerpt = page.locator('#mp-tfa');
-
     this.searchInput = page
       .getByRole('search')
       .getByRole('searchbox', { name: /Search Wikipedia/i });
+    this.clickSearchButton = page.getByRole('button', { name: 'Search' });
   }
 
   navigate() {
@@ -56,5 +56,11 @@ export class MainPage {
 
   getNavigation() {
     return this.navigation;
+  }
+  getTitle() {
+    return this.page.getByRole('main').getByRole('heading').first();
+  }
+  onClickSearchButton() {
+    return this.clickSearchButton;
   }
 }
