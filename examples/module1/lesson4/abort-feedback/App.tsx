@@ -12,7 +12,7 @@ const App = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchWithTimeout = (url, timeout) => {
+  const fetchWithTimeout = (url: string, timeout: number) => {
     return Promise.race([
       fetch(url),
       new Promise((_, reject) =>
@@ -25,7 +25,7 @@ const App = () => {
     setLoading(true);
     setError(''); // Resetujemy komunikat błędu przy nowym zapytaniu
     try {
-      const response = await fetchWithTimeout(API_URL, 10500);
+      const response = (await fetchWithTimeout(API_URL, 5000)) as Response;
       const data = await response.json();
       setUsers(data.users);
       setError('success');
