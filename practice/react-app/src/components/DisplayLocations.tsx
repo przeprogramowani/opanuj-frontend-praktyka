@@ -1,3 +1,5 @@
+// Rozwiązanie z M1L4 - implementacja API przy uzyciu GraphQL
+
 import { useQuery, gql } from '@apollo/client';
 
 const GET_LOCATIONS = gql`

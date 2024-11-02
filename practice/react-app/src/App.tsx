@@ -1,10 +1,15 @@
 import './App.css';
-import DisplayLocations from './components/DisplayLocations';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import TanStackQueryPractice from './components/TanStackQueryPractice/TanStackQueryPractice';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <div>
-      <DisplayLocations />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <TanStackQueryPractice />
+      </div>
+    </QueryClientProvider>
   );
 }
