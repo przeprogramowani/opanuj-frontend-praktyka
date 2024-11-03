@@ -1,8 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import { useArticlesQuery } from '../../hooks/useArticlesQuery';
+import { useMutationQuery } from '../../hooks/useMutationQuery';
 
 function Component1() {
   const { isPending, error, data } = useArticlesQuery();
+  const mutation = useMutationQuery();
 
   if (isPending) return <div>Loading...</div>;
 
@@ -17,6 +18,10 @@ function Component1() {
             <li key={item.id}>{item.author}</li>
           ))}
         </div>
+        <button onClick={() => console.log(mutation.mutate())}>Add</button>
+        {mutation.isPending && <div>ADDING...</div>}
+        {mutation.isError && <div>ERROR</div>}
+        {mutation.isSuccess && <div>SUCCES</div>}
       </div>
     </>
   );
