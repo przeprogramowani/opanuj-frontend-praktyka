@@ -5,7 +5,6 @@ export class ArticlePage {
   private readonly topbarWatchButton: Locator;
   private readonly topbarUnwatchButton: Locator;
   private readonly stickyHeader = '#vector-sticky-header';
-  private readonly watchStarStickyHeader = '#ca-watchstar-sticky-header';
   private readonly stickybarWatchButton: Locator;
   private readonly stickybarUnwatchButton: Locator;
 

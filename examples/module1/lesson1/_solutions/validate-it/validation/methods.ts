@@ -5,7 +5,7 @@ export type StringValidationMethod = (input: string) => boolean;
 
 const isEven: NumericValidationMethod = (input: number) => input % 2 === 0;
 
-const isGreatherThan = (boundary: number): NumericValidationMethod => {
+const isGreaterThan = (boundary: number): NumericValidationMethod => {
   return (input: number) => input > boundary;
 };
 
@@ -21,6 +21,6 @@ export const isValidInteger: StringValidationMethod = (
 
 export const NUMBER_VALIDATORS: NumericValidationMethod[] = [
   isEven,
-  isGreatherThan(0),
+  isGreaterThan(0),
   isLessThan(100),
 ];
