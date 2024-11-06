@@ -10,8 +10,30 @@ export const useMutationQuery = () => {
         console.log('POST request status:', res.statusText);
       });
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['articles']);
+    onMutate: async () => {
+      const newData = {
+        author: 'Peter Parker',
+        content: 'Excepteur sint occaecat cupidatat non proident.',
+        id: 11,
+        title: 'Article 11',
+      };
+
+      await queryClient.cancelQueries({ queryKey: ['articles'] });
+
+      const previousArticles = queryClient.getQueryData(['articles']);
+
+      //optimistic update
+      queryClient.setQueryData(['articles'], (old) => [...old, newData]);
+
+      return { previousArticles };
+    },
+
+    //if falls return to previus data
+    onError: (err, newTodo, context) => {
+      queryClient.setQueryData(['articles'], context.previousArticles);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
     },
   });
 };
