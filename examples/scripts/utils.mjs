@@ -40,3 +40,19 @@ async function testPort(port) {
     server.close();
   }
 }
+
+import { glob } from 'glob';
+
+export async function getProjectPath(projectName) {
+  const projectPaths = await glob(`./module*/*/${projectName}`);
+
+  if (projectPaths.length !== 1) {
+    throw new Error(
+      `Nie znaleziono projektu lub istnieje wiele projektów o tej samej nazwie: ${JSON.stringify(
+        projectPaths
+      )}`
+    );
+  }
+
+  return projectPaths[0];
+}
