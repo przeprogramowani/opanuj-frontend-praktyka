@@ -10,8 +10,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  workers: 1,
-  reporter: [['dot']],
+  workers: 4,
+  reporter: [['list'], ['html', { outputFolder: './playwright/html-report' }]],
   use: {
     baseURL: BASE_URL,
     trace: 'on',

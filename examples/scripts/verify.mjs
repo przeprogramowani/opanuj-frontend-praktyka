@@ -42,7 +42,9 @@ async function main() {
       );
 
       testProcess.stdout?.on('data', (data) => {
-        process.stdout.write(data);
+        if (!data.includes('trace (application/zip)')) {
+          process.stdout.write(data);
+        }
       });
 
       testProcess.stderr?.on('data', (data) => {
