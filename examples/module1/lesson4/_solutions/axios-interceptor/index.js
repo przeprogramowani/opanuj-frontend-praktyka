@@ -12,7 +12,7 @@ axios.interceptors.response.use(function (response) {
     config: { url, metadata },
   } = response;
   const elapsedTime = new Date() - metadata.startTime;
-  console.log(`Zapytanie pod ${url} trwało ${elapsedTime}ms`);
+  console.log(`Request to ${url} took ${elapsedTime}ms`);
   return response;
 });
 
