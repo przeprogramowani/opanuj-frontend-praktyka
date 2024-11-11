@@ -82,7 +82,7 @@ export async function startServer(projectName, port) {
 export const handleShutdown = (serverProcess, viteServer) => {
   console.log('\nShutting down server...');
   cleanup(serverProcess, viteServer);
-  process.exit(0);
+  setTimeout(() => process.exit(0), 100);
 };
 
 function cleanup(serverProcess, viteServer) {
@@ -92,7 +92,14 @@ function cleanup(serverProcess, viteServer) {
 
   if (serverProcess) {
     try {
-      if (typeof serverProcess.kill === 'function') {
+      // For Angular's ng serve process
+      if (serverProcess.pid) {
+        try {
+          process.kill(serverProcess.pid);
+        } catch (e) {
+          serverProcess.kill('SIGTERM');
+        }
+      } else if (typeof serverProcess.kill === 'function') {
         serverProcess.kill('SIGTERM');
       } else if (typeof serverProcess.close === 'function') {
         serverProcess.close();
