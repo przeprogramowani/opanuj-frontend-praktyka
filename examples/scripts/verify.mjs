@@ -38,11 +38,15 @@ async function main() {
         'npx playwright install && npx playwright test --config=./scripts/playwright-verify.config.ts',
         {
           stdio: ['inherit', 'pipe', 'pipe'],
+          env: { ...process.env, FORCE_COLOR: true },
         }
       );
 
       testProcess.stdout?.on('data', (data) => {
-        if (!data.includes('trace (application/zip)')) {
+        if (
+          !data.includes('trace (application/zip)') &&
+          !data.match(/\d+ failed|\d+ passed/)
+        ) {
           process.stdout.write(data);
         }
       });
