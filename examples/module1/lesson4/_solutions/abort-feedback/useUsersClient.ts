@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const API_URL = '/api/data/users?timeout=10000';
 
@@ -14,9 +14,9 @@ export function useUsersClient() {
 
   function fetchUsers() {
     axios
-      .get<User[]>(API_URL, { timeout: 5000 })
+      .get<{ users: User[] }>(API_URL, { timeout: 5000 })
       .then((response) => {
-        setUsers(response.data);
+        setUsers(response.data?.users);
       })
       .catch((error) => {
         if (error.code === 'ECONNABORTED') {
