@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { BsEyeFill, BsPlus } from 'react-icons/bs';
 
 import { CartContext } from '../contexts/CartContext';
+import { useRenderLogging } from '../tests/useRenderLogging';
 import { Product as ProductType } from '../types/Product';
 
 const Product = ({ product }: { product: ProductType }) => {
+  useRenderLogging('Product'); // Code required for acceptance testing
+
   const { addToCart } = useContext(CartContext);
 
   const { id, image, category, title, price } = product;
@@ -24,7 +27,10 @@ const Product = ({ product }: { product: ProductType }) => {
           </div>
         </div>
         <div className="absolute top-6 -right-11 group-hover:right-5 p-2 flex flex-col justify-center items-center gap-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <button onClick={() => addToCart(product)}>
+          <button
+            onClick={() => addToCart(product)}
+            data-testid="add-to-cart-button"
+          >
             <div className="flex justify-center items-center text-white w-12 h-12 bg-teal-500">
               <BsPlus className="text-3xl" />
             </div>

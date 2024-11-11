@@ -3,12 +3,15 @@ import { BsBag } from 'react-icons/bs';
 import { CiShop } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
+import { useRenderLogging } from '../tests/useRenderLogging';
 
 interface HeaderProps {
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Header = ({ setIsSidebarOpen }: HeaderProps) => {
+  useRenderLogging('Header'); // Code required for acceptance testing
+
   return (
     <header className={`bg-none py-6 fixed w-full z-10 lg:px-8 transition-all`}>
       <div className="container mx-auto flex items-center justify-between h-full">
