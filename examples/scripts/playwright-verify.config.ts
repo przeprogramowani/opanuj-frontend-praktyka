@@ -4,9 +4,10 @@ dotenv.config();
 
 const BASE_URL = process.env.BASE_URL;
 const PROJECT_DIR = process.env.PROJECT_DIR;
+const EXERCISE_DIR = PROJECT_DIR?.replace('_solutions', '');
 
 export default defineConfig({
-  testDir: `../${PROJECT_DIR}/tests`,
+  testDir: `../${EXERCISE_DIR}/tests`,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,
