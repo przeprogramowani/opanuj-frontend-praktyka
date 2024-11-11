@@ -18,10 +18,8 @@ export async function startServer(projectName, port) {
     const app = express();
     const httpServer = createHttpServer(app);
 
-    // Konfiguracja aplikacji Express
     configureExpressApp(app);
 
-    // Tworzenie serwera Vite
     const viteServer = await createViteServer({
       configFile: false,
       root: projectPath,
@@ -59,10 +57,8 @@ export async function startServer(projectName, port) {
       next(err);
     });
 
-    // Użycie middleware Vite
     app.use(viteServer.middlewares);
 
-    // Uruchomienie serwera
     httpServer.listen(port, () => {
       console.log(`App is running on http://localhost:${port}`);
     });
@@ -71,11 +67,8 @@ export async function startServer(projectName, port) {
 
     return { serverProcess: httpServer, viteServer, projectPath, port };
   } else {
-    console.log(
-      'Wykryto projekt Angular. Uruchamianie serwera deweloperskiego Angular...'
-    );
     execSync('npm install', { stdio: 'inherit', cwd: projectPath });
-    const ngProcess = spawn('npm', ['run', 'start'], {
+    const ngProcess = spawn('npm', ['run', 'start', '--', '--port', port], {
       cwd: projectPath,
       stdio: 'inherit',
     });
