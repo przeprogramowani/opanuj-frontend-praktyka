@@ -80,7 +80,6 @@ export async function startServer(projectName, port) {
 }
 
 export const handleShutdown = (serverProcess, viteServer) => {
-  console.log('\nShutting down server...');
   cleanup(serverProcess, viteServer);
   setTimeout(() => process.exit(0), 100);
 };
