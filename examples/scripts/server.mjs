@@ -59,9 +59,7 @@ export async function startServer(projectName, port) {
 
     app.use(viteServer.middlewares);
 
-    httpServer.listen(port, () => {
-      console.log(`App is running on http://localhost:${port}`);
-    });
+    httpServer.listen(port);
 
     await waitForServer(port);
 
@@ -113,10 +111,12 @@ async function waitForServer(port, maxAttempts = 15) {
   for (let i = 0; i < maxAttempts; i++) {
     try {
       const response = await fetch(`http://localhost:${port}`);
-      if (response.ok) return true;
-    } catch (e) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
+      if (response.ok) {
+        console.log(`App is running on http://localhost:${port}`);
+        return true;
+      }
+    } catch (e) {}
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
-  throw new Error('Server failed to start');
+  throw new Error(`Server didn't respond to healthcheck requests`);
 }
