@@ -1,27 +1,34 @@
 import React from 'react';
-import { useAppContext } from '../context/AppContext';
+import { FilterType } from '../types';
 
-const FilterOptions = () => {
-  const { filterType, setFilterType } = useAppContext();
+interface FilterOptionsProps {
+  filterType: FilterType;
+  setFilterType: (type: FilterType) => void;
+}
 
+const FilterOptions = ({ filterType, setFilterType }: FilterOptionsProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilterType(e.target.value as FilterType);
   };
 
   return (
-    <select
-      value={filterType}
-      onChange={handleChange}
-      className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    >
-      <option value="name">Country Name</option>
-      <option value="currency">Currency</option>
-      <option value="language">Language</option>
-      <option value="capital">Capital City</option>
-    </select>
+    <div className="mb-4">
+      <label htmlFor="filter" className="mr-2">
+        Filter By:
+      </label>
+      <select
+        id="filter"
+        value={filterType}
+        onChange={handleChange}
+        className="border p-2"
+      >
+        <option value="name">Name</option>
+        <option value="language">Language</option>
+        <option value="currency">Currency</option>
+        <option value="capital">Capital</option>
+      </select>
+    </div>
   );
 };
 
 export default FilterOptions;
-
-type FilterType = 'name' | 'currency' | 'language' | 'capital';

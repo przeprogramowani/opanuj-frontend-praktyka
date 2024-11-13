@@ -9,6 +9,7 @@ export interface Country {
       };
     };
   };
+  cca3: string;
   capital?: string[];
   currencies?: {
     [key: string]: {

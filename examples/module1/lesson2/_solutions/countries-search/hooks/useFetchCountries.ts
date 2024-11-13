@@ -11,47 +11,35 @@ import { Country, FilterType } from '../types';
 const useFetchCountries = (searchTerm: string, filterType: FilterType) => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const fetchStrategies = {
+      name: fetchCountriesByName,
+      currency: fetchCountriesByCurrency,
+      language: fetchCountriesByLanguage,
+      capital: fetchCountriesByCapital,
+      default: fetchAllCountries,
+    };
+
     const fetchData = async () => {
       setIsLoading(true);
-      setIsError(false);
-      setErrorMessage('');
+      setError(null);
+
       try {
-        let data: Country[] = [];
-        if (searchTerm === '') {
-          data = await fetchAllCountries();
-        } else {
-          switch (filterType) {
-            case 'name':
-              data = await fetchCountriesByName(searchTerm);
-              break;
-            case 'currency':
-              data = await fetchCountriesByCurrency(searchTerm);
-              break;
-            case 'language':
-              data = await fetchCountriesByLanguage(searchTerm);
-              break;
-            case 'capital':
-              data = await fetchCountriesByCapital(searchTerm);
-              break;
-            default:
-              data = await fetchAllCountries();
-          }
-        }
+        const fetchFn =
+          searchTerm === ''
+            ? fetchAllCountries
+            : fetchStrategies[filterType] ?? fetchStrategies.default;
+
+        const data = await fetchFn(searchTerm);
         setCountries(data);
       } catch (error) {
-        console.log('🚀 ~ fetchData ~ error:', error);
-        console.error('Error fetching countries:', error);
-        if (error instanceof Error) {
-          setErrorMessage(error.message);
-          console.log('🚀 ~ fetchData ~ error.message:', error.message);
-        } else {
-          setErrorMessage('An unexpected error occurred.');
-        }
-        setIsError(true);
+        setError(
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred.'
+        );
       } finally {
         setIsLoading(false);
       }
@@ -60,7 +48,11 @@ const useFetchCountries = (searchTerm: string, filterType: FilterType) => {
     fetchData();
   }, [searchTerm, filterType]);
 
-  return { countries, isLoading, isError, errorMessage };
+  return {
+    countries,
+    isLoading,
+    error,
+  };
 };
 
 export default useFetchCountries;

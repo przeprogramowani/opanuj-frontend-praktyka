@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { useAppContext } from '../context/AppContext';
+import React from 'react';
 
-const SearchBar = () => {
-  const { setSearchTerm, filterType } = useAppContext();
-  const [input, setInput] = useState<string>('');
+interface SearchBarProps {
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+}
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSearchTerm(input.trim());
+const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
   return (
-    <form onSubmit={handleSearch} className="w-full max-w-md">
+    <div className="mb-4">
       <input
         type="text"
-        placeholder={`Search by ${filterType}...`}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        value={searchTerm}
+        onChange={handleChange}
+        placeholder="Search countries..."
+        className="w-full p-2 border"
       />
-    </form>
+    </div>
   );
 };
 

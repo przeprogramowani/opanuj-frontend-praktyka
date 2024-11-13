@@ -1,25 +1,35 @@
 import React from 'react';
-import { useAppContext } from '../context/AppContext';
+import { SortOrder } from '../types';
 
-const SortOptions = () => {
-  const { sortOrder, setSortOrder } = useAppContext();
+interface SortOptionsProps {
+  sortOrder: SortOrder;
+  setSortOrder: (order: SortOrder) => void;
+}
 
+const SortOptions: React.FC<SortOptionsProps> = ({
+  sortOrder,
+  setSortOrder,
+}) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value as SortOrder);
   };
 
   return (
-    <select
-      value={sortOrder}
-      onChange={handleChange}
-      className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    >
-      <option value="alphabetical">Alphabetical</option>
-      <option value="population">Population Size</option>
-    </select>
+    <div className="mb-4">
+      <label htmlFor="sort" className="mr-2">
+        Sort By:
+      </label>
+      <select
+        id="sort"
+        value={sortOrder}
+        onChange={handleChange}
+        className="border p-2"
+      >
+        <option value="alphabetical">Alphabetical</option>
+        <option value="population">Population</option>
+      </select>
+    </div>
   );
 };
 
 export default SortOptions;
-
-type SortOrder = 'alphabetical' | 'population';
