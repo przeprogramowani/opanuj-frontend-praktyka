@@ -27,6 +27,8 @@ const useFetchCountries = (searchTerm: string, filterType: FilterType) => {
       setError(null);
 
       try {
+        console.log('🚀 ~ fetchData ~ searchTerm:', searchTerm);
+        console.log('🚀 ~ fetchData ~ filterType:', filterType);
         const fetchFn =
           searchTerm === ''
             ? fetchAllCountries

@@ -35,7 +35,7 @@ const CountriesSearchContainer = () => {
   const totalPages = Math.ceil(sortedCountries.length / itemsPerPage);
 
   useEffect(() => {
-    setCurrentPage(1);
+    if (currentPage !== 1) setCurrentPage(1);
   }, [searchTerm, filterType, sortOrder]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -62,14 +62,18 @@ const CountriesSearchContainer = () => {
   };
 
   return (
-    <div className="container mx-auto py-4">
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+    <main className="container mx-auto py-4">
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        filterType={filterType}
+      />
       <div className="flex flex-row gap-4">
         <FilterOptions filterType={filterType} setFilterType={setFilterType} />
         <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder} />
       </div>
       <ErrorBoundary>{renderContent()}</ErrorBoundary>
-    </div>
+    </main>
   );
 };
 

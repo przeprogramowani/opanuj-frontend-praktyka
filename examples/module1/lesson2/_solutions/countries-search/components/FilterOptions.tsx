@@ -13,20 +13,20 @@ const FilterOptions = ({ filterType, setFilterType }: FilterOptionsProps) => {
 
   return (
     <div className="mb-4">
-      <label htmlFor="filter" className="mr-2">
+      <label className="mr-2">
         Filter By:
+        <select
+          id="filter"
+          value={filterType}
+          onChange={handleChange}
+          className="border p-2"
+        >
+          <option value="name">Name</option>
+          <option value="language">Language</option>
+          <option value="currency">Currency</option>
+          <option value="capital">Capital</option>
+        </select>
       </label>
-      <select
-        id="filter"
-        value={filterType}
-        onChange={handleChange}
-        className="border p-2"
-      >
-        <option value="name">Name</option>
-        <option value="language">Language</option>
-        <option value="currency">Currency</option>
-        <option value="capital">Capital</option>
-      </select>
     </div>
   );
 };

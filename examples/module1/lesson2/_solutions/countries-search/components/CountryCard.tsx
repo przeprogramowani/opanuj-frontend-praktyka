@@ -7,14 +7,19 @@ interface CountryCardProps {
 
 const CountryCard = ({ country }: CountryCardProps) => {
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <article
+      className="bg-white shadow-md rounded-lg overflow-hidden"
+      data-testid="country-card"
+    >
       <img
         src={country.flags?.png}
         alt={`${country.name.common} flag`}
         className="w-full h-40 object-cover"
       />
       <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{country.name.common}</h2>
+        <h2 className="text-xl font-semibold mb-2" data-testid="country-name">
+          {country.name.common}
+        </h2>
         {country.population && (
           <p className="text-gray-600">
             🧑‍🧑‍🧒‍🧒 {country.population.toLocaleString()}
@@ -35,7 +40,7 @@ const CountryCard = ({ country }: CountryCardProps) => {
           <p className="text-gray-600">🏙️ {country.capital[0]}</p>
         )}
       </div>
-    </div>
+    </article>
   );
 };
 

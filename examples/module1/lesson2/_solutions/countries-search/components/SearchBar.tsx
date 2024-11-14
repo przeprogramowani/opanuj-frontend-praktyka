@@ -1,22 +1,44 @@
-import React from 'react';
+import { debounce } from 'es-toolkit';
+import React, { useCallback, useState } from 'react';
+import { FilterType } from '../types';
 
 interface SearchBarProps {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
+  filterType: FilterType;
 }
 
-const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
+const SearchBar = ({
+  searchTerm: externalSearchTerm,
+  setSearchTerm,
+  filterType,
+}: SearchBarProps) => {
+  const [localSearchTerm, setLocalSearchTerm] = useState(externalSearchTerm);
+
+  const debouncedSetSearchTerm = useCallback(
+    debounce((value: string) => {
+      setSearchTerm(value);
+    }, 500),
+    []
+  );
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    const newValue = e.target.value;
+    setLocalSearchTerm(newValue);
+    debouncedSetSearchTerm(newValue);
   };
+
+  React.useEffect(() => {
+    setLocalSearchTerm(externalSearchTerm);
+  }, [externalSearchTerm]);
 
   return (
     <div className="mb-4">
       <input
         type="text"
-        value={searchTerm}
+        value={localSearchTerm}
         onChange={handleChange}
-        placeholder="Search countries..."
+        placeholder={`Search by country's ${filterType}...`}
         className="w-full p-2 border"
       />
     </div>
