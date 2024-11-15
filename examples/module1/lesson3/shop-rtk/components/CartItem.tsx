@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { IoMdAdd, IoMdClose, IoMdRemove } from 'react-icons/io';
@@ -27,27 +27,33 @@ const CartItem = ({ item }: { item: CartItemType }) => {
             <div
               onClick={() => removeFromCart(id)}
               className="text-xl cursor-pointer"
+              aria-label="Remove from cart"
             >
               <IoMdClose className="text-gray-500 hover:text-red-500 transition" />
             </div>
           </div>
           <div className="flex gap-x-2 h-[36px] text-sm">
             <div className="flex flex-1 max-w-[100px] items-center h-full border text-primary font-medium">
-              <div
+              <button
                 onClick={() => decreaseAmount(id)}
                 className="h-full flex-1 flex justify-center items-center cursor-pointer"
+                aria-label="Decrease amount"
               >
                 <IoMdRemove />
-              </div>
-              <div className="h-full flex justify-center items-center px-2">
+              </button>
+              <div
+                className="h-full flex justify-center items-center px-2"
+                data-testid="cart-item-amount"
+              >
                 {amount}
               </div>
-              <div
+              <button
                 onClick={() => addToCart(item)}
                 className="h-full flex flex-1 justify-center items-center cursor-pointer"
+                aria-label="Increase amount"
               >
                 <IoMdAdd />
-              </div>
+              </button>
             </div>
             <div className="flex flex-1 justify-around items-center">
               $ {price}

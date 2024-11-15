@@ -18,15 +18,19 @@ const Header = ({ setIsSidebarOpen }: HeaderProps) => {
         <Link to={`/`} className="cursor-pointer ml-8">
           <CiShop className="text-3xl " />
         </Link>
-        <div
+        <button
           onClick={() => setIsSidebarOpen((isOpen) => !isOpen)}
           className="cursor-pointer flex relative mr-8"
+          data-testid="cart-button"
         >
           <BsBag className="text-2xl" />
-          <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
+          <div
+            className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center"
+            data-testid="cart-count"
+          >
             {itemAmount}
           </div>
-        </div>
+        </button>
       </div>
     </header>
   );

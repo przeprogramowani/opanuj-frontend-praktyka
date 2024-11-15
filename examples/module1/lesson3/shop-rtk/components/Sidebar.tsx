@@ -33,7 +33,8 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
     >
       <div className="flex items-center justify-between py-6 border-b">
         <div className="uppercase text-sm font-semibold">
-          Shopping Bag ({itemAmount})
+          Shopping Bag (
+          <span data-testid="cart-count-sidebar">{cartItems.length}</span>)
         </div>
         <div
           onClick={() => setIsSidebarOpen(false)}
@@ -52,12 +53,13 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
           <div className="font-semibold">
             <span className="mr-2">Subtotal:</span> $ {total.toFixed(2)}
           </div>
-          <div
+          <button
             onClick={() => dispatch(clearCart())}
-            className="cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
+            className="py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
+            aria-label="Clear cart"
           >
             <FiTrash2 />
-          </div>
+          </button>
         </div>
         <Link
           to={'/'}

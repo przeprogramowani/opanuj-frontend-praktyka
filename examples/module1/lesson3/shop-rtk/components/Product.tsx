@@ -12,7 +12,7 @@ const Product = ({ product }: { product: ProductType }) => {
   const { id, image, category, title, price } = product;
 
   return (
-    <div>
+    <div data-testid="product">
       <div className="border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition">
         <div className="w-full h-full flex justify-center items-center">
           <div className="w-[200px] mx-auto flex justify-center items-center">
@@ -24,7 +24,10 @@ const Product = ({ product }: { product: ProductType }) => {
           </div>
         </div>
         <div className="absolute top-6 -right-11 group-hover:right-5 p-2 flex flex-col justify-center items-center gap-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <button onClick={() => dispatch(addToCart(product))}>
+          <button
+            data-testid="add-to-cart-button"
+            onClick={() => dispatch(addToCart(product))}
+          >
             <div className="flex justify-center items-center text-white w-12 h-12 bg-teal-500">
               <BsPlus className="text-3xl" />
             </div>
@@ -32,6 +35,7 @@ const Product = ({ product }: { product: ProductType }) => {
           <Link
             to={`/product/${id}`}
             className="w-12 h-12 bg-white flex justify-center items-center text-primary drop-shadow-xl"
+            data-testid="view-details-button"
           >
             <BsEyeFill />
           </Link>

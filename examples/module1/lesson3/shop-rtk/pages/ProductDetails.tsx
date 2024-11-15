@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
 import { ProductContext } from '../contexts/ProductContext';
@@ -22,7 +22,10 @@ const ProductDetails = () => {
 
   const { title, price, description, image } = product;
   return (
-    <section className="pt-[450px] md:pt-32 pb-[400px] md:pb-12 lg:py-32 h-screen flex items-center">
+    <section
+      className="pt-[450px] md:pt-32 pb-[400px] md:pb-12 lg:py-32 h-screen flex items-center"
+      data-testid="product-details"
+    >
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="flex flex-1 justify-center items-center mb-8 lg:mb-0">
@@ -37,6 +40,7 @@ const ProductDetails = () => {
             </div>
             <p className="mb-8">{description}</p>
             <button
+              data-testid="add-to-cart-button"
               onClick={() => addToCart(product)}
               className="bg-green-600 py-4 px-8 text-white"
             >
