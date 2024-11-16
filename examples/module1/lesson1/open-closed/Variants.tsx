@@ -1,4 +1,4 @@
-import { User } from './User';
+import type { User } from './User';
 
 export const UserPreview = ({ firstName, lastName }: User) => (
   <div className="flex bg-cyan-800 text-white rounded-lg p-4">

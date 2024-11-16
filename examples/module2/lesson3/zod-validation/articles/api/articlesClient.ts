@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
-  Article,
-  ArticleResponse,
+  type Article,
+  type ArticleResponse,
   ArticleResponseSchema,
 } from '../models/Article';
 import { ZodError } from 'zod';

@@ -2,10 +2,10 @@
 import bookshelf from '../media/image.png';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Comment } from '../types/Comment';
-import { Article } from '../types/Article';
-import { Author } from '../types/Authors';
-import { Bootstrap } from '../types/Bootstrap';
+import type { Comment } from '../types/Comment';
+import type { Article } from '../types/Article';
+import type { Author } from '../types/Authors';
+import type { Bootstrap } from '../types/Bootstrap';
 import { useLoaderData } from 'react-router-dom';
 
 export function SlowApp() {

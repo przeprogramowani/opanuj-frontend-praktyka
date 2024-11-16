@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { execSync, spawn } from 'child_process';
 import express from 'express';
 import { createServer as createHttpServer } from 'http';
-import preprocess from 'svelte-preprocess';
+import { sveltePreprocess } from 'svelte-preprocess';
 import { createServer as createViteServer } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { getProjectPath } from './utils.mjs';
@@ -37,7 +37,7 @@ export async function startServer(projectName, port) {
         react(),
         svelte({
           configFile: false,
-          preprocess: [preprocess()],
+          preprocess: [sveltePreprocess()],
         }),
         createHtmlPlugin({
           inject: {

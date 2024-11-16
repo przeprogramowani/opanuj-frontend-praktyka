@@ -1,4 +1,4 @@
-import { Article } from './types';
+import type { Article } from './types';
 import { useArticlesClient } from './useArticlesClient';
 
 export function ArticlesList() {

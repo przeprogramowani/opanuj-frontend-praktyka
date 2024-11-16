@@ -1,11 +1,14 @@
 <script lang="ts">
   import { WeatherType } from '../models/LocationWeather';
 
-  export let type: WeatherType;
+  interface Props {
+    type: WeatherType;
+  }
 
-  let weatherIcon: string;
+  let { type }: Props = $props();
+  let weatherIcon: string = $state('');
 
-  $: {
+  $effect(() => {
     switch (type) {
       case WeatherType.Sunny:
         weatherIcon = '☀️';
@@ -23,7 +26,7 @@
         weatherIcon = '❓';
         break;
     }
-  }
+  });
 </script>
 
 <div>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fetchWeather } from '../lib/LocationFetcher';
-  import { LocationWeather } from '../models/LocationWeather';
+  import type { LocationWeather } from '../models/LocationWeather';
   import WeatherPreview from './WeatherPreview.svelte';
 
   let weather: LocationWeather;

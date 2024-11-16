@@ -1,8 +1,12 @@
 <script lang="ts">
-  import { LocationWeather } from '../models/LocationWeather';
+  import type { LocationWeather } from '../models/LocationWeather';
   import DailyWeather from './DailyWeather.svelte';
 
-  export let weather: LocationWeather;
+  interface Props {
+    weather: LocationWeather;
+  }
+
+  let { weather }: Props = $props();
 </script>
 
 <div>

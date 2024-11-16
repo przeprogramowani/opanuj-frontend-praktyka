@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Character } from '../types/Character';
+import type { Character } from '../types/Character';
 
 export function useCharacterSearch(name: string, gender: string) {
   const [characters, setCharacters] = useState<Character[]>([]);

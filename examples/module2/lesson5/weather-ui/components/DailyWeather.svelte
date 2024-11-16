@@ -1,8 +1,12 @@
 <script lang="ts">
-  import { DailyWeather } from '../models/LocationWeather';
+  import type { DailyWeather } from '../models/LocationWeather';
   import WeatherIcon from './WeatherIcon.svelte';
 
-  export let dailyWeather: DailyWeather;
+  interface Props {
+    dailyWeather: DailyWeather;
+  }
+
+  let { dailyWeather }: Props = $props();
 </script>
 
 <div class="bg-white rounded-xl p-4 shadow-lg">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getComments } from './acme-lib/api';
-import { Comment } from './acme-lib/types';
+import type { Comment } from './acme-lib/types';
 
 const Articles = () => {
   const [comments, setComments] = useState<Comment[]>([]);

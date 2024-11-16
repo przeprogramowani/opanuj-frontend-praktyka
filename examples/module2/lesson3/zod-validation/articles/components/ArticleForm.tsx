@@ -1,5 +1,5 @@
 import { useForm } from '../hooks/useForm';
-import { ArticleFormFields, ArticleFormSchema } from '../models/ArticleForm';
+import { type ArticleFormFields, ArticleFormSchema } from '../models/ArticleForm';
 
 interface ArticleFormProps {
   onFormSubmit: (title: string, content: string) => void;

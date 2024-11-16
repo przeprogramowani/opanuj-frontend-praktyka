@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useUsers } from './hooks/useUsers';
-import { User } from './User';
+import type { User } from './User';
 
 interface UsersListProps {
   header: string;
