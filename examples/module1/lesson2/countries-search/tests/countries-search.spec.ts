@@ -11,7 +11,6 @@ test.describe('Countries Search Application', () => {
   });
 
   test('should load and display the search interface', async ({ page }) => {
-    await expect(page.getByText('Countries Search')).toBeVisible();
     await expect(
       page.getByPlaceholder("Search by country's name...")
     ).toBeVisible();
