@@ -1,0 +1,35 @@
+<script lang="ts">
+  import type { User } from '../model/User';
+  import { getStatusColor } from '../utils/statusColors';
+
+  type StatusAggregate = Record<string, number>;
+
+  interface Props {
+    users: User[];
+  }
+
+  let { users }: Props = $props();
+  let statusCounts = $state({});
+
+  $effect(() => {
+    statusCounts = users.reduce((acc: StatusAggregate, user: User) => {
+      acc[user.status] = (acc[user.status] || 0) + 1;
+      return acc;
+    }, {} as StatusAggregate);
+  });
+</script>
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+  {#each Object.entries(statusCounts) as [status, count]}
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="flex flex-col items-center">
+        <span
+          class={`px-2 py-1 rounded-lg text-sm font-medium mb-2 ${getStatusColor(status)}`}
+        >
+          {status}
+        </span>
+        <span class="text-2xl font-bold">{count}</span>
+      </div>
+    </div>
+  {/each}
+</div>

@@ -1,47 +1,78 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import { onMount } from 'svelte';
+  import UsersList from './components/UsersList.svelte';
+  import StatusStats from './components/StatusStats.svelte';
+  import AddUserDialog from './components/AddUserDialog.svelte';
+  import type { User } from './model/User';
+
+  let users = $state<User[]>([]);
+  let loading = $state(true);
+  let error = $state<string | null>(null);
+  let isDialogOpen = $state(false);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/data/users');
+      if (!response.ok) throw new Error('Failed to fetch users');
+      const data = await response.json();
+      users = data.users;
+    } catch (e) {
+      error = e instanceof Error ? e.message : 'An error occurred';
+    } finally {
+      loading = false;
+    }
+  };
+
+  onMount(fetchUsers);
 </script>
 
-<main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
+<main class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Contacts List</h1>
+    <button
+      on:click={() => (isDialogOpen = true)}
+      class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 mr-2"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      Add Contact
+    </button>
   </div>
-  <h1>Vite + Svelte</h1>
 
-  <div class="card">
-    <Counter />
-  </div>
+  {#if loading}
+    <div class="flex justify-center items-center h-32">
+      <div class="text-gray-600">Loading contacts...</div>
+    </div>
+  {:else if error}
+    <div
+      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+    >
+      {error}
+    </div>
+  {:else}
+    <StatusStats {users} />
+    <UsersList {users} />
+  {/if}
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+  <AddUserDialog
+    isOpen={isDialogOpen}
+    on:close={() => (isDialogOpen = false)}
+    on:userAdded={fetchUsers}
+  />
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+  :global(body) {
+    background-color: #f3f4f6;
   }
 </style>
