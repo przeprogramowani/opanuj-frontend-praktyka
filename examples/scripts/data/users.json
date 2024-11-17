@@ -1,19 +1,19 @@
 {
   "users": [
-    { "id": 0, "name": "Mark Zuckerberg" },
-    { "id": 1, "name": "Bill Gates" },
-    { "id": 2, "name": "Steve Jobs" },
-    { "id": 3, "name": "Elon Musk" },
-    { "id": 4, "name": "Warren Buffet" },
-    { "id": 5, "name": "Jeff Bezos" },
-    { "id": 6, "name": "Larry Page" },
-    { "id": 7, "name": "Sergey Brin" },
-    { "id": 8, "name": "Larry Ellison" },
-    { "id": 9, "name": "Michael Bloomberg" },
-    { "id": 10, "name": "Richard Branson" },
-    { "id": 11, "name": "Jack Ma" },
-    { "id": 12, "name": "Rupert Murdoch" },
-    { "id": 13, "name": "Oprah Winfrey" },
-    { "id": 14, "name": "Donald Trump" }
+    { "id": 0, "name": "Mark Zuckerberg", "status": "Qualified" },
+    { "id": 1, "name": "Bill Gates", "status": "Rejected" },
+    { "id": 2, "name": "Steve Jobs", "status": "In Progress" },
+    { "id": 3, "name": "Elon Musk", "status": "Converted" },
+    { "id": 4, "name": "Warren Buffet", "status": "New" },
+    { "id": 5, "name": "Jeff Bezos", "status": "Contacted" },
+    { "id": 6, "name": "Larry Page", "status": "Contacted" },
+    { "id": 7, "name": "Sergey Brin", "status": "Rejected" },
+    { "id": 8, "name": "Larry Ellison", "status": "Qualified" },
+    { "id": 9, "name": "Michael Bloomberg", "status": "In Progress" },
+    { "id": 10, "name": "Richard Branson", "status": "New" },
+    { "id": 11, "name": "Jack Ma", "status": "New" },
+    { "id": 12, "name": "Rupert Murdoch", "status": "Contacted" },
+    { "id": 13, "name": "Oprah Winfrey", "status": "Converted" },
+    { "id": 14, "name": "Donald Trump", "status": "Rejected" }
   ]
 }
