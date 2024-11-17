@@ -11,7 +11,7 @@
   <div>Error: {$users.error.message}</div>
 {:else}
   <div class="grid gap-4" data-testid="users-list">
-    {#each $users.data as user (user.id)}
+    {#each $users.data ?? [] as user (user.id)}
       <div
         class="bg-white rounded-lg shadow p-4 flex justify-between items-center"
       >
