@@ -1,5 +1,5 @@
-import { DiscountConfig } from '../discounts/config';
-import { CalculationResult, Purchase } from '../types/types';
+import type { DiscountConfig } from '../discounts/config';
+import type { CalculationResult, Purchase } from '../types/types';
 
 export class DiscountCalculator {
   private discountConfig: DiscountConfig;

@@ -1,4 +1,4 @@
-import { Comment } from '../types/Comment';
+import type { Comment } from '../types/Comment';
 
 type REDUCER_ACTIONS =
   | { type: 'SET_COMMENTS'; payload: Comment[] }

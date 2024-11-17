@@ -8,19 +8,12 @@ export function getRandomSubset(array) {
 }
 
 export async function findAvailablePort(startPort, maxPort = 4200) {
-  let notStartPort = false;
   for (let port = startPort; port <= maxPort; port++) {
     try {
       await testPort(port);
-      console.log(`
-=================
-|| ✅ SUCCESS  ||
-=================
-Found available port: ${port}
-`);
+
       return port; // If we reach here, the port is available
     } catch (err) {
-      notStartPort = true;
       continue;
     }
   }
@@ -39,4 +32,20 @@ async function testPort(port) {
   } finally {
     server.close();
   }
+}
+
+import { glob } from 'glob';
+
+export async function getProjectPath(projectName) {
+  const projectPaths = await glob(`./module*/*/${projectName}`);
+
+  if (projectPaths.length !== 1) {
+    throw new Error(
+      `❌ Nie znaleziono projektu lub istnieje wiele projektów o tej samej nazwie: ${JSON.stringify(
+        projectPaths
+      )}`
+    );
+  }
+
+  return projectPaths[0];
 }

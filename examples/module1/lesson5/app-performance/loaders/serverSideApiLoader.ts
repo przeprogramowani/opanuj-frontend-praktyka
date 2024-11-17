@@ -1,4 +1,4 @@
-import { Bootstrap } from '../types/Bootstrap';
+import type { Bootstrap } from '../types/Bootstrap';
 
 declare global {
   interface Window {

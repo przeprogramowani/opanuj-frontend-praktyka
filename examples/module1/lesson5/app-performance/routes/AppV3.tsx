@@ -2,10 +2,10 @@
 import bookshelf from '../media/image-v2.png';
 import { useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
-import { Author } from '../types/Authors';
-import { Article } from '../types/Article';
-import { Comment } from '../types/Comment';
-import { Bootstrap } from '../types/Bootstrap';
+import type { Author } from '../types/Authors';
+import type { Article } from '../types/Article';
+import type { Comment } from '../types/Comment';
+import type { Bootstrap } from '../types/Bootstrap';
 import { useLoaderData } from 'react-router-dom';
 import { commentsReducer } from '../reducers/commentsReducer';
 import {

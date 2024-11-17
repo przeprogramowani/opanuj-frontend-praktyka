@@ -1,27 +1,10 @@
-import { readFile } from 'fs/promises';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
 import express from 'express';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-export async function readContent(pathToResource) {
-  let resource = '{}';
-
-  try {
-    resource = await readFile(
-      join(__dirname, `../data/${pathToResource}.json`),
-      'utf-8'
-    );
-  } catch (err) {
-    console.log(`Could not read resource ${pathToResource}.json`, err);
-  }
-
-  return resource;
-}
+import bodyParser from 'body-parser';
+import { getResource, addResource } from '../services/app-storage.mjs';
 
 export const createDataMiddleware = () => {
   const router = express.Router();
+  router.use(bodyParser.json());
 
   router.get('/batch', async (req, res) => {
     let resource = {};
@@ -40,12 +23,13 @@ export const createDataMiddleware = () => {
   });
 
   router.get('/:resource', async (req, res) => {
-    const resource = await readContent(req.params.resource);
-    return res.json(JSON.parse(resource));
+    const resource = await getResource(req.params.resource);
+    return res.json(resource);
   });
 
   router.post('/:resource', async (req, res) => {
-    return res.sendStatus(200);
+    const newResource = addResource(req.params.resource, req.body);
+    return res.json(newResource);
   });
 
   return router;

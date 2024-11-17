@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     <input
       class="border h-7 mt-1 indent-2"
       type="text"
-      placeholder="Name"
+      placeholder="Enter character name"
       [value]="name"
       (input)="onNameChange($event)"
     />

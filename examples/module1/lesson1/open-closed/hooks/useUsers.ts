@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { User } from '../User';
+import type { User } from '../User';
 
 const USER_JOHN: User = {
   id: 0,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Article, ArticleResponse } from './types';
+import type { Article, ArticleResponse } from './types';
 
 export function useArticlesClient() {
   const [articles, setArticles] = useState<Article[]>([]);
