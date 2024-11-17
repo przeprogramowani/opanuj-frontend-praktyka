@@ -2,6 +2,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import react from '@vitejs/plugin-react';
 import { execSync, spawn } from 'child_process';
 import express from 'express';
+import chalk from 'chalk';
 import { createServer as createHttpServer } from 'http';
 import { sveltePreprocess } from 'svelte-preprocess';
 import { createServer as createViteServer } from 'vite';
@@ -112,7 +113,12 @@ async function waitForServer(port, maxAttempts = 15) {
     try {
       const response = await fetch(`http://localhost:${port}`);
       if (response.ok) {
-        console.log(`App is running on http://localhost:${port}`);
+        const appUrl = `http://localhost:${port}`;
+        console.log(
+          `🚀 Aplikacja uruchomiona i dostępna pod adresem: ${chalk.green(
+            appUrl
+          )}`
+        );
         return true;
       }
     } catch (e) {}

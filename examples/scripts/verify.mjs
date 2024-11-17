@@ -1,14 +1,16 @@
 import { exec } from 'child_process';
+import chalk from 'chalk';
 import { handleShutdown, startServer } from './server.mjs';
 import { findAvailablePort } from './utils.mjs';
 
 async function main() {
   const args = process.argv.slice(2);
   const projectName = args[0];
+  console.log(`🔍 Sprawdzam testy dla projektu: ${chalk.blue(projectName)}`);
 
   if (!projectName) {
     console.error(
-      'Please provide the project name (example: npm run verify solver).'
+      'Podaj nazwę projektu jako ostatni parametr (przykładowo: npm run verify solver).'
     );
     process.exit(1);
   }
@@ -24,6 +26,7 @@ async function main() {
       projectPath,
       viteServer: vs,
     } = await startServer(projectName, port);
+
     serverProcess = sp;
     viteServer = vs;
 
@@ -57,19 +60,19 @@ async function main() {
 
       testProcess.on('exit', (code) => {
         if (code === 0) {
-          console.info('Congrats, tests have passed!');
+          console.info('Gratulacje, testy przeszły!');
           resolve();
         } else {
-          reject(new Error(`Tests failed with code ${code}`));
+          reject(new Error(`Testy nie przeszły z kodem ${code}`));
         }
       });
     });
   } catch (error) {
-    if (error.message.includes('Tests failed with code')) {
-      console.error('Tests failed, please adjust your code and try again.');
+    if (error.message.includes('Testy nie przeszły z kodem')) {
+      console.error('Testy nie przeszły, popraw kod i spróbuj ponownie.');
       process.exit(0);
     } else {
-      console.error('Error when starting verification server:', error);
+      console.error('Błąd podczas uruchamiania serwera:', error);
       process.exit(1);
     }
   } finally {

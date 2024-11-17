@@ -37,7 +37,7 @@ test.describe('Users CRM', () => {
     await nameInput.fill('John Doe');
 
     const statusInput = addUserForm.getByLabel('Status');
-    await statusInput.selectOption('Active');
+    await statusInput.selectOption('New');
 
     const submitButton = addUserForm.getByText('Add');
     await submitButton.click();

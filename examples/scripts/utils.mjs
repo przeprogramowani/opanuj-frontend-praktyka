@@ -41,7 +41,7 @@ export async function getProjectPath(projectName) {
 
   if (projectPaths.length !== 1) {
     throw new Error(
-      `Nie znaleziono projektu lub istnieje wiele projektów o tej samej nazwie: ${JSON.stringify(
+      `❌ Nie znaleziono projektu lub istnieje wiele projektów o tej samej nazwie: ${JSON.stringify(
         projectPaths
       )}`
     );

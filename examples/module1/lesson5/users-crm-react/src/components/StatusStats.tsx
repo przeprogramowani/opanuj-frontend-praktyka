@@ -37,7 +37,11 @@ const StatusStats = () => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
       {Object.entries(statusCounts).map(([status, count]) => (
-        <div key={status} className="bg-white rounded-lg shadow p-4">
+        <div
+          key={status}
+          className="bg-white rounded-lg shadow p-4"
+          data-testid="status-stats-item"
+        >
           <div className="flex flex-col items-center">
             <span
               className={`px-2 py-1 rounded-lg text-sm font-medium mb-2 ${getStatusColor(
