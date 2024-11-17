@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
-import { CartItem } from '../types/CartItem';
-import { Product } from '../types/Product';
+import type { CartItem } from '../types/CartItem';
+import type { Product } from '../types/Product';
 
 type CartContextType = {
   cart: CartItem[];

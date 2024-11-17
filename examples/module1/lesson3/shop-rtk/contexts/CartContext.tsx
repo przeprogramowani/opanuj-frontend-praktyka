@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { Product } from '../types/Product';
+import type { Product } from '../types/Product';
 
 type CartItem = Product & { amount: number };
 

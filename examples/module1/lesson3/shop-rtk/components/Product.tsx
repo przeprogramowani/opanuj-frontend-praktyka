@@ -5,7 +5,7 @@ import { BsEyeFill, BsPlus } from 'react-icons/bs';
 
 import { useAppDispatch } from '../hooks/rtk';
 import { addToCart } from '../state/cartSlice';
-import { Product as ProductType } from '../types/Product';
+import type { Product as ProductType } from '../types/Product';
 
 const Product = ({ product }: { product: ProductType }) => {
   const dispatch = useAppDispatch();

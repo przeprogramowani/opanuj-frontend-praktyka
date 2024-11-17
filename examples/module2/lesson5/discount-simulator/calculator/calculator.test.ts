@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { DiscountCalculator } from './calculator';
-import { DISCOUNT_CONFIG, DiscountConfig } from '../discounts/config';
-import { Purchase } from '../types/types';
+import { DISCOUNT_CONFIG } from '../discounts/config';
+import type { Purchase } from '../types/types';
 
 describe('DiscountCalculator', () => {
   test('should apply base discount', () => {

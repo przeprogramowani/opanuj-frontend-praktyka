@@ -5,7 +5,7 @@ import { BsEyeFill, BsPlus } from 'react-icons/bs';
 
 import { CartContext } from '../contexts/CartContext';
 import { useRenderLogging } from '../tests/useRenderLogging';
-import { Product as ProductType } from '../types/Product';
+import type { Product as ProductType } from '../types/Product';
 
 const Product = ({ product }: { product: ProductType }) => {
   useRenderLogging('Product'); // Code required for acceptance testing

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Article } from '../models/Article';
+import type { Article } from '../models/Article';
 import { getArticles, createArticle } from '../api/articlesClient';
 
 export function useArticles() {

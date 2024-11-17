@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Bootstrap } from '../types/Bootstrap';
+import type { Bootstrap } from '../types/Bootstrap';
 
 export async function clientSideApiLoader(): Promise<Bootstrap> {
   const { data } = await axios.get<Bootstrap>(

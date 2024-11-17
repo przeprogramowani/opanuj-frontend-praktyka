@@ -8,14 +8,12 @@ export function getRandomSubset(array) {
 }
 
 export async function findAvailablePort(startPort, maxPort = 4200) {
-  let notStartPort = false;
   for (let port = startPort; port <= maxPort; port++) {
     try {
       await testPort(port);
 
       return port; // If we reach here, the port is available
     } catch (err) {
-      notStartPort = true;
       continue;
     }
   }
@@ -43,7 +41,7 @@ export async function getProjectPath(projectName) {
 
   if (projectPaths.length !== 1) {
     throw new Error(
-      `Nie znaleziono projektu lub istnieje wiele projektów o tej samej nazwie: ${JSON.stringify(
+      `❌ Nie znaleziono projektu lub istnieje wiele projektów o tej samej nazwie: ${JSON.stringify(
         projectPaths
       )}`
     );

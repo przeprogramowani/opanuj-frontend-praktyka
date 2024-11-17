@@ -1,4 +1,4 @@
-import { Character } from '../types/Character';
+import type { Character } from '../types/Character';
 import { CharacterCard } from './CharacterCard';
 
 export function CharacterList({ characters }: { characters: Character[] }) {

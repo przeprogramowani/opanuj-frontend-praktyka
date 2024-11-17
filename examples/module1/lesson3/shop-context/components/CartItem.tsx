@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { IoMdAdd, IoMdClose, IoMdRemove } from 'react-icons/io';
 
-import { CartItem as CartItemType } from '../types/CartItem';
+import type { CartItem as CartItemType } from '../types/CartItem';
 import { CartContext } from '../contexts/CartContext';
 
 const CartItem = ({ item }: { item: CartItemType }) => {

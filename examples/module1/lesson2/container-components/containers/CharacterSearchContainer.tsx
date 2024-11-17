@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import CharacterList from '../components/CharacterList';
 import SearchForm from '../components/SearchForm';
 import SearchTitle from '../components/SearchTitle';
-import { Character } from '../types/Character';
+import type { Character } from '../types/Character';
 
 function CharacterSearchContainer() {
   const [name, setName] = useState('');

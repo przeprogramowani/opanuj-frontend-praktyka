@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getArticles } from './acme-lib/api';
-import { Article } from './acme-lib/types';
+import type { Article } from './acme-lib/types';
 
 const Articles = () => {
   const [articles, setArticles] = useState<Article[]>([]);

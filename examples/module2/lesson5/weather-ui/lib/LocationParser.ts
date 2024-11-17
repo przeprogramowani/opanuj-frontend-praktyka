@@ -1,4 +1,4 @@
-import { WeatherRequest } from '../models/WeatherRequest';
+import type { WeatherRequest } from '../models/WeatherRequest';
 
 export function parseLocation(locationQuery: string): WeatherRequest | null {
   const [city, country] = locationQuery.trim().split(',');

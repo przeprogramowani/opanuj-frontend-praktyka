@@ -1,4 +1,4 @@
-import { Customer, Product } from '../types/types';
+import type { Customer, Product } from '../types/types';
 
 export type DiscountConfig = {
   baseDiscount: number;
