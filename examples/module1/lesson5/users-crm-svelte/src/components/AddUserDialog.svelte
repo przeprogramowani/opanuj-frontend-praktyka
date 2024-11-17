@@ -53,7 +53,7 @@
     name = '';
     status = 'New';
     error = null;
-    dispatch('close');
+    onClose();
   };
 </script>
 
@@ -75,7 +75,11 @@
         </div>
       {/if}
 
-      <form onsubmit={handleSubmit} class="space-y-4">
+      <form
+        onsubmit={handleSubmit}
+        class="space-y-4"
+        data-testid="add-user-form"
+      >
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700"
             >Name</label

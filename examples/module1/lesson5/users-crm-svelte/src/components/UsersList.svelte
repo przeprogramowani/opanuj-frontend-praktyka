@@ -28,7 +28,7 @@
 {:else if error}
   <div>Error: {error}</div>
 {:else}
-  <div class="grid gap-4">
+  <div class="grid gap-4" data-testid="users-list">
     {#each users as user (user.id)}
       <div
         class="bg-white rounded-lg shadow p-4 flex justify-between items-center"

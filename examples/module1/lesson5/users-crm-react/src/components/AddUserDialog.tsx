@@ -78,7 +78,11 @@ const AddUserDialog = ({ isOpen, onClose }: AddUserDialogProps) => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+          data-testid="add-user-form"
+        >
           <div>
             <label
               htmlFor="name"

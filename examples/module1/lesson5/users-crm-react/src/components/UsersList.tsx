@@ -28,7 +28,7 @@ const UsersList = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4" data-testid="users-list">
       {users.map((user) => (
         <div
           key={user.id}
