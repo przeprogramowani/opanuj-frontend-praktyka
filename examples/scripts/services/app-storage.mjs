@@ -41,7 +41,7 @@ export function addResource(resourceName, resource) {
     id: new Date().getTime(),
     ...resource,
   };
-  console.log(newResource);
+  console.log(`Adding new entry to ${resourceName}`, newResource);
 
   storage[resourceName].push(newResource);
   return newResource;
