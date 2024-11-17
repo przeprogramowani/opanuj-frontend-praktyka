@@ -1,14 +1,10 @@
 <script lang="ts">
-  import { preventDefault } from 'svelte/legacy';
-
-  import { createEventDispatcher } from 'svelte';
-
   interface Props {
     isOpen?: boolean;
+    onClose: () => void;
   }
 
-  let { isOpen = false }: Props = $props();
-  const dispatch = createEventDispatcher();
+  let { isOpen = false, onClose }: Props = $props();
 
   let name = $state('');
   let status = $state('New');
@@ -24,7 +20,8 @@
     'Rejected',
   ];
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: SubmitEvent) => {
+    event.preventDefault();
     if (!name.trim()) {
       error = 'Name is required';
       return;
@@ -44,8 +41,7 @@
 
       if (!response.ok) throw new Error('Failed to add user');
 
-      dispatch('userAdded');
-      closeDialog();
+      onClose();
     } catch (e) {
       error = e instanceof Error ? e.message : 'Failed to add user';
     } finally {
@@ -79,7 +75,7 @@
         </div>
       {/if}
 
-      <form onsubmit={preventDefault(handleSubmit)} class="space-y-4">
+      <form onsubmit={handleSubmit} class="space-y-4">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700"
             >Name</label
