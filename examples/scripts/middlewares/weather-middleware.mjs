@@ -1,5 +1,5 @@
 import express from 'express';
-import { readContent } from './data-middleware.mjs';
+import { getFromFileSystem } from '../services/app-storage.mjs';
 
 export const createWeatherMiddleware = () => {
   const router = express.Router();
@@ -12,8 +12,7 @@ export const createWeatherMiddleware = () => {
       return;
     }
 
-    const weather = await readContent('weather');
-    const jsonWeather = JSON.parse(weather);
+    const jsonWeather = await getFromFileSystem('weather');
 
     try {
       return res.json({

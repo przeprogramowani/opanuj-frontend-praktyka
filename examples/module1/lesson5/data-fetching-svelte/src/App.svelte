@@ -15,7 +15,7 @@
       const response = await fetch('http://localhost:3000/api/data/users');
       if (!response.ok) throw new Error('Failed to fetch users');
       const data = await response.json();
-      users = data.users;
+      users = data;
     } catch (e) {
       error = e instanceof Error ? e.message : 'An error occurred';
     } finally {

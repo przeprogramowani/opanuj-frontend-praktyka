@@ -8,14 +8,12 @@ export function getRandomSubset(array) {
 }
 
 export async function findAvailablePort(startPort, maxPort = 4200) {
-  let notStartPort = false;
   for (let port = startPort; port <= maxPort; port++) {
     try {
       await testPort(port);
 
       return port; // If we reach here, the port is available
     } catch (err) {
-      notStartPort = true;
       continue;
     }
   }
