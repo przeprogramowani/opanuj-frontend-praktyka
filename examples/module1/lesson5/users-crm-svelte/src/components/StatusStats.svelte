@@ -38,7 +38,10 @@
 {:else}
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
     {#each Object.entries(statusCounts) as [status, count]}
-      <div class="bg-white rounded-lg shadow p-4">
+      <div
+        class="bg-white rounded-lg shadow p-4"
+        data-testid="status-stats-item"
+      >
         <div class="flex flex-col items-center">
           <span
             class={`px-2 py-1 rounded-lg text-sm font-medium mb-2 ${getStatusColor(

@@ -51,6 +51,7 @@
 {#if isOpen}
   <div
     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+    data-testid="add-user-dialog"
   >
     <div class="bg-white rounded-lg p-6 w-full max-w-md">
       <div class="flex justify-between items-center mb-4">

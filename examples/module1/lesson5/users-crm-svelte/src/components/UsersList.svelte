@@ -32,6 +32,7 @@
     {#each users as user (user.id)}
       <div
         class="bg-white rounded-lg shadow p-4 flex justify-between items-center"
+        data-testid="user-item"
       >
         <div class="flex flex-row justify-between items-center w-full">
           <h3 class="text-lg font-semibold">{user.name}</h3>

@@ -32,6 +32,7 @@ const UsersList = () => {
       {users.map((user) => (
         <div
           key={user.id}
+          data-testid="user-item"
           className="bg-white rounded-lg shadow p-4 flex justify-between items-center"
         >
           <div className="flex flex-row justify-between items-center w-full">
