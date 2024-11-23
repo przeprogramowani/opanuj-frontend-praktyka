@@ -1,0 +1,1 @@
+export const failingDivision = "Cannot divide by zero";
