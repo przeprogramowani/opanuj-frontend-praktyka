@@ -1,5 +1,9 @@
-function SearchTitle() {
-  return <h1 className="text-2xl">Wyszukiwarka postaci Rick and Morty</h1>;
+interface ISearchTitle {
+  title: string;
+}
+
+function SearchTitle({title}: ISearchTitle) {
+  return <h1 className="text-2xl">Wyszukiwarka postaci {title}</h1>;
 }
 
 export default SearchTitle;
