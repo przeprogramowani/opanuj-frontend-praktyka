@@ -22,11 +22,8 @@ test.describe('Number Validator', () => {
     const validateButton = page.locator('#validation-btn');
     await validateButton.click();
 
-    await page.waitForTimeout(100);
-
     const result = page.locator('#result');
-    const resultContent = await result.textContent();
-console.log('Result content:', resultContent);
+    
     await expect(result).toContainText('Invalid - empty or non integer');
   });
 
