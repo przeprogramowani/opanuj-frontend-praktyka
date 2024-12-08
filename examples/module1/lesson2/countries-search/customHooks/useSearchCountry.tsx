@@ -19,7 +19,7 @@ const useSearchCountry = (name: string) => {
             setCountries([]);
             console.error('Error fetching data:', error);
         });
-    }, [name]);
+    }, [name, sortBy, filterBy]);
 
     const sorting = (data: ICountry[]) => {
         const sortFn = sortBy === 'population' ? sortByPopulation : sortByName;
