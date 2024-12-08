@@ -1,49 +1,42 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Signal, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import {
-  BehaviorSubject,
-  Observable,
-  combineLatest,
-  map,
-  of,
-  switchMap,
-} from 'rxjs';
+import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { combineLatest, map, of, switchMap, catchError } from 'rxjs';
 import { Character } from '../types/Character';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterSearchService {
-  private charactersSource$: Observable<Character[]> = new Observable<
-    Character[]
-  >();
-  characters: Signal<Character[]> = signal([]);
-  private nameSubject = new BehaviorSubject<string>('');
-  private genderSubject = new BehaviorSubject<string>('');
-  private sortOptionSubject = new BehaviorSubject<string>('');
-  private apiBaseUrl = 'https://rickandmortyapi.com/api/character/';
+  private readonly charactersSource$: Signal<Character[]> = signal<Character[]>([]);
+  readonly characters: Signal<Character[]> = signal<Character[]>([]);
+
+  private readonly nameSignal: WritableSignal<string> = signal<string>('');
+  private readonly genderSignal: WritableSignal<string> = signal<string>('');
+  private readonly sortOptionSignal: WritableSignal<string> = signal<string>('');
+
+  private readonly apiBaseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.charactersSource$ = combineLatest([
-      this.nameSubject,
-      this.genderSubject,
-    ]).pipe(
-      switchMap(([name, gender]) => {
-        if (name !== '' || gender !== '') {
-          return this.http
-            .get<{ results: Character[] }>(
-              `${this.apiBaseUrl}?name=${name}&gender=${gender}`
-            )
-            .pipe(map((response) => response.results || []));
-        } else {
-          return of([]);
-        }
-      })
+    this.apiBaseUrl = 'https://rickandmortyapi.com/api/character/';
+
+    this.charactersSource$ = toSignal(
+      combineLatest([
+        toObservable(this.nameSignal),
+        toObservable(this.genderSignal),
+      ]).pipe(
+        switchMap(([name, gender]) =>
+          this.fetchCharacters(name, gender)
+        )
+      ),
+      { initialValue: [] }
     );
 
     this.characters = toSignal(
-      combineLatest([this.charactersSource$, this.sortOptionSubject]).pipe(
+      combineLatest([
+        toObservable(this.charactersSource$),
+        toObservable(this.sortOptionSignal),
+      ]).pipe(
         map(([characters, sortOption]) =>
           this.sortCharacters(characters, sortOption)
         )
@@ -52,38 +45,56 @@ export class CharacterSearchService {
     );
   }
 
-  setName(name: string) {
-    this.nameSubject.next(name);
+  setName(name: string): void {
+    this.nameSignal.set(name);
   }
 
-  setGender(gender: string) {
-    this.genderSubject.next(gender);
+  setGender(gender: string): void {
+    this.genderSignal.set(gender);
   }
 
-  setSortOption(sortOption: string) {
-    this.sortOptionSubject.next(sortOption);
+  setSortOption(sortOption: string): void {
+    this.sortOptionSignal.set(sortOption);
   }
 
+  // Gettery
   get name(): string {
-    return this.nameSubject.value;
+    return this.nameSignal();
   }
 
   get gender(): string {
-    return this.genderSubject.value;
+    return this.genderSignal();
   }
 
   get sortOption(): string {
-    return this.sortOptionSubject.value;
+    return this.sortOptionSignal();
   }
 
-  sortCharacters(characters: Character[], sortOption: string): Character[] {
+  private fetchCharacters(name: string, gender: string) {
+    if (!name && !gender) {
+      return of([]);
+    }
+    return this.http
+      .get<{ results: Character[] }>(
+        `${this.apiBaseUrl}?name=${name}&gender=${gender}`
+      )
+      .pipe(
+        map((response) => response.results || []),
+        catchError(() => of([]))
+      );
+  }
+
+  private sortCharacters(characters: Character[], sortOption: string): Character[] {
+    if (!sortOption) return characters;
     return [...characters].sort((a, b) => {
-      if (sortOption === 'name') {
-        return a.name.localeCompare(b.name);
-      } else if (sortOption === 'created') {
-        return new Date(a.created).getTime() - new Date(b.created).getTime();
+      switch (sortOption) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'created':
+          return new Date(a.created).getTime() - new Date(b.created).getTime();
+        default:
+          return 0;
       }
-      return 0;
     });
   }
 }
