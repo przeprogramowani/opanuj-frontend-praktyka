@@ -13,3 +13,5 @@ export const productsApi = createApi({
     }),
   }),
 });
+
+export const { useGetProductsQuery, useGetProductByIdQuery } = productsApi;
