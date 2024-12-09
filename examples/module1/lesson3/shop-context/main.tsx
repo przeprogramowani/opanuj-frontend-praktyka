@@ -7,10 +7,10 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <CartProvider>
       <ProductProvider>
-        <App />
+        <CartProvider>
+          <App />
+        </CartProvider>
       </ProductProvider>
-    </CartProvider>
   </React.StrictMode>
 );
