@@ -1,0 +1,1 @@
+export const isSomeNumberZero = (a: number, b: number) => Number(a) === 0 || Number(b) === 0;
