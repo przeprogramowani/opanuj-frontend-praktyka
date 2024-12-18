@@ -4,7 +4,7 @@ type SearchFormProps = {
   gender: string;
   setGender: (gender: string) => void;
   sortOption: string;
-  setSortOption: (sortOption: string) => void;
+  setSortOption: (sortOption: '' | 'name' | 'created') => void;
 };
 
 function SearchForm({
