@@ -14,9 +14,9 @@ export function useUsersClient() {
 
   function fetchUsers() {
     axios
-      .get<{ users: User[] }>(API_URL, { timeout: 5000 })
+      .get<User[]>(API_URL, { timeout: 5000 })
       .then((response) => {
-        setUsers(response.data?.users);
+        setUsers(response.data);
       })
       .catch((error) => {
         if (error.code === 'ECONNABORTED') {

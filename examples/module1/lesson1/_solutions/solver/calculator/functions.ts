@@ -1,4 +1,4 @@
-import { CalculationResult } from './CalculationResult';
+import { type CalculationResult } from './CalculationResult';
 
 export function add(addend1: number, addend2: number): CalculationResult {
   return { result: addend1 + addend2 };
