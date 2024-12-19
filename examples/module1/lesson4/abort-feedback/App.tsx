@@ -1,67 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import useFetchData from './useFetchData';
 
 interface User {
   id: number;
   name: string;
 }
 
-const API_URL = '/api/data/users?timeout=10000';
-
 const App = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  const abortControllerRef = useRef<AbortController>(null);
-
-  const fetchWithTimeout = (url: string, timeout: number, signal: any) => {
-    return Promise.race([
-      fetch(url, { signal }),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), timeout)
-      ),
-    ])
-  };
-
-  const getUsersRequest = () => {
-    setError(null);
-
-    if (abortControllerRef.current) {
-      abortControllerRef.current?.abort();
-    }
-
-    const newAbortController = new AbortController();
-
-    abortControllerRef.current = newAbortController;
-
-    const timeout = setTimeout(() => {
-      setError('Sorry, there seems to be connectivity issues...');
-    }, 5000)
-
-    fetchWithTimeout(API_URL, 11000, newAbortController.signal)
-      .then((res) => res.json())
-      .then((users) => {
-        setUsers(users);
-        setError(null);
-      }).catch((error) => {
-        if (error.message === 'Timeout') {
-          setError('Sorry, there seems to be connectivity issues...');
-        }
-      }).finally(() => {
-        clearTimeout(timeout);
-      });
-  };
-
-  useEffect(() => {
-    getUsersRequest();
-    return () => {
-      // Cleanup function to abort any pending requests
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, []);
+  const { users, error, getUsersRequest } = useFetchData();
   
-
   return (
     <div>
       <div className="flex flex-row items-center justify-between py-4">
