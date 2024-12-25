@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { usePostUser } from '../hooks/usePostUser';
 
 interface AddUserDialogProps {
   isOpen: boolean;
@@ -8,8 +9,16 @@ interface AddUserDialogProps {
 const AddUserDialog = ({ isOpen, onClose }: AddUserDialogProps) => {
   const [name, setName] = useState('');
   const [status, setStatus] = useState('New');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const closeDialog = () => {
+    setName('');
+    setStatus('New');
+    setError(null);
+    onClose();
+  };
+
+  const { mutate, isPending, isError, error: fetchError } = usePostUser(closeDialog);
 
   const statuses = [
     'New',
@@ -28,33 +37,8 @@ const AddUserDialog = ({ isOpen, onClose }: AddUserDialogProps) => {
       return;
     }
 
-    setLoading(true);
     setError(null);
-
-    try {
-      const response = await fetch('http://localhost:3000/api/data/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, status }),
-      });
-
-      if (!response.ok) throw new Error('Failed to add user');
-
-      closeDialog();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Failed to add user');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const closeDialog = () => {
-    setName('');
-    setStatus('New');
-    setError(null);
-    onClose();
+    mutate({ name: name, status: status });
   };
 
   if (!isOpen) return null;
@@ -75,9 +59,9 @@ const AddUserDialog = ({ isOpen, onClose }: AddUserDialogProps) => {
           </button>
         </div>
 
-        {error && (
+        {isError || error && (
           <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">
-            {error}
+            {isError ? fetchError?.message : error}
           </div>
         )}
 
@@ -134,10 +118,10 @@ const AddUserDialog = ({ isOpen, onClose }: AddUserDialogProps) => {
             </button>
             <button
               type="submit"
-              disabled={loading}
+              disabled={isPending}
               className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
             >
-              {loading ? 'Adding...' : 'Add Contact'}
+              {isPending ? 'Adding...' : 'Add Contact'}
             </button>
           </div>
         </form>
