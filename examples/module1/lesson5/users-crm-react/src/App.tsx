@@ -5,9 +5,9 @@ import UsersList from './components/UsersList';
 import StatusStats from './components/StatusStats';
 import AddUserDialog from './components/AddUserDialog';
 
+const queryClient = new QueryClient();
 function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
