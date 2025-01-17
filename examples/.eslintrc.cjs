@@ -6,6 +6,11 @@ module.exports = {
     project: true,
     tsconfigRootDir: __dirname,
   },
+  extends: ['plugin:prettier/recommended'],
+  plugins: ['prettier'],
+  rules: {
+    'prettier/prettier': 'error',
+  },
   ignorePatterns: ['scripts/*'],
   overrides: [
     // Konfiguracja dla lekcji 2x3: Testy e2e
