@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import type { Character } from '../types/Character';
 
 export default function useSearchCharacter() {
@@ -23,6 +23,6 @@ export default function useSearchCharacter() {
     gender,
     setGender,
     characters,
-    setCharacters
-  }
+    setCharacters,
+  };
 }

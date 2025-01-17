@@ -5,7 +5,10 @@ import { OPENAI_MODEL_VERSION, VECTOR_STORE_ID } from './platform-config';
 
 const openai = new OpenAI();
 
-export async function generateDocumentation(filePath: string, fileContent: string) {
+export async function generateDocumentation(
+  filePath: string,
+  fileContent: string
+) {
   console.log('Calling OpenAI API...');
 
   const prompt = createPrompt(filePath, fileContent);
@@ -23,5 +26,7 @@ export async function uploadToStore(filePaths: string[]) {
 
   console.log(`Uploading ${filePaths.length} files to the vector store...`);
 
-  await openai.beta.vectorStores.fileBatches.uploadAndPoll(VECTOR_STORE_ID, { files: fileStreams });
+  await openai.beta.vectorStores.fileBatches.uploadAndPoll(VECTOR_STORE_ID, {
+    files: fileStreams,
+  });
 }

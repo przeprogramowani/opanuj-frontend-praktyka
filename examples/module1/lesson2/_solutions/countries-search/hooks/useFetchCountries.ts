@@ -32,7 +32,7 @@ const useFetchCountries = (searchTerm: string, filterType: FilterType) => {
         const fetchFn =
           searchTerm === ''
             ? fetchAllCountries
-            : fetchStrategies[filterType] ?? fetchStrategies.default;
+            : (fetchStrategies[filterType] ?? fetchStrategies.default);
 
         const data = await fetchFn(searchTerm);
         setCountries(data);

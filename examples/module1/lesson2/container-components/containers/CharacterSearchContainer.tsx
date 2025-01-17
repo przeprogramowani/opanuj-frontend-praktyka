@@ -6,12 +6,13 @@ import useSortCharacters from '../hooks/useSortCharacters';
 
 function CharacterSearchContainer() {
   const { characters, gender, setGender, name, setName } = useSearchCharacter();
-  const { setSortOption, sortOption, sortedCharacters } = useSortCharacters(characters);
+  const { setSortOption, sortOption, sortedCharacters } =
+    useSortCharacters(characters);
 
   return (
     <>
       <div className="pt-20" />
-      <SearchTitle />
+      <SearchTitle title="Wyszukiwarka postaci Rick and Morty" />
       <div className="pt-8" />
       <SearchForm
         name={name}

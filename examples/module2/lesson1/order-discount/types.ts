@@ -1,14 +1,14 @@
 export interface Order {
-    items: OrderItem[];
+  items: OrderItem[];
 }
 
 export interface OrderItem {
-    product: Product;
-    quantity: number;
-    isLoyaltyItem: boolean;
+  product: Product;
+  quantity: number;
+  isLoyaltyItem: boolean;
 }
 
 export interface Product {
-    name: string;
-    price: number;
+  name: string;
+  price: number;
 }
