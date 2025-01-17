@@ -1,10 +1,12 @@
+import type { Dispatch, SetStateAction } from "react";
+
 type SearchFormProps = {
   name: string;
   setName: (name: string) => void;
   gender: string;
   setGender: (gender: string) => void;
-  sortOption: string;
-  setSortOption: (sortOption: '' | 'name' | 'created') => void;
+  sortOption: "" | "name" | "created";
+  setSortOption: Dispatch<SetStateAction<"" | "name" | "created">>;
 };
 
 function SearchForm({
@@ -45,7 +47,7 @@ function SearchForm({
         Sort by
         <select
           value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
+          onChange={(e) => setSortOption(e.target.value as '' | 'name' | 'created')}
           className="border h-7 mt-1"
         >
           <option value="">Initial</option>

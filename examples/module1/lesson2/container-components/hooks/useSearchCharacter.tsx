@@ -23,5 +23,6 @@ export default function useSearchCharacter() {
     gender,
     setGender,
     characters,
+    setCharacters
   }
 }
