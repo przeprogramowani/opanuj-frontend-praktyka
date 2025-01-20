@@ -7,7 +7,7 @@ import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
 import SortOptions from '../components/SortOptions';
 import useFetchCountries from '../hooks/useFetchCountries';
-import { Country, FilterType, SortOrder } from '../types';
+import type { FilterType, SortOrder } from '../types';
 
 const CountriesSearchContainer = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');

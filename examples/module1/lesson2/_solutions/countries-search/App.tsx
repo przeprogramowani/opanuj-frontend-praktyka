@@ -1,7 +1,6 @@
-import React from 'react';
 import CountriesSearchContainer from './containers/CountriesSearchContainer';
 
-const App: React.FC = () => {
+const App = () => {
   return <CountriesSearchContainer />;
 };
 
