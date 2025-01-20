@@ -3,7 +3,7 @@ import { findAvailablePort } from './utils.mjs';
 
 async function main() {
   const args = process.argv.slice(2);
-  const projectName = args[0];
+  const projectName = args.pop();
 
   if (!projectName) {
     console.error('Please provide the project name.');
@@ -18,7 +18,8 @@ async function main() {
   try {
     const { serverProcess: sp, viteServer: vs } = await startServer(
       projectName,
-      port
+      port,
+      args.includes('--debug')
     );
     serverProcess = sp;
     viteServer = vs;

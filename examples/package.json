@@ -5,6 +5,7 @@
   "main": "-",
   "scripts": {
     "example": "node ./scripts/vite.mjs",
+    "example:debug": "node ./scripts/vite.mjs --debug",
     "verify": "node ./scripts/verify.mjs",
     "test": "vitest",
     "test:e2e": "npx playwright install && npx playwright test",
