@@ -12,7 +12,9 @@ const config = {
 
 async function main() {
   if (!config.openApiKey || !config.githubKey || !config.repoNameOwner) {
-    throw new Error('Missing env variables. API keys & repo metadata must be provided.');
+    throw new Error(
+      'Missing env variables. API keys & repo metadata must be provided.'
+    );
   }
 
   const diffContent = readFileSync('./diff.txt', 'utf-8');

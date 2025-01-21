@@ -6,7 +6,11 @@ export interface PathBuilderConfig {
   ignoreDirs: string[];
 }
 
-export async function buildPaths({ rootDir, patterns, ignoreDirs }: PathBuilderConfig) {
+export async function buildPaths({
+  rootDir,
+  patterns,
+  ignoreDirs,
+}: PathBuilderConfig) {
   const paths = await glob(patterns, {
     cwd: rootDir,
     absolute: true,

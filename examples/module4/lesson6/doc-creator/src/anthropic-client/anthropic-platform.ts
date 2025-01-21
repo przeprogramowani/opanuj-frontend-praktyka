@@ -5,7 +5,10 @@ const CLAUDE_MODEL_VERSION = 'claude-3-sonnet-20240229';
 
 const anthropic = new Anthropic();
 
-export async function generateDocumentation(filePath: string, fileContent: string) {
+export async function generateDocumentation(
+  filePath: string,
+  fileContent: string
+) {
   console.log('Calling Anthropic API...');
 
   const prompt = createPrompt(filePath, fileContent);
