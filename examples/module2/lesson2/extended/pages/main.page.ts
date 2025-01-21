@@ -18,7 +18,7 @@ export class MainPage {
 
     this.searchInput = page
       .getByRole('search')
-      .getByRole('searchbox', { name: /Search Wikipedia/i });
+      .getByRole('combobox', { name: /Search Wikipedia/i });
   }
 
   navigate() {
@@ -42,8 +42,24 @@ export class MainPage {
     return this.page.waitForURL(`**${articleHref}`);
   }
 
+  async goToCommunityPortalPage() {
+    const linkToCommunityPortal = this.page.getByTitle('The hub for editors');
+
+    const communityPortalHref = (await linkToCommunityPortal.getAttribute(
+      'href'
+    ))!;
+
+    await linkToCommunityPortal.click();
+
+    return this.page.waitForURL(`**${communityPortalHref}`);
+  }
+
   async searchFor(term: string) {
     return this.searchInput.fill(term);
+  }
+
+  async activateSearch() {
+    await this.searchInput.focus();
   }
 
   getSearchResults() {

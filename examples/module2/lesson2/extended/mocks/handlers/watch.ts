@@ -1,4 +1,4 @@
-import { HttpResponse, StrictResponse, http } from 'msw';
+import { HttpResponse, type StrictResponse, http } from 'msw';
 
 export const watchHandlers = [
   http.post('/w/api.php', async ({ request }) => {
