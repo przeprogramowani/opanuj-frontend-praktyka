@@ -25,9 +25,9 @@ export class CharacterSearchService {
         switchMap(([name, gender]) => {
           if (name !== '' || gender !== '') {
             return this.http
-              .get<{ results: Character[] }>(
-                `${this.apiBaseUrl}?name=${name}&gender=${gender}`
-              )
+              .get<{
+                results: Character[];
+              }>(`${this.apiBaseUrl}?name=${name}&gender=${gender}`)
               .pipe(map((response) => response.results || []));
           } else {
             return of([]);
