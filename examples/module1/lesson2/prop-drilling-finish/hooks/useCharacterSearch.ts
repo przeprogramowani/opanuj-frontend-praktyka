@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react';
-import type { Character } from '../types/Character';
+import type { Character } from '../api-client-generated/models/Character';
+import { DefaultApi } from '../api-client-generated';
 
-export function useCharacterSearch(name: string, gender: string) {
+export default function useCharacterSearch(name: string, gender: string, page: number) {
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
-    if (name || gender) {
-      fetch(
-        `https://rickandmortyapi.com/api/character/?name=${name}&gender=${gender}`
-      )
-        .then((response) => response.json())
-        .then((data) => setCharacters(data.results || []))
-        .catch((error) => console.error('Error fetching data:', error));
-    }
-  }, [name, gender]);
+    const api = new DefaultApi();
+    api.getCharacters({ name, gender, page }).then((response) => {
+      setCharacters(response.results || []);
+      setTotalPages(response.info?.pages || 0); // Assuming response.info.pages contains the total number of pages
+    });
+  }, [name, gender, page]);
 
-  return characters;
+  return { characters, totalPages };
 }
