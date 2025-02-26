@@ -1,10 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { CharacterSearchService } from './character-search.service';
 import { Character } from '../types/Character';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('CharacterSearchService', () => {
   let service: CharacterSearchService;
@@ -12,9 +10,9 @@ describe('CharacterSearchService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [CharacterSearchService],
-    });
+    imports: [],
+    providers: [CharacterSearchService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(CharacterSearchService);
     httpMock = TestBed.inject(HttpTestingController);
   });
