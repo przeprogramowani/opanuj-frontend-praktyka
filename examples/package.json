@@ -9,7 +9,7 @@
     "verify": "node ./scripts/verify.mjs",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "test": "vitest",
+    "test": "vitest run",
     "test:e2e": "npx playwright install && npx playwright test",
     "test:e2e:ui": "npx playwright install && npx playwright test --ui",
     "lint:e2e": "npx eslint **/{tests,pages,mocks}/**"
