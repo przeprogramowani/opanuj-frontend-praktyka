@@ -1,10 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CharacterSearchContainerComponent } from './character-search-container.component';
 import { CharacterSearchService } from '../../services/character-search.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { of } from 'rxjs';
 import { Character } from '../../types/Character';
-import { By } from '@angular/platform-browser';
 
 describe('CharacterSearchContainerComponent', () => {
   let component: CharacterSearchContainerComponent;
@@ -24,8 +27,12 @@ describe('CharacterSearchContainerComponent', () => {
     );
 
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [{ provide: CharacterSearchService, useValue: spy }],
+      imports: [],
+      providers: [
+        { provide: CharacterSearchService, useValue: spy },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CharacterSearchContainerComponent);

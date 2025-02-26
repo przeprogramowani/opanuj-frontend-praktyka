@@ -9,19 +9,18 @@ import { SortSelectComponent } from '../../components/sort-select/sort-select.co
 import { CharacterSearchService } from '../../services/character-search.service';
 
 @Component({
-  selector: 'app-character-search-container',
-  standalone: true,
-  imports: [
-    SearchTitleComponent,
-    NameFieldComponent,
-    GenderSelectComponent,
-    SortSelectComponent,
-    CharacterListComponent,
-    CharacterCardComponent,
-    CommonModule,
-  ],
-  templateUrl: './character-search-container.component.html',
-  styleUrl: './character-search-container.component.scss',
+    selector: 'app-character-search-container',
+    imports: [
+        SearchTitleComponent,
+        NameFieldComponent,
+        GenderSelectComponent,
+        SortSelectComponent,
+        CharacterListComponent,
+        CharacterCardComponent,
+        CommonModule,
+    ],
+    templateUrl: './character-search-container.component.html',
+    styleUrl: './character-search-container.component.scss'
 })
 export class CharacterSearchContainerComponent {
   showRickOnly = signal(false);

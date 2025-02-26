@@ -2,17 +2,22 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CharacterSearchContainerComponent } from './character-search-container.component';
 import { CharacterSearchService } from '../../services/character-search.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import { signal } from '@angular/core';
 import { Character } from '../../types/Character';
-import { By } from '@angular/platform-browser';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('CharacterSearchContainerComponent', () => {
   let component: CharacterSearchContainerComponent;
   let fixture: ComponentFixture<CharacterSearchContainerComponent>;
   let characterSearchService: jasmine.SpyObj<CharacterSearchService>;
+  let mockCharactersSignal: any;
 
   beforeEach(async () => {
+    mockCharactersSignal = signal<Character[]>([]);
+
     const spy = jasmine.createSpyObj(
       'CharacterSearchService',
       ['setName', 'setGender', 'setSortOption'],
@@ -20,14 +25,18 @@ describe('CharacterSearchContainerComponent', () => {
         name: '',
         gender: '',
         sortOption: '',
-        characters$: of([]),
+        characters: mockCharactersSignal,
       }
     );
 
     await TestBed.configureTestingModule({
-    imports: [],
-    providers: [{ provide: CharacterSearchService, useValue: spy }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [],
+      providers: [
+        { provide: CharacterSearchService, useValue: spy },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CharacterSearchContainerComponent);
     component = fixture.componentInstance;
@@ -71,18 +80,18 @@ describe('CharacterSearchContainerComponent', () => {
       },
     ];
 
-    component.characters = mockCharacters;
+    // Update the mockCharactersSignal with mock data
+    mockCharactersSignal.set(mockCharacters);
 
     // Simulate checkbox event
     const mockEvent = { target: { checked: true } } as unknown as Event;
     component.onShowRickOnlyChange(mockEvent);
 
-    // Check that only Rick remains after filtering
-    expect(component.characters.length).toBe(0); // Initial state before subscription resolves
+    // Check that the signal value was updated properly
+    expect(component.showRickOnly()).toBeTrue();
 
-    // Manually subscribe to the BehaviorSubject to test the filtering
-    component.showRickOnly.subscribe((value) => {
-      expect(value).toBeTrue();
-    });
+    // Check the computed value is filtered correctly
+    expect(component.characters().length).toBe(1);
+    expect(component.characters()[0].name).toBe('Rick Sanchez');
   });
 });
