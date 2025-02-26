@@ -14,9 +14,9 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "engines": {
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:tokens && npm run build:bundle && npm run test",
-    "build:tokens": "node build.js",
+    "build:tokens": "node build.mjs",
     "build:bundle": "rollup -c",
     "clean": "rimraf dist",
     "release": "npm run build && np",
@@ -32,16 +32,16 @@
     "update:token": "./update_token.sh"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.5",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "np": "^10.0.3",
-    "rimraf": "^5.0.5",
-    "rollup": "^4.14.1",
-    "rollup-plugin-dts": "^6.1.0",
-    "style-dictionary": "^3.9.2",
-    "typescript": "^5.4.5",
-    "vitest": "^1.4.0"
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "np": "^10.2.0",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.34.8",
+    "rollup-plugin-dts": "^6.1.1",
+    "style-dictionary": "^4.3.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
   },
   "repository": {
     "type": "git",
