@@ -1,4 +1,3 @@
-import React from 'react';
 import { SortOrder } from '../types';
 
 interface SortOptionsProps {

@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-sort-select',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'app-sort-select',
+    imports: [],
+    template: `
     <label class="flex flex-col">
       Sort by
       <select
@@ -18,7 +17,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       </select>
     </label>
   `,
-  styleUrl: './sort-select.component.scss',
+    styleUrl: './sort-select.component.scss'
 })
 export class SortSelectComponent {
   @Input() sortOption: string = '';

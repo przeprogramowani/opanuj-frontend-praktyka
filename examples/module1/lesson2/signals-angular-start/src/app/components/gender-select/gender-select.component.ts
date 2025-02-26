@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-gender-select',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'app-gender-select',
+    imports: [],
+    template: `
     <label class="flex flex-col">
       Gender
       <select
@@ -20,7 +19,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       </select>
     </label>
   `,
-  styleUrl: './gender-select.component.scss',
+    styleUrl: './gender-select.component.scss'
 })
 export class GenderSelectComponent {
   @Input() gender: string = '';

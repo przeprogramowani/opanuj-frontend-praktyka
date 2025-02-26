@@ -1,4 +1,3 @@
-import React from 'react';
 import { IoMdAdd, IoMdClose, IoMdRemove } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/rtk';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 type SortSelectProps = {
   sortOption: string;
   setSortOption: React.Dispatch<React.SetStateAction<string>>;

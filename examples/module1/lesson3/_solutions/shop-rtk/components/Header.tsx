@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsBag } from 'react-icons/bs';
 import { CiShop } from 'react-icons/ci';
 import { Link } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { BsBag } from 'react-icons/bs';
 import { CiShop } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
