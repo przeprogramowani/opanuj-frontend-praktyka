@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-name-field',
-  standalone: true,
-  imports: [],
-  template: `<label class="flex flex-col">
+    selector: 'app-name-field',
+    imports: [],
+    template: `<label class="flex flex-col">
     Name
     <input
       class="border h-7 mt-1 indent-2"
@@ -14,7 +13,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       (input)="onNameChange($event)"
     />
   </label>`,
-  styleUrl: './name-field.component.scss',
+    styleUrl: './name-field.component.scss'
 })
 export class NameFieldComponent {
   @Input() name: string = '';

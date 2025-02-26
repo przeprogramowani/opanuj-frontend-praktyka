@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
-import { CharacterCardComponent } from '../../components/character-card/character-card.component';
 import { CharacterListComponent } from '../../components/character-list/character-list.component';
 import { GenderSelectComponent } from '../../components/gender-select/gender-select.component';
 import { NameFieldComponent } from '../../components/name-field/name-field.component';
@@ -12,14 +11,12 @@ import { Character } from '../../types/Character';
 
 @Component({
   selector: 'app-character-search-container',
-  standalone: true,
   imports: [
     SearchTitleComponent,
     NameFieldComponent,
     GenderSelectComponent,
     SortSelectComponent,
     CharacterListComponent,
-    CharacterCardComponent,
     CommonModule,
   ],
   templateUrl: './character-search-container.component.html',
