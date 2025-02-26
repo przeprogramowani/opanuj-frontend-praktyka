@@ -7,6 +7,17 @@ on:
     branches:
       - master
 
+# Configuration for custom script execution
+# Add new entries to this array without changing execution logic
+env:
+  CUSTOM_SCRIPTS_CONFIG: |
+    [
+      {
+        "directory": "module4/lesson2/design-tokens",
+        "script": "setup.sh"
+      }
+    ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -22,6 +33,28 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
+
+      - name: Execute custom setup scripts
+        run: |
+          echo "Running custom setup scripts..."
+          # Parse the JSON configuration from env variable
+          CONFIG_JSON='${{ env.CUSTOM_SCRIPTS_CONFIG }}'
+
+          # Loop through each config entry
+          echo "$CONFIG_JSON" | jq -c '.[]' | while read -r entry; do
+            DIR=$(echo "$entry" | jq -r '.directory')
+            SCRIPT=$(echo "$entry" | jq -r '.script')
+
+            # Check if this directory exists in the repository
+            if [ -d "$DIR" ]; then
+              echo "Executing script: $SCRIPT for directory: $DIR"
+              if [ -f "$SCRIPT" ]; then
+                bash "$SCRIPT"
+              else
+                echo "Warning: Script $SCRIPT not found"
+              fi
+            fi
+          done
 
       - name: Install dependencies
         run: npm ci
