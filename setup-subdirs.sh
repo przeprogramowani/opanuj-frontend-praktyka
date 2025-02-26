@@ -8,9 +8,20 @@ CONFIG_JSON='[
   {
     "directory": "./examples/module4/lesson2/design-tokens",
     "script": "setup.sh"
+  },
+  {
+    "directory": "./examples/module1/lesson2/signals-angular-start",
+    "script": "setup.sh"
+  },
+  {
+    "directory": "./examples/module1/lesson2/signals-angular-finish",
+    "script": "setup.sh"
   }
 ]'
 # Add more configurations by adding entries to the JSON array above
+
+# Store the root directory
+ROOT_DIR=$(pwd)
 
 # Loop through each config entry
 echo "$CONFIG_JSON" | jq -c '.[]' | while read -r entry; do
@@ -31,8 +42,9 @@ echo "$CONFIG_JSON" | jq -c '.[]' | while read -r entry; do
     if [ -f "$SCRIPT_PATH" ]; then
       # Navigate to the directory and run the script
       cd "$DIR" && bash "$SCRIPT"
-      # Return to the original directory
-      cd - > /dev/null
+      # Return to the root directory
+      cd "$ROOT_DIR"
+      echo "Returned to root directory"
     else
       echo "Warning: Script $SCRIPT_PATH not found"
     fi
