@@ -1,10 +1,10 @@
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { UsersList } from './UsersList';
 import { UserPreview, UserFriends, DetailedUser } from './Variants';
 
 const rootElement = document.getElementById('app')!;
 if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
+  const root = createRoot(rootElement);
 
   root.render(
     <>
