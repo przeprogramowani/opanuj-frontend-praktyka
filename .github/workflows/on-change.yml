@@ -13,7 +13,7 @@ env:
   CUSTOM_SCRIPTS_CONFIG: |
     [
       {
-        "directory": "module4/lesson2/design-tokens",
+        "directory": "./examples/module4/lesson2/design-tokens",
         "script": "setup.sh"
       }
     ]
