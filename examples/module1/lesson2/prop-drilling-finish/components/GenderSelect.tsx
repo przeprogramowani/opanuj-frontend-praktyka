@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface GenderSelectProps {
   gender: string;
   setGender: React.Dispatch<React.SetStateAction<string>>;

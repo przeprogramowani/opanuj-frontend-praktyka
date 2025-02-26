@@ -1,10 +1,9 @@
-import React, { ReactNode } from 'react';
 import { useUsers } from './hooks/useUsers';
 import type { User } from './User';
 
 interface UsersListProps {
   header: string;
-  viewFn: (user: User) => JSX.Element;
+  viewFn: (user: User) => React.ReactElement;
 }
 
 export const UsersList = ({ header, viewFn }: UsersListProps) => {

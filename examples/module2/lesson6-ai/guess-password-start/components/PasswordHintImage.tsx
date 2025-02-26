@@ -1,5 +1,3 @@
-import React from 'react';
-
 const PasswordHintImage: React.FC = () => {
   return (
     <div className="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">

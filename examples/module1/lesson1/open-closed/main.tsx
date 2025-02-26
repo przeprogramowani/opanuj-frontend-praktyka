@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { UsersList } from './UsersList';
 import { UserPreview, UserFriends, DetailedUser } from './Variants';

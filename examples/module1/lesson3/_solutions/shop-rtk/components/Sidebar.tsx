@@ -1,4 +1,3 @@
-import React from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import { Link } from 'react-router-dom';

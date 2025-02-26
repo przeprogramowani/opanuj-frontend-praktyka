@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { f1, f2, f3, f4 } from './functions';
 
 const App = () => {
