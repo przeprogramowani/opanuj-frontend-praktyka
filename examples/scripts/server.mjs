@@ -1,7 +1,8 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import react from '@vitejs/plugin-react';
 import chalk from 'chalk';
-import { execSync, spawn } from 'child_process';
+import { execSync } from 'child_process';
+import crossSpawn from 'cross-spawn';
 import express from 'express';
 import { createServer as createHttpServer } from 'http';
 import { sveltePreprocess } from 'svelte-preprocess';
@@ -75,10 +76,14 @@ export async function startServer(projectName, port, debug = false) {
     execSync('npm install', { stdio: 'inherit', cwd: projectPath });
 
     if (debug) console.log(`Starting Angular dev server on port ${port}...`);
-    const ngProcess = spawn('npm', ['run', 'start', '--', '--port', port], {
-      cwd: projectPath,
-      stdio: 'inherit',
-    });
+    const ngProcess = crossSpawn(
+      'npm',
+      ['run', 'start', '--', '--port', port],
+      {
+        cwd: projectPath,
+        stdio: 'inherit',
+      }
+    );
 
     await waitForServer(port, 15, debug);
 
