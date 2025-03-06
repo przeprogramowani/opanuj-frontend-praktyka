@@ -16,8 +16,6 @@ axios.interceptors.response.use(function (response) {
   return response;
 });
 
-const {
-  data: { articles },
-} = await axios.get('/api/data/articles?timeout=3000');
+const { data: articles } = await axios.get('/api/data/articles?timeout=3000');
 
 document.querySelector('#data').innerHTML = articles[0].content;
