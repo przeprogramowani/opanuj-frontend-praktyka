@@ -4,7 +4,3 @@ export interface Article {
   content: string;
   author: string;
 }
-
-export interface ArticleResponse {
-  articles: Article[];
-}
