@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import type { Article, ArticleResponse } from './types';
+import type { Article } from './types';
 
 export function useArticlesClient() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -10,11 +10,9 @@ export function useArticlesClient() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get<ArticleResponse>(
-        'http://localhost:3000/api/data/articles?timeout=2000'
-      )
-      .then(({ data: { articles } }) => {
-        setArticles(articles);
+      .get<Article[]>('http://localhost:3000/api/data/articles?timeout=2000')
+      .then(({ data }) => {
+        setArticles(data);
       })
       .catch((error) => {
         setError('Cannot fetch articles!');
