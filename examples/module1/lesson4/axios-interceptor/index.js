@@ -1,18 +1,19 @@
-import axios from 'axios';
+const fetchHandler = {
+  apply: async (target, __, args) => {
+    let [url, options] = args;
 
-// Add a request interceptor
-axios.interceptors.request.use(function (config) {
-  return config;
-});
+    const startTime = Date.now();
+    const response = await target(url, options);
+    const endTime = Date.now() - startTime;
 
-// Add a response interceptor
-axios.interceptors.response.use(function (response) {
-  // Do something with response data
-  return response;
-});
+    console.log(`Request to ${url} took ${endTime}ms`);
 
-const {
-  data: { articles },
-} = await axios.get('/api/data/articles?timeout=3000');
+    return response;
+  },
+};
 
-document.querySelector('#data').innerHTML = articles[0].content;
+const proxiedFetch = new Proxy(fetch, fetchHandler);
+const response = await proxiedFetch('/api/data/articles?timeout=3000');
+const data = await response.json();
+
+document.querySelector('#data').innerHTML = data[0].content;
